@@ -1,16 +1,104 @@
 // SwitchyOmega 3 — background service worker (MV3).
 //
-// Phase 0: hello-world. Event listeners are registered SYNCHRONOUSLY at the top
-// level (the MV3 bootstrap invariant) so a respawned worker never misses an
-// event. Later phases add: proxy application (ProxyImplSettings), storage
-// rehydration on wake, onStartup reconciliation, alarms, and proxy auth.
+// Constructs the options manager with chrome.storage-backed storage and the
+// chrome.proxy implementation, and wires all lifecycle/event listeners
+// synchronously at the top level (the MV3 bootstrap invariant).
+//
+// Storage layout: options in chrome.storage.local (unprefixed); durable runtime
+// state in the same area under the `omega.state.` prefix (survives SW restarts
+// and browser restarts, so the current profile can be re-applied on wake). The
+// options store excludes the state prefix.
+
+import { Log, OptionsSync } from '@switchyomega/omega-core'
+import { ChromeStorage } from './adapter/chrome_storage.js'
+import { ChromeOptions } from './adapter/chrome_options.js'
+import { SettingsProxyImpl } from './adapter/proxy/proxy_impl_settings.js'
+import { installMessageRouter } from './adapter/messaging.js'
+import { installContextMenus } from './adapter/context_menu.js'
+
+const STATE_PREFIX = 'omega.state.'
+
+const storage = new ChromeStorage('local', { excludePrefix: STATE_PREFIX })
+const state = new ChromeStorage('local', { prefix: STATE_PREFIX })
+
+let sync: OptionsSync | undefined
+if (chrome.storage.sync) {
+  sync = new OptionsSync(new ChromeStorage('sync'))
+  sync.transformValue = ChromeOptions.transformValueForSync
+  // Syncing is opt-in; enabled later via setOptionsSync (state-driven).
+  sync.enabled = false
+}
+
+const proxyImpl = new SettingsProxyImpl(Log)
+state.set({ proxyImplFeatures: proxyImpl.features })
+
+const options = new ChromeOptions(null, storage, state, Log, sync, proxyImpl)
+options.setProxyNotControllable(null)
+
+// --- external proxy-change detection (with own-change guard) ---
+let externalChangeTimeout: ReturnType<typeof setTimeout> | null = null
+proxyImpl.watchProxyChange((rawDetails) => {
+  const details = rawDetails as { levelOfControl?: string; value?: unknown } | undefined
+  if (!details) return
+  const notControllableBefore = options.proxyNotControllable()
+  let internal = false
+  let noRevert = false
+  switch (details.levelOfControl) {
+    case 'controlled_by_other_extensions':
+    case 'not_controllable': {
+      const reason = details.levelOfControl === 'not_controllable' ? 'policy' : 'app'
+      options.setProxyNotControllable(reason)
+      noRevert = true
+      break
+    }
+    default:
+      options.setProxyNotControllable(null)
+  }
+  if (details.levelOfControl === 'controlled_by_this_extension') {
+    internal = true
+    // Our own change — ignore unless we were previously not in control.
+    if (!notControllableBefore) return
+  }
+
+  // Debounce: Chromium fires onChange on unload just after we lose control;
+  // waiting avoids clobbering currentProfileName. (Best-effort under the SW.)
+  if (externalChangeTimeout != null) clearTimeout(externalChangeTimeout)
+  let parsed: ReturnType<SettingsProxyImpl['parseExternalProfile']> = null
+  externalChangeTimeout = setTimeout(() => {
+    if (parsed) options.setExternalProfile(parsed, { noRevert, internal })
+  }, 500)
+  parsed = proxyImpl.parseExternalProfile(details as never, options._options)
+})
+
+// --- lifecycle + event listeners (registered synchronously) ---
 
 chrome.runtime.onInstalled.addListener((details) => {
-  console.log('[SwitchyOmega3] onInstalled:', details.reason, details.previousVersion ?? '')
+  Log.log('[SwitchyOmega3] onInstalled:', details.reason, details.previousVersion ?? '')
+  if (details.reason === 'install') {
+    state.set({ firstRun: 'new' })
+  }
+  // reason === 'update' → legacy data migration is handled in Phase 3.5.
 })
 
 chrome.runtime.onStartup.addListener(() => {
-  console.log('[SwitchyOmega3] onStartup — browser launched; will reconcile proxy state here')
+  Log.log('[SwitchyOmega3] onStartup — reconciling')
+  options.ready?.then(() => {
+    // The committed proxy setting persists across restarts; init() already
+    // re-applied the stored profile. Re-establish SW-lifetime-scoped bits:
+    options.reschedule()
+    options.reassertPopup()
+  })
 })
 
-console.log('[SwitchyOmega3] service worker booted at', new Date().toISOString())
+chrome.action.onClicked.addListener((tab) => {
+  options.ready?.then(() => options.onActionClicked(tab))
+})
+
+installMessageRouter(options, state)
+installContextMenus(options, state)
+
+// Debugging/E2E handle. The service-worker global scope is not reachable by web
+// pages or other extensions, so this exposes no attack surface.
+;(globalThis as unknown as { omega: unknown }).omega = { options, state, proxyImpl }
+
+Log.log('[SwitchyOmega3] service worker booted')
