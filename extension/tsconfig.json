@@ -12,5 +12,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "env.d.ts", "vite.config.ts", "src/manifest.config.ts"]
+  "include": ["src", "test", "env.d.ts", "vite.config.ts", "src/manifest.config.ts"]
 }

@@ -15,6 +15,7 @@ import { ChromeOptions } from './adapter/chrome_options.js'
 import { SettingsProxyImpl } from './adapter/proxy/proxy_impl_settings.js'
 import { installMessageRouter } from './adapter/messaging.js'
 import { installContextMenus } from './adapter/context_menu.js'
+import { installMigration, runMigration } from './adapter/migration.js'
 
 const STATE_PREFIX = 'omega.state.'
 
@@ -76,8 +77,10 @@ chrome.runtime.onInstalled.addListener((details) => {
   Log.log('[SwitchyOmega3] onInstalled:', details.reason, details.previousVersion ?? '')
   if (details.reason === 'install') {
     state.set({ firstRun: 'new' })
+  } else if (details.reason === 'update') {
+    // Migrate legacy MV2 localStorage state (Phase 3.5).
+    runMigration()
   }
-  // reason === 'update' → legacy data migration is handled in Phase 3.5.
 })
 
 chrome.runtime.onStartup.addListener(() => {
@@ -96,6 +99,7 @@ chrome.action.onClicked.addListener((tab) => {
 
 installMessageRouter(options, state)
 installContextMenus(options, state)
+installMigration(options, state)
 
 // Debugging/E2E handle. The service-worker global scope is not reachable by web
 // pages or other extensions, so this exposes no attack surface.

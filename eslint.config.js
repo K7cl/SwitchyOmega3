@@ -11,6 +11,7 @@ export default tseslint.config(
       '**/dist/**',
       '**/node_modules/**',
       '**/*.min.js',
+      '**/public/**',
       'docs/**',
       // legacy packages (kept as porting reference, not linted)
       'omega-pac/**',
