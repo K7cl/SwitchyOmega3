@@ -32,6 +32,14 @@ export default tseslint.config(
         parser: tseslint.parser,
       },
     },
+    rules: {
+      // View/page components use single-word names by design.
+      'vue/multi-word-component-names': 'off',
+      // Editors intentionally mutate object props that are references into the
+      // pinia store (the store is the source of truth). shallowOnly still flags
+      // reassigning the prop itself.
+      'vue/no-mutating-props': ['error', { shallowOnly: true }],
+    },
   },
   {
     // Service worker + node build scripts use console intentionally.

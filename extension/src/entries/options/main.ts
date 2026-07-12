@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
+import { router } from '@/ui/router'
 
-// Phase 0: bare Vue mount. Phase 5 adds pinia (options store) + vue-router
-// (about / ui / general / io / profile/:name) and the full options SPA.
-createApp(App).mount('#app')
+createApp(App).use(createPinia()).use(router).mount('#app')
