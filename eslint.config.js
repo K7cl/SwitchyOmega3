@@ -44,6 +44,19 @@ export default tseslint.config(
     },
     rules: {
       'no-console': 'off',
+      // Honor the leading-underscore convention for intentionally-unused args.
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+      ],
+    },
+  },
+  {
+    // Behavioral PAC tests eval() the generated script in the runner only
+    // (never in shipped code) — this is the plan's acceptance contract.
+    files: ['**/*.test.ts', '**/*.spec.ts'],
+    rules: {
+      'no-eval': 'off',
     },
   },
 )
