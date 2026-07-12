@@ -1,0 +1,56 @@
+{
+  "appNameShort": {
+    "message": "SwitchyOmega"
+  },
+  "manifest_app_name": {
+    "message": "Proxsi SwitchyOmega"
+  },
+  "manifest_app_description": {
+    "message": "Kelola dan beralih di antara beberapa proxy dengan cepat & mudah."
+  },
+  "manifest_icon_default_title": {
+    "message": "Memuat…"
+  },
+  "upgrade_profile_auto": {
+    "message": "Saklar Otomatis"
+  },
+  "profile_direct": {
+    "message": "[Langsung]"
+  },
+  "profile_system": {
+    "message": "[System Proxsi]"
+  },
+  "condition_HostWildcardCondition": {
+    "message": "Tuan rumah wildcard"
+  },
+  "condition_help_HostWildcardCondition": {
+    "message": "Mencocokkan host (nama domain) dengan karakter pengganti.<br><b>Tanda bintang <code>*<code><b> cocok dengan nol karakter atau lebih.<br><b>Tanda tanya <code>?<code><b> cocok dengan tepat satu karakter.<br><br>Perlu diketahui bahwa aturan yang dimulai dengan <code>*.<code> diperlakukan secara khusus hanya dalam kondisi karakter pengganti Host.<br>Contoh: <code>*.example.com<code> akan cocok dengan www.example.com <b>DAN example.com juga.<b><br>Untuk mencocokkan subdomain <b>saja<b>, gunakan <b>dua<b> tanda bintang seperti <code>**.example.com<code>."
+  },
+  "condition_HostRegexCondition": {
+    "message": "Tuan rumah regex"
+  },
+  "condition_help_HostRegexCondition": {
+    "message": "Seperti kondisi wildcard Host, tetapi cocok dengan host (nama domain) dengan <a href='https:www.google.comsearch?q=regular%20expression'>ekspresi reguler<a>.<br>Ekspresi reguler sulit dibuat (dan dibaca).<br>Disarankan untuk menggunakan wildcard untuk sebagian besar kasus dan hanya menggunakan regex untuk kondisi yang tidak dapat dicapai oleh jenis kondisi lainnya."
+  },
+  "condition_HostLevelsCondition": {
+    "message": "Tingkat tuan rumah"
+  },
+  "condition_help_HostLevelsCondition": {
+    "message": "Mencocokkan permintaan jika dan hanya jika level host berada dalam rentang yang diberikan.<br>Level host didefinisikan sebagai <b>jumlah segmen yang dipisahkan titik<b> dari host (nama domain).<br>Contoh: <code>www.example.com<code> memiliki level host 3, sedangkan <code>internal<code> memiliki level host 1."
+  },
+  "condition_IpCondition": {
+    "message": "Literal IP"
+  },
+  "condition_help_IpCondition": {
+    "message": "Mencocokkan permintaan jika dan hanya jika host adalah alamat IP <b>literal<b> dan dalam subnet sebagaimana ditetapkan oleh <a href='https:en.wikipedia.orgwikiClassless_Inter-Domain_Routing#CIDR_notation'>notasi CIDR<a>.<br>Misalnya, dengan aturan <code>127.0.0.116<code>, maka ia akan mencocokkan semua alamat IP seperti <code>127.0.*.*<code>.<br>Jadi <code>127.0.0.1<code> cocok sedangkan <code>127.1.0.0<code> tidak. Nama host seperti <code>localhost<code> tidak akan pernah cocok karena keduanya <b>bukan<b> IP literal."
+  },
+  "condition_UrlWildcardCondition": {
+    "message": "URL wildcard"
+  },
+  "condition_help_UrlWildcardCondition": {
+    "message": "Mencocokkan URL permintaan dengan karakter pengganti.<br>Lihat bagian karakter pengganti Host di atas untuk referensi karakter pengganti cepat.<br>Perhatikan bahwa karakter pengganti URL tidak diperlakukan secara khusus (tidak ada keajaiban subdomain seperti pada karakter pengganti Host).<br>Jadi <code>*:*.example.com*<code> cocok dengan http:www.example.com tetapi <b>tidak<b> cocok dengan http:example.com."
+  },
+  "condition_UrlRegexCondition": {
+    "message": "URL regex"
+  }
+}

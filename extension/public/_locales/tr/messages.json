@@ -1,0 +1,864 @@
+{
+  "appNameShort": {
+    "message": "SwitchyOmega"
+  },
+  "manifest_app_name": {
+    "message": "Proxy SwitchyOmega"
+  },
+  "manifest_app_description": {
+    "message": "Birden çok vekil sunucuyu yönet ve aralarında kolayca ve hızlıca geçiş yap."
+  },
+  "manifest_icon_default_title": {
+    "message": "Yükleniyor…"
+  },
+  "upgrade_profile_auto": {
+    "message": "Otomatik Geçiş"
+  },
+  "profile_direct": {
+    "message": "[Doğrudan]"
+  },
+  "profile_system": {
+    "message": "[Sistem Vekil Sunucusu]"
+  },
+  "condition_HostWildcardCondition": {
+    "message": "Sunucu joker karakteri"
+  },
+  "condition_help_HostWildcardCondition": {
+    "message": "Sunucuları (alan adlarını) joker karakteriyle eşler.<br><b>Yıldız karakteri <code>*</code></b> sıfır ya da daha fazla karaktere denk gelir.<br><b>Soru işareti <code>?</code></b> tam olarak tek karaktere denk gelir.<br><br>Şu şekilde <code>*.</code> başlayan kurallar sadece Sunucu joker eşleme koşulları için geçerlidir.<br>Örnek: <code>*.ornek.com</code> www.ornek.com <b>VE ornek.com için eşlenecektir.</b><br>Sadece altalan adlarını eşlemek için <b>only</b>, <b>iki</b> yıldız karakteri kullanın: <code>**.ornek.com</code>."
+  },
+  "condition_HostRegexCondition": {
+    "message": "Sunucu düzenli ifadesi"
+  },
+  "condition_HostLevelsCondition": {
+    "message": "Sunucu seviyeleri"
+  },
+  "condition_help_HostLevelsCondition": {
+    "message": "İstek sadece sunucu seviyesi(host level) belirtilen aralıkta ise eşleşir .\n<br>Tanımlanan sunucu seviyesi <b>nokta ile ayrılmış bölümlerin sayısı</b> sunucu (domain adı).<br>Örnek: <code>www.example.com</code> kodunun sunucu seviyesi 3 iken,  <code>internal</code> kodunun sunucu seviyesi 1'dir ."
+  },
+  "condition_IpCondition": {
+    "message": "IP Değişmezleri"
+  },
+  "condition_help_IpCondition": {
+    "message": "Gönderilen istek, sunucu istenilen şartlarda bir IP adresine sahipse ve alt ağda ise yani<a href='https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation'>CIDR notation</a>adresinde belirtilen özelliklere sahipse eşleşme gerçekleşir.<br>Örneğin,  <code>127.0.0.1/16</code>şartı mevcut olsun. Bu şarta <code>127.0.*.*</code> ile başlayan tüm IP'ler uyar yani eşleşme başarılı olur.<br>Bu yüzden<code>127.0.0.1</code> IP'si belirtilen kurala uyarken <code>127.1.0.0</code> IP'si kurala uymaz. <code>localhost</code> Şeklinde bir ada sahip olan sunucularda ise asla eşleşme gerçekleşmez çünkü istenilen şartlarda bir IP adresine sahip değillerdir."
+  },
+  "condition_UrlWildcardCondition": {
+    "message": "URL wildcard"
+  },
+  "condition_help_UrlRegexCondition": {
+    "message": "URL eşlemesi <a href='https://www.google.com/search?q=regular%20expression'>düzenli ifadeler</a> ile güçlüdür.<br>Ancak, düzenli ifadelerin oluşturulması (ve okunması) zor olabilir.<br>Çoğu durumda joker karakter kullanmanız ve yalnızca başka bir koşul türüyle elde edilemeyen koşullar için kurallı ifade kullanmanız önerilir."
+  },
+  "condition_KeywordCondition": {
+    "message": "Anahtar Kelime"
+  },
+  "condition_FalseCondition": {
+    "message": "(Devre dışı)"
+  },
+  "condition_details_FalseCondition": {
+    "message": "(Eşleme sırasında koşul görmezden gelindi)"
+  },
+  "condition_TimeCondition": {
+    "message": "Mevcut Zaman"
+  },
+  "condition_WeekdayCondition": {
+    "message": "Haftanın Günü"
+  },
+  "condition_alert_fullUrlLimitationLink": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation"
+  },
+  "condition_group_default": {
+    "message": ""
+  },
+  "condition_group_host": {
+    "message": "Sunucu"
+  },
+  "condition_group_url": {
+    "message": "Url"
+  },
+  "condition_group_special": {
+    "message": "Özel"
+  },
+  "ruleListFormat_Switchy": {
+    "message": "Değiştirilebilir"
+  },
+  "ruleListFormat_AutoProxy": {
+    "message": "AutoProxy"
+  },
+  "ruleList_usageUrl": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/RuleListUsage"
+  },
+  "ruleList_error_unknownProfile": {
+    "message": "Bilinmeyen profil: $PROFILE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "ruleList_error_invalidRule": {
+    "message": "$LNO$ nolu satırda geçersiz kural: $SOURCE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "LNO": {
+        "content": "$1"
+      },
+      "SOURCE": {
+        "content": "$2"
+      }
+    }
+  },
+  "dialog_close": {
+    "message": "Kapat"
+  },
+  "dialog_save": {
+    "message": "Değişikleri Kaydet"
+  },
+  "dialog_ok": {
+    "message": "Tamam"
+  },
+  "dialog_cancel": {
+    "message": "İptal"
+  },
+  "inputClear_clear": {
+    "message": "Temizle"
+  },
+  "inputClear_restore": {
+    "message": "Eski Haline Getir"
+  },
+  "options_title": {
+    "message": "SwitchyOmega Seçenekler"
+  },
+  "options_experimental_badge": {
+    "message": "α"
+  },
+  "options_navHeader_setting": {
+    "message": "Ayarlar"
+  },
+  "options_navHeader_profiles": {
+    "message": "Profiller"
+  },
+  "options_navHeader_actions": {
+    "message": "Hareketler"
+  },
+  "options_tab_ui": {
+    "message": "Arayüz"
+  },
+  "options_tab_general": {
+    "message": "General"
+  },
+  "options_tab_importExport": {
+    "message": "İçe veya Dışa Aktar"
+  },
+  "options_newProfile": {
+    "message": "Yeni profil…"
+  },
+  "options_apply": {
+    "message": "Değişiklikleri uygula"
+  },
+  "options_discard": {
+    "message": "Değişiklikleri yoksay"
+  },
+  "options_reset": {
+    "message": "Seçenekleri sıfırla"
+  },
+  "options_group_miscOptions": {
+    "message": "Diğer Seçenekler"
+  },
+  "options_confirmDeletion": {
+    "message": "Koşula bağlı silinmeyi onayla."
+  },
+  "options_refreshOnProfileChange": {
+    "message": "Profil güncellendiğinde mevcut sekmeyi yenile."
+  },
+  "options_group_keyboardShortcut": {
+    "message": "Klavye Kısayolu"
+  },
+  "options_menuShortcutConfigure": {
+    "message": "Kısayolu ayarla"
+  },
+  "options_group_switchOptions": {
+    "message": "Geçiş Seçenekleri"
+  },
+  "options_startupProfile": {
+    "message": "Başlangıç Hesabı"
+  },
+  "options_startupProfile_none": {
+    "message": "(Geçerli profil)"
+  },
+  "options_showConditionTypesAdvanced": {
+    "message": "Gelişmiş koşul tiplerini göster"
+  },
+  "options_showConditionTypesAdvancedHelp": {
+    "message": "Yeni tip gelişmiş ancak karmaşık geçiş koşullarının kilidini açar. Çoğu senaryoda, temel koşul türleri yeterli olmalıdır, bu yüzden bu seçenek önerilmez."
+  },
+  "options_quickSwitch": {
+    "message": "Hızlı Geçiş"
+  },
+  "options_group_conflicts": {
+    "message": "Çakışmalar"
+  },
+  "options_group_networkRequests": {
+    "message": "Ağ İstekleri"
+  },
+  "options_downloadOptions": {
+    "message": "İndirme Seçenekleri"
+  },
+  "options_downloadInterval": {
+    "message": "İndirme zaman aralığı"
+  },
+  "options_downloadInterval_15": {
+    "message": "15 Dakika"
+  },
+  "options_downloadInterval_60": {
+    "message": "1 Saat"
+  },
+  "options_downloadInterval_180": {
+    "message": "3 Saat"
+  },
+  "options_downloadInterval_360": {
+    "message": "6 Saat"
+  },
+  "options_downloadInterval_720": {
+    "message": "12 Saat"
+  },
+  "options_downloadInterval_1440": {
+    "message": "Her gün"
+  },
+  "options_downloadInterval_never": {
+    "message": "Asla"
+  },
+  "options_group_importExportProfile": {
+    "message": "Profil"
+  },
+  "options_exportPacFile": {
+    "message": "PAC Dosyası Olarak Dışa Aktar"
+  },
+  "options_exportPacFileHelp": {
+    "message": "Geçerli profili PAC dosyası olarak dışa aktar, böylece diğer tarayıcılarda kullanabilirsin."
+  },
+  "options_group_importExportSettings": {
+    "message": "Ayarlar"
+  },
+  "options_makeBackup": {
+    "message": "Yedek oluştur"
+  },
+  "options_makeBackupHelp": {
+    "message": "Tüm ayarlarının tam bir yedeğini oluştur (profiller ve diğer seçenekler dahil)."
+  },
+  "options_restoreLocal": {
+    "message": "Dosyadan eski haline getir"
+  },
+  "options_restoreLocalHelp": {
+    "message": "SwitchyOmega seçeneklerini bir dosyadan eski haline getir."
+  },
+  "options_restoreOnline": {
+    "message": "Çevirimiçi eski haline getir"
+  },
+  "options_restoreOnlinePlaceholder": {
+    "message": "Seçenekler dosyası bağlantısı (ör. 'http://example.com/switchy.bak')"
+  },
+  "options_restoreOnlineSubmit": {
+    "message": "Eski haline getir"
+  },
+  "options_group_syncing": {
+    "message": "Eşitleniyor (Deneysel)"
+  },
+  "options_syncEnable": {
+    "message": "Eşitlemeyi Etkinleş"
+  },
+  "options_syncEnableForce": {
+    "message": "Eşitlemeden İndir"
+  },
+  "options_syncDisable": {
+    "message": "Eşitlemeyi pasifleştir"
+  },
+  "options_syncReset": {
+    "message": "Uzak kopyayı temizle"
+  },
+  "options_profileSyncDisabled": {
+    "message": "Bu profil için eşitleme pasifleştirildi."
+  },
+  "options_profileSyncDisabled_quotaPerItem": {
+    "message": "Çok fazla depolama alanı kullanması sebebiyle bu profil için eşleme pasifleştirildi."
+  },
+  "options_profileTabPrefix": {
+    "message": "Profil :: "
+  },
+  "options_renameProfile": {
+    "message": "Yeniden adlandır"
+  },
+  "options_deleteProfile": {
+    "message": "Sil"
+  },
+  "options_profileExportRuleList": {
+    "message": "Kural listesini yayınla"
+  },
+  "options_profileExportRuleListHelp": {
+    "message": "Geçiş kurallarını metin biçiminde yayınlama için dışa aktar."
+  },
+  "options_profileExportPac": {
+    "message": "PAC Dışa Aktar"
+  },
+  "options_profileUnsupported": {
+    "message": "Desteklenmeyen profil türü $TYPE$!",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "TYPE": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileEditSource": {
+    "message": "Kaynak kodunu düzenle"
+  },
+  "options_profileEditSourceHelp": {
+    "message": "Kaynak kodu biçimi hakkında yardım göster"
+  },
+  "options_profileEditSourceHelpUrl": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/SwitchyOmega-conditions-format#result-profile"
+  },
+  "options_group_proxyServers": {
+    "message": "Proxy servers"
+  },
+  "options_proxy_scheme": {
+    "message": "Şema"
+  },
+  "options_proxy_protocol": {
+    "message": "Protokol"
+  },
+  "options_proxy_server": {
+    "message": "Sunucu"
+  },
+  "options_proxy_port": {
+    "message": "Port"
+  },
+  "options_proxy_auth": {
+    "message": "Kimlik doğrulama"
+  },
+  "options_scheme_default": {
+    "message": "(varsayılan)"
+  },
+  "options_protocol_useDefault": {
+    "message": "(varsayılanı kullan)"
+  },
+  "options_proxy_expand": {
+    "message": "Gelişmişi Göster"
+  },
+  "options_group_bypassList": {
+    "message": "Baypas Listesi"
+  },
+  "options_bypassListHelpLinkText": {
+    "message": "(Joker karakterleri ve daha fazlası…)"
+  },
+  "options_group_pacUrl": {
+    "message": "PAC Bağlantısı"
+  },
+  "options_group_pacScript": {
+    "message": "PAC Betiği"
+  },
+  "options_pacScriptLastUpdate": {
+    "message": "PAC betiği indirilme zamanı $TIME$:",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "TIME": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_group_virtualProfile": {
+    "message": "Sanal Profil"
+  },
+  "options_virtualProfileTarget": {
+    "message": "Hedef"
+  },
+  "options_virtualProfileTargetHelp": {
+    "message": "Bu profil uygulandığında, aşağıda seçilen profille tamamen aynı şekilde hareket eder."
+  },
+  "options_group_virtualProfileReplace": {
+    "message": "Sanal Profile Taşı"
+  },
+  "options_virtualProfileReplace": {
+    "message": "Hedef profille yer değiştir"
+  },
+  "options_group_ruleListConfig": {
+    "message": "Kural Listesi Ayarı"
+  },
+  "options_ruleListFormat": {
+    "message": "Kural Listesi Biçimi"
+  },
+  "options_group_ruleListResult": {
+    "message": "Kural listesi sonuç profilleri"
+  },
+  "options_ruleListMatchProfile": {
+    "message": "Profili eşle"
+  },
+  "options_ruleListDefaultProfile": {
+    "message": "Varsayılan profil"
+  },
+  "options_group_ruleListUrl": {
+    "message": "Kural Listesi Bağlantısı"
+  },
+  "options_group_ruleListText": {
+    "message": "Kural Listesi Metni"
+  },
+  "options_ruleListLastUpdate": {
+    "message": "Kural listesi indirilme zamanı $TIME$:",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "TIME": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_group_switchRules": {
+    "message": "Geçiş kuralları"
+  },
+  "options_sort": {
+    "message": "Sırala"
+  },
+  "options_conditionType": {
+    "message": "Koşul Türü"
+  },
+  "options_showConditionTypeHelp": {
+    "message": "Yardım göster"
+  },
+  "options_conditionDetails": {
+    "message": "Koşul Detayları"
+  },
+  "options_resultProfile": {
+    "message": "Profil"
+  },
+  "options_conditionActions": {
+    "message": "Actions"
+  },
+  "options_addCondition": {
+    "message": "Koşul ekle"
+  },
+  "options_cloneRule": {
+    "message": "Kopya"
+  },
+  "options_ruleNote": {
+    "message": "Note"
+  },
+  "options_switchAttachedProfileInCondition": {
+    "message": "Kural listesi kuralları"
+  },
+  "options_switchAttachedProfileInConditionDisabled": {
+    "message": "(Kural listesi kuralları PASİFLEŞTİRİLDİ)"
+  },
+  "options_switchDefaultProfile": {
+    "message": "Default"
+  },
+  "options_hourBetween": {
+    "message": "≤ geçerli saat ≤"
+  },
+  "options_weekDayShort_0": {
+    "message": "Su"
+  },
+  "options_weekDayShort_1": {
+    "message": "Mo"
+  },
+  "options_weekDayShort_2": {
+    "message": "Tu"
+  },
+  "options_weekDayShort_3": {
+    "message": "We"
+  },
+  "options_weekDayShort_4": {
+    "message": "Th"
+  },
+  "options_weekDayShort_5": {
+    "message": "Fr"
+  },
+  "options_weekDayShort_6": {
+    "message": "Sa"
+  },
+  "options_group_conditionHelp": {
+    "message": "Koşul Türleri Hakkında"
+  },
+  "options_group_attachProfile": {
+    "message": "Çevirimiçi kural listelerini içe aktar"
+  },
+  "options_attachProfile": {
+    "message": "Kural listesi ekle"
+  },
+  "options_modalHeader_welcome": {
+    "message": "SwitchyOmega'ya Hoşgeldiniz"
+  },
+  "options_guideNext": {
+    "message": "Sonraki"
+  },
+  "options_guideDone": {
+    "message": "Tamamlandı"
+  },
+  "options_guideSkip": {
+    "message": "Kılavuzu geç"
+  },
+  "options_modalHeader_applyOptions": {
+    "message": "Seçenekleri Uygula"
+  },
+  "options_applyOptionsConfirm": {
+    "message": "Seçenekleri kaydetmek ve uygulamak istiyor musun?"
+  },
+  "options_modalHeader_renameProfile": {
+    "message": "Profili Yeniden Adlandır"
+  },
+  "options_renameProfileName": {
+    "message": "Yeni profil adı"
+  },
+  "options_profileNameConflict": {
+    "message": "Bu adda bir profil zaten var."
+  },
+  "options_modalHeader_replaceProfile": {
+    "message": "Profili Yer Değiştir"
+  },
+  "options_replaceProfile": {
+    "message": "Profili Yer Değiştir"
+  },
+  "options_replaceProfileConfirm": {
+    "message": "Gerçekten $FromProfile$ profilini $ToProfile$ ile yer değiştirmek istiyor musun?",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "FromProfile": {
+        "content": "$1"
+      },
+      "ToProfile": {
+        "content": "$2"
+      }
+    }
+  },
+  "options_replaceProfileSuccess": {
+    "message": "Seçenekler güncellendi."
+  },
+  "options_modalHeader_deleteProfile": {
+    "message": "Profil Sil"
+  },
+  "options_deleteProfileConfirm": {
+    "message": "Aşağıdaki profili gerçekten silmek istiyor musun?"
+  },
+  "options_modalHeader_cannotDeleteProfile": {
+    "message": "Profil Silinemedi"
+  },
+  "options_profileReferredBy": {
+    "message": "Bu profil silinemez, çünkü aşağıdaki profillerle bağlantılı:"
+  },
+  "options_modifyReferringProfiles": {
+    "message": "Bu profilleri değiştirmeli ve silmeden önce bu profille bağlantılarını durdurmalısınız."
+  },
+  "options_profileNameEmpty": {
+    "message": "Profil adı boş olamaz."
+  },
+  "popup_title": {
+    "message": "SwitchyOmega Açılır Pencere"
+  },
+  "options_modalHeader_proxyAuth": {
+    "message": "Proxy Authentication"
+  },
+  "options_proxyAuthUsername": {
+    "message": "Kullanıcı adı"
+  },
+  "options_proxyAuthPassword": {
+    "message": "Password"
+  },
+  "options_proxyAuthShowPassword": {
+    "message": "Parolayı göster"
+  },
+  "options_proxyAuthHidePassword": {
+    "message": "Parolayı gizle"
+  },
+  "options_proxyAuthNone": {
+    "message": "No Authentication"
+  },
+  "options_modalHeader_deleteRule": {
+    "message": "Kuralı Sil"
+  },
+  "options_deleteRuleConfirm": {
+    "message": "Aşağıdaki kuralı silmek istediğine emin misin?"
+  },
+  "options_deleteRule": {
+    "message": "Delete"
+  },
+  "options_modalHeader_resetRules": {
+    "message": "Kuralları sıfırla"
+  },
+  "options_resetRules": {
+    "message": "Kuralları sıfırla"
+  },
+  "options_resetRules_help": {
+    "message": "Tüm kurallar için profil ayarla"
+  },
+  "options_modalHeader_deleteAttached": {
+    "message": "Kural Listesini Kaldır"
+  },
+  "options_deleteAttachedConfirm": {
+    "message": "Geçerli profilden kural listesini gerçekten kaldırmak istiyor musun?"
+  },
+  "options_ruleListLineCount": {
+    "message": "$COUNT$ satır kural",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "COUNT": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_deleteAttached": {
+    "message": "Kural listesini kaldır"
+  },
+  "options_modalHeader_newProfile": {
+    "message": "Yeni Profil"
+  },
+  "options_newProfileName": {
+    "message": "Profil adı"
+  },
+  "options_profileType": {
+    "message": "Lütfen profil türü seç:"
+  },
+  "options_profileTypeFixedProfile": {
+    "message": "Proxy Profili"
+  },
+  "options_profileTypePacProfile": {
+    "message": "PAC Profili"
+  },
+  "options_profileTypeSwitchProfile": {
+    "message": "Profile Geç"
+  },
+  "options_profileTypeRuleListProfile": {
+    "message": "Kural Listesi Profili"
+  },
+  "options_profileTypeVirtualProfile": {
+    "message": "Sanal Profil"
+  },
+  "options_createProfile": {
+    "message": "Oluştur"
+  },
+  "options_modalHeader_resetOptions": {
+    "message": "Reset Options"
+  },
+  "options_resetOptionsConfirm": {
+    "message": "Seçenekleri gerçekten sıfırlamak istiyor musun? Tüm profiller ve ayarlar kaybedilecek!"
+  },
+  "options_formInvalid": {
+    "message": "Lütfen sayfadaki hataları düzeltin."
+  },
+  "options_profileNotFound": {
+    "message": "$PROFILE$ profili yok! Seçenekler bozulmuş olabilir.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_resetSuccess": {
+    "message": "Options reset."
+  },
+  "options_saveSuccess": {
+    "message": "Seçenekler kaydedildi."
+  },
+  "options_importSuccess": {
+    "message": "Seçenekler içe aktarıldı."
+  },
+  "options_importFormatError": {
+    "message": "Geçersiz yedek dosyası!"
+  },
+  "options_importDownloadError": {
+    "message": "Yedek dosyası indirirken hata!"
+  },
+  "options_profileDownloadSuccess": {
+    "message": "Profil güncellendi."
+  },
+  "options_profileDownloadError": {
+    "message": "Profil verisi indirilirken hata!"
+  },
+  "options_profileDownloadError_NetworkError": {
+    "message": "Güncelleme sırasında ağ hatası oluştu."
+  },
+  "options_profileDownloadError_HttpError": {
+    "message": "Güncelleme sırasında HTTP ($STATUS$) hatası oluştu.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "STATUS": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileDownloadError_HttpNotFoundError": {
+    "message": "Profil bağlantısı sunucuda bulunamadı. Lütfen tekrar kontrol edin."
+  },
+  "options_profileDownloadError_HttpServerError": {
+    "message": "Güncelleme sırasında uzak sunucu ($STATUS$) hatası verdi.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "STATUS": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_downloadProfileNow": {
+    "message": "Profili Şimdi İndir"
+  },
+  "popup_externalProfile": {
+    "message": "(Harici Profil)"
+  },
+  "popup_externalProfileName": {
+    "message": "profile adı"
+  },
+  "popup_proxyNotControllableManage": {
+    "message": "Uzantıları yönet"
+  },
+  "popup_addConditionTo": {
+    "message": "Şuraya koşul ekle"
+  },
+  "popup_addCondition": {
+    "message": "Koşul ekle"
+  },
+  "popup_showOptions": {
+    "message": "Options"
+  },
+  "popup_reportIssues": {
+    "message": "Hataları raporla"
+  },
+  "popup_errorLog": {
+    "message": "Hata kayıtlarını kaydet"
+  },
+  "popup_requestErrorHeading": {
+    "message": "Yüklemesi başarısız olan kaynaklar"
+  },
+  "popup_configureMonitorWebRequests": {
+    "message": "Ağ İzleyicisini Yapılandır"
+  },
+  "options_resultProfileForSelectedDomains": {
+    "message": "Bu profili seçilen alan adları için kullan"
+  },
+  "popup_issueTemplate": {
+    "message": "\n\n\n<!-- Yorumunuzunu bu satırın ÜSTÜNE yazın. -->\nSwitchyOmega $projectVersion$\n$userAgent$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "projectVersion": {
+        "content": "$1"
+      },
+      "userAgent": {
+        "content": "$2"
+      }
+    }
+  },
+  "browserAction_profileDetails_PacProfile": {
+    "message": "(PAC betiği)"
+  },
+  "browserAction_profileDetails_SystemProfile": {
+    "message": "(diğer uzantılar veya çevre değişkenleri tarafından kontrol ediliyor)"
+  },
+  "browserAction_profileDetails_DirectProfile": {
+    "message": "(hiçbir proxy kullanmıyor)"
+  },
+  "browserAction_profileDetails_SwitchProfile": {
+    "message": "(şart temelli geçiş yapma)"
+  },
+  "browserAction_profileDetails_RuleListProfile": {
+    "message": "(kural listesi temelli geçiş yapma)"
+  },
+  "browserAction_titleNormal": {
+    "message": "SwitchyOmega:: $PROFILE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "browserAction_titleWithResult": {
+    "message": "SwitchyOmega:: $PROFILE$\n$DETAILS$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      },
+      "_unused_2": {
+        "content": "$2"
+      },
+      "DETAILS": {
+        "content": "$3"
+      }
+    }
+  },
+  "browserAction_defaultRuleDetails": {
+    "message": "(default)"
+  },
+  "browserAction_directResult": {
+    "message": "DIRECT"
+  },
+  "browserAction_attachedPrefix": {
+    "message": "(RL) "
+  },
+  "browserAction_tempRulePrefix": {
+    "message": "(TEMP) "
+  },
+  "contextMenu_enableQuickSwitch": {
+    "message": "Hızlı Geçişi Etkinleştir"
+  },
+  "about_title": {
+    "message": "Hakkında"
+  },
+  "about_app_description": {
+    "message": "Proxy yapılandırma aracı"
+  },
+  "about_version": {
+    "message": "Sürüm $VERSION$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "VERSION": {
+        "content": "$1"
+      }
+    }
+  },
+  "about_experimental_warning_moz": {
+    "message": "Mozilla Firefox seteği yüksek oranda deneyseldir! Hatalar ile karşılaşırsanız, aşağıdaki düğmeleri kullanarak lütfen raporlayın."
+  },
+  "about_disclaimer_networkService": {
+    "message": "SwitchyOmega proxy, VPN veya diğer ağ servislerini sağlamaz."
+  },
+  "about_disclaimer_privacy": {
+    "message": "SwitchyOmega sizi takip etmez veya internet sitelerine reklam yerleştirmez. Lütfen <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/Privacy#english'>gizlilik politikası</a> sayfasına bakın."
+  },
+  "about_help": {
+    "message": "SwitchyOmega kullanımı hakkında yardım ve diğer sorularınız için lütfen bakınız: <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/FAQ'>SSS</a>."
+  },
+  "about_copyright": {
+    "message": "Telif Hakkı 2012-2019 <a href='https://github.com/FelisCatus/SwitchyOmega/blob/master/AUTHORS'>SwitchyOmega Yazarları</a>. Tüm hakları saklıdır."
+  },
+  "about_credits": {
+    "message": "SwitchyOmega <a href='https://github.com/FelisCatus/SwitchyOmega'>SwitchyOmega</a> açık kaynak kodlu bir projedir ve diğer <a href='https://github.com/FelisCatus/SwitchyOmega/blob/master/AUTHORS'>açık kaynak kodlu yazılımlar</a> kulanılarak üretilmiştir."
+  },
+  "about_license": {
+    "message": "SwitchyOmega <a href='https://www.gnu.org/philosophy/free-sw.en.html'>özgür yazılımdır</a> ve <a href='https://www.gnu.org/licenses/gpl.html'>GNU General Public License</a> Sürüm 3 ve sonrası ile lisanslanmıştır."
+  }
+}

@@ -6,16 +6,16 @@
     "message": "Proxy SwitchyOmega"
   },
   "manifest_app_description": {
-    "message": "Manage and switch between multiple proxies quickly & easily."
+    "message": "Einfach & schnell mehrere Proxies verwalten und zwischen ihnen wechseln."
   },
   "manifest_icon_default_title": {
-    "message": "Loading…"
+    "message": "Laden…"
   },
   "upgrade_profile_auto": {
-    "message": "Auto Switch"
+    "message": "Automatisches Wechseln"
   },
   "profile_direct": {
-    "message": "[Direct]"
+    "message": "[Direkt]"
   },
   "profile_system": {
     "message": "[System Proxy]"
@@ -24,13 +24,13 @@
     "message": "Host wildcard"
   },
   "condition_help_HostWildcardCondition": {
-    "message": "Matches hosts (domain names) by wildcard.<br><b>The asterisk <code>*</code></b> matches zero or more characters.<br><b>The question mark <code>?</code></b> matches exactly one character.<br><br>Note that rules beginning with <code>*.</code> are specially treated only in Host wildcard conditions.<br>Example: <code>*.example.com</code> will match www.example.com <b>AND example.com as well.</b><br>To match subdomains <b>only</b>, use <b>two</b> asterisks like <code>**.example.com</code>."
+    "message": "Übereinstimmungen mit Hosts (Domänennamen) per Wildcard.<br><b>Das Sternchen <code>*</code></b> entspricht null oder mehr Zeichen.<br><b>Das Fragezeichen <code>?</code></b> entspricht genau einem Zeichen.<br><br>Beachten Sie, dass Regeln, die mit <code>*.</code> beginnen, speziell nur in Hosts mit Wildcard behandelt werden.<br>Beispiel: <code>*.example.com</code> passt auch zu www.example.com <b>UND auch example.com.</b><br>Zur Übereinstimmung <b>nur</b> von Subdomains, verwenden Sie <b>zwei</b> Sternchen wie <code>**.example.com</code>."
   },
   "condition_HostRegexCondition": {
     "message": "Host regex"
   },
   "condition_help_HostRegexCondition": {
-    "message": "Like Host wildcard condition, but matches hosts (domain names) by <a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>.<br>Regular expressions can be hard to construct (and read).<br>It is recommended to use wildcards for most cases and only use regex for conditions that cannot be achieved by any other condition type."
+    "message": "Wie die Host Platzhalter Bedingung, aber gleicht hosts (domain namen) bei <a href='https://www.google.com/search?q=regular%20expression'>Regulärer Ausdruck</a>.<br>Regulärer Ausdruck können schwer zu erstellen und/oder zu lesen sein.<br>Es wird im Normalfall Platzhalter zu verwenden und Regulärer Ausdrücke nur für Bedingungen Typen die nicht mit anderen Bedingungen Typen möglich sind zu benutzen."
   },
   "condition_HostLevelsCondition": {
     "message": "Host levels"
@@ -57,16 +57,16 @@
     "message": "Matches URL by extremely powerful <a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>.<br>However, regular expressions can be hard to construct (and read).<br>It is recommended to use wildcards for most cases and only use regex for conditions that cannot be achieved by any other condition type."
   },
   "condition_KeywordCondition": {
-    "message": "Keyword"
+    "message": "Schlüsselwort"
   },
   "condition_help_KeywordCondition": {
     "message": "A keyword condition matches if the URL protocol is HTTP, and the pattern is an exact sub-string of the URL.<br>It behaves like the URL wildcard pattern <code>http://*<b>pattern</b>*</code>, where <b>pattern</b> is the keyword pattern.<br>Keyword conditions are useful if you want to bypass a firewall blocking some keywords in the URL, by requesting such URLs through a proxy."
   },
   "condition_FalseCondition": {
-    "message": "(Disabled)"
+    "message": "(Ausgeschaltet)"
   },
   "condition_details_FalseCondition": {
-    "message": "(Condition ignored when matching)"
+    "message": "(Bedingung wird ignoriert wenn zutreffend)"
   },
   "condition_help_FalseCondition": {
     "message": "You can disable a condition by setting its type to <code>(Disabled)</code>. A Disabled condition act as if it does not exist.<br>This feature can be used to disable conditions temporarily.<br>Disabled conditions still hold the previous information (like patterns) and can be re-enabled by setting the condition type back to the previous type."
@@ -99,7 +99,7 @@
     "message": "Url"
   },
   "condition_group_special": {
-    "message": "Special"
+    "message": "Spezial"
   },
   "ruleListFormat_Switchy": {
     "message": "Switchy"
@@ -114,7 +114,7 @@
     "message": "Missing '@with result' directive!"
   },
   "ruleList_error_unknownProfile": {
-    "message": "Unknown profile: $PROFILE$",
+    "message": "Unbekanntes Profil: $PROFILE$",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -125,7 +125,7 @@
     }
   },
   "ruleList_error_missingResultProfile": {
-    "message": "Missing result profile name at Line $LNO$: $SOURCE$",
+    "message": "Benötigt Ergebnis Profil Name in Line $LNO$: $SOURCE$",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -249,7 +249,7 @@
     "message": "Show advanced condition types"
   },
   "options_showConditionTypesAdvancedHelp": {
-    "message": "Unlocks new types of advanced but complicated switch conditions. For most scenarios, the basic condition types should be enough, so this option is not recommended."
+    "message": "Erschließt neue Arten von fortgeschrittenen, aber komplizierten Schalterbedingungen. Für die meisten Szenarien sollten die Grundbedingungsarten ausreichen, so dass diese Option nicht empfohlen wird."
   },
   "options_quickSwitch": {
     "message": "Quick Switch"

@@ -1,0 +1,1230 @@
+{
+  "appNameShort": {
+    "message": "SwitchyOmega"
+  },
+  "manifest_app_name": {
+    "message": "Проксі SwitchyOmega"
+  },
+  "manifest_app_description": {
+    "message": "Керуйте і перемикайтеся між проксі серверами швидко і легко."
+  },
+  "manifest_icon_default_title": {
+    "message": "Завантаження…"
+  },
+  "upgrade_profile_auto": {
+    "message": "Автоперемикання"
+  },
+  "profile_direct": {
+    "message": "[Напряму]"
+  },
+  "profile_system": {
+    "message": "[Системний проксі]"
+  },
+  "condition_HostWildcardCondition": {
+    "message": "За підстановкою у назві"
+  },
+  "condition_help_HostWildcardCondition": {
+    "message": "Зіставляє хости (доменні імена) з шаблоном.<br><b>Зірочка<code>*</code></b>зіставляє нуль або більше символів.<br><b>Знак питання<code>?</Code></b>зіставляє рівно один символ.<br><br>Запримітьте, що правила, що починаються з<code>*.</code>обробляються особливо тільки в шаблонах хоста.<br>Приклад:<code>*. example.com</code>зіставити як www.example.com,<b>ТАК І example.com.</b><br>Для того, щоб зіставити<b>тільки</b>піддомени, використовуйте<b>дві</b>зірочки:<code>**. example.com</code>."
+  },
+  "condition_HostRegexCondition": {
+    "message": "Регулярний вираз хоста"
+  },
+  "condition_help_HostRegexCondition": {
+    "message": "Подібно до шаблонів хоста, але зіставляє хости (доменні імена) з <ahref='https://www.google.ru/search?q=регулярні%20вирази'>регулярним виразом</a>.<br>Регулярні вирази буває важко побудувати (і читати).<br>Тому регулярні вирази рекомендується використовувати тільки для тих умов, що не можуть бути виражені іншими методами."
+  },
+  "condition_HostLevelsCondition": {
+    "message": "Рівні хоста"
+  },
+  "condition_help_HostLevelsCondition": {
+    "message": "Відповідає запиту тільки тоді, коли рівень хоста знаходиться в заданому діапазоні.<br>Рівень хоста визначається як<b>число розділених точками сегментів</b>хоста (доменного імені).<br>Приклад:<code>www.example.com</code>має рівень хоста 3, а<code>internal</code>має рівень хоста 1."
+  },
+  "condition_IpCondition": {
+    "message": "Літерали IP"
+  },
+  "condition_help_IpCondition": {
+    "message": "Відповідає запиту тільки тоді, якщо хост є<b>літерально</b>IP-адресою і знаходиться в підмережі, як зазначено в <ahref='https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation' >записи CIDR</a>.<br>Наприклад, правило<code>127.0.0.1/16</code>відповідає всім IP-адресами як<code>127.0. *. *</code>.<br>Таким чином<code>127.0.0.1</code>відповідає запиту, а<code>127.1.0.0</code>- немає. Імена хостів, такі як<code>localhost</code>, ніколи не будуть відповідати запиту, тому що вони<b »не літерали</b>IP."
+  },
+  "condition_UrlWildcardCondition": {
+    "message": "Шаблон URL"
+  },
+  "condition_help_UrlWildcardCondition": {
+    "message": "Зіставляє URL-адреси запиту з шаблоном.<br>Дивіться приклад шаблону хоста в розділі вище для швидкого створення шаблону для посилання.<br>Запримітьте, що шаблон URL-адреси не обробляються спеціальним чином (немає «магії» піддомена, як в шаблоні хоста).<br>Таким чином шаблон<code>*://*.example.com/*</code>відповідає http://www.example.com/але<b>не відповідає</b>http://example.com/."
+  },
+  "condition_UrlRegexCondition": {
+    "message": "Регулярний вираз URL"
+  },
+  "condition_help_UrlRegexCondition": {
+    "message": "Зіставляє URL-адресу за допомогою «надзвичайно потужного» <ahref='https://www.google.com/search?q=regular%20expression'>регулярного виразу</a>.<br>Однак регулярні вирази складно створювати (і читати).<br>У більшості випадків рекомендується використовувати шаблони, а регулярні вирази використовувати тільки для умов де без них неможливо обійтися."
+  },
+  "condition_KeywordCondition": {
+    "message": "Ключове слово"
+  },
+  "condition_help_KeywordCondition": {
+    "message": "Відповідає значенню ключового слова, якщо URL-адреса належить HTTP-протоколу, і зразок слова є частиною URL-адреси.<br>Він поводиться подібно шаблону URL. Приклад:<code>http://*<b>ключове слово</b>*</code>.<br>Ключові слова корисні, якщо Ви хочете обійти брендмауер, який блокує деякі ключові слова в URL-адресі, запитуючи такі URL-адреси через проксі."
+  },
+  "condition_FalseCondition": {
+    "message": "(вимкнено)"
+  },
+  "condition_details_FalseCondition": {
+    "message": "(Умова нехтується при зіставленні)"
+  },
+  "condition_help_FalseCondition": {
+    "message": "Ви можете вимкнути умову, встановивши її тип у стан<code>(вимкнено)</code>. Вимкнена умова діє так, ніби її не існує.<br>Цю можливість можна використовувати для тимчасового вимкнення умов.<br>Вимкнені умови як і раніше містять попередню інформацію (наприклад, шаблони) і можуть бути повторно увімкнені шляхом повернення до попереднього типу."
+  },
+  "condition_TimeCondition": {
+    "message": "Поточний час"
+  },
+  "condition_help_TimeCondition": {
+    "message": "Спрацьовує, якщо поточний місцевий час є у діапазоні, визначеному між <b>початковою годиною</b> та <b>кінцевою годиною</b> включно<br>Місцевий час, починаючи з початкової та кінцевої години розраховано згідно <b>24 год.</b> формату (<b>p 0 до 23</b>). <br>Розрахунок відбувається приблизно в той момент, коли надісланий запит."
+  },
+  "condition_WeekdayCondition": {
+    "message": "День тижня"
+  },
+  "condition_help_WeekdayCondition": {
+    "message": "Відповідає, якщо<b>поточний день тижня</b>обраний в деталях умови. День розраховується відповідно до місцевого часового поясу.<br>Запит і його URL-адресу не мають значення для цього умови. Результат грунтується виключно на дні тижня, коли відправляється запит."
+  },
+  "condition_alert_fullUrlLimitation": {
+    "message": "Повна відповідність URL-адреси більше не можливо для<code>https://</code>починаючи з Chrome 52. <ahref='https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL- Limitation'>Дізнатися більше...</a>"
+  },
+  "condition_alert_fullUrlLimitationLink": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation"
+  },
+  "condition_group_default": {
+    "message": ""
+  },
+  "condition_group_host": {
+    "message": "Хост"
+  },
+  "condition_group_url": {
+    "message": "Адреса"
+  },
+  "condition_group_special": {
+    "message": "Особливі"
+  },
+  "ruleListFormat_Switchy": {
+    "message": "Перемикач"
+  },
+  "ruleListFormat_AutoProxy": {
+    "message": "Авто проксі"
+  },
+  "ruleList_usageUrl": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/RuleListUsage"
+  },
+  "ruleList_error_resultNotEnabled": {
+    "message": "Не вистачає директиви '@with result'!"
+  },
+  "ruleList_error_unknownProfile": {
+    "message": "Невідомий профіль: $PROFILE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "ruleList_error_missingResultProfile": {
+    "message": "Відсутня назва профілю в рядку $LNO$: $SOURCE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "LNO": {
+        "content": "$1"
+      },
+      "SOURCE": {
+        "content": "$2"
+      }
+    }
+  },
+  "ruleList_error_invalidRule": {
+    "message": "Некоректне правило в рядку $LNO$: $SOURCE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "LNO": {
+        "content": "$1"
+      },
+      "SOURCE": {
+        "content": "$2"
+      }
+    }
+  },
+  "ruleList_error_noDefaultRule": {
+    "message": "Відсутня правило для умови «*»!"
+  },
+  "dialog_close": {
+    "message": "Зачинити"
+  },
+  "dialog_save": {
+    "message": "Зберегти зміни"
+  },
+  "dialog_ok": {
+    "message": "Згоден"
+  },
+  "dialog_cancel": {
+    "message": "Скасувати"
+  },
+  "inputClear_clear": {
+    "message": "Очистити"
+  },
+  "inputClear_restore": {
+    "message": "Відновити"
+  },
+  "options_title": {
+    "message": "Налаштування SwitchyOmega"
+  },
+  "options_experimental_badge": {
+    "message": "α"
+  },
+  "options_navHeader_setting": {
+    "message": "Налаштування"
+  },
+  "options_navHeader_profiles": {
+    "message": "Профілі"
+  },
+  "options_navHeader_actions": {
+    "message": "Дії"
+  },
+  "options_tab_ui": {
+    "message": "Інтерфейс"
+  },
+  "options_tab_general": {
+    "message": "Загальні"
+  },
+  "options_tab_importExport": {
+    "message": "Імпорт/Експорт"
+  },
+  "options_newProfile": {
+    "message": "Новий профіль…"
+  },
+  "options_apply": {
+    "message": "Задіяти зміни"
+  },
+  "options_discard": {
+    "message": "Відхилити зміни"
+  },
+  "options_reset": {
+    "message": "Скинути налаштування"
+  },
+  "options_group_miscOptions": {
+    "message": "Інші налаштування"
+  },
+  "options_confirmDeletion": {
+    "message": "Підтвердити при видаленні умови."
+  },
+  "options_refreshOnProfileChange": {
+    "message": "Перезавантажити активну вкладинку при зміні профілю."
+  },
+  "options_showInspectMenu": {
+    "message": "Дозволити перевірку проксі, який використовується для елементів сторінки, через контекстне меню."
+  },
+  "options_addConditionsToBottom": {
+    "message": "Put new conditions added using the popup to the bottom of the list."
+  },
+  "options_group_keyboardShortcut": {
+    "message": "Клавіатурні скорочення"
+  },
+  "options_menuShortcutHelp": {
+    "message": "Натискання гарячої клавіші відкриє контекстне меню SwitchyOmega. (Типово Alt + Shift + O)."
+  },
+  "options_menuShortcutMore": {
+    "message": "Елементи спливаючого меню також можуть бути доступні за допомогою клавіатури. Натисніть ? (або /) знаходячись у меню, щоб дізнатися більше."
+  },
+  "options_menuShortcutConfigure": {
+    "message": "Налаштувати скорочення"
+  },
+  "options_group_switchOptions": {
+    "message": "Налаштування перемикання"
+  },
+  "options_startupProfile": {
+    "message": "Стартовий профіль"
+  },
+  "options_startupProfile_none": {
+    "message": "(Поточний профіль)"
+  },
+  "options_showConditionTypesAdvanced": {
+    "message": "Показувати складніші типи умов"
+  },
+  "options_showConditionTypesAdvancedHelp": {
+    "message": "Розблокує нові типи передових, але складних умов перемикання. Для більшості сценаріїв основних типів умов має бути достатньо, тому цей параметр не рекомендується."
+  },
+  "options_quickSwitch": {
+    "message": "Швидке перемикання"
+  },
+  "options_cycledProfiles": {
+    "message": "Задіяні профілі"
+  },
+  "options_cycledProfilesHelp": {
+    "message": "Коли ви натискаєте на значок (або використовуєте гарячу клавішу), такі профілі будуть застосовуватися в заданому порядку."
+  },
+  "options_cycledProfilesTooFew": {
+    "message": "Вам потрібно вибрати як мінімум 2 профілю, щоб увімкнути цю функцію! Ви можете перетягнути їх з поля нижче."
+  },
+  "options_notCycledProfiles": {
+    "message": "Чи не задіяні профілі"
+  },
+  "options_group_proxyChanges": {
+    "message": "Зміни проксі"
+  },
+  "options_revertProxyChanges": {
+    "message": "Скасувати зміни проксі-серверів, що зроблені іншими застосунками."
+  },
+  "options_group_conflicts": {
+    "message": "Конфлікти"
+  },
+  "options_conflicts_introduction": {
+    "message": "Sometimes, other apps will also try to control the proxy settings, resulting in conflicts. Note that ad blockers and other extensions may also use proxy settings under the hood. Such conflicts cannot be avoided due to how the browser works."
+  },
+  "options_conflicts_lowerPriority": {
+    "message": "A red badge like this on the SwitchyOmega icon indicates that another app has higher priority so SwitchyOmega cannot control the settings. Please try to uninstall SwitchyOmega and reinstall, which should raise SwitchyOmega's priority. If you still see conflicts after reinstallation, please consider removing the other app causing the conflict."
+  },
+  "options_conflicts_higherPriority": {
+    "message": "If SwitchyOmega has higher priority, you can give the control back to other apps or system settings by selecting $SYSTEMPROFILE$ in the popup menu.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "SYSTEMPROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_showExternalProfile": {
+    "message": "Show popup menu item to import proxy settings from other apps."
+  },
+  "options_showExternalProfileHelp": {
+    "message": "When $SYSTEMPROFILE$ is selected, you can import the effective proxy settings from other apps by selecting $EXTERNALPROFILE$ on the popup menu. The settings will be imported as a profile using the name you provide. Please note that the imported profile is a snapshot and will not reflect any changes from the source app thereafter.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "SYSTEMPROFILE": {
+        "content": "$1"
+      },
+      "EXTERNALPROFILE": {
+        "content": "$2"
+      }
+    }
+  },
+  "options_group_networkRequests": {
+    "message": "Мережеві запити"
+  },
+  "options_monitorWebRequests": {
+    "message": "Показувати число невдалих мережевих запитів на поточній вкладинці."
+  },
+  "options_monitorWebRequestsHelp": {
+    "message": "Жовта позначка відобразиться на піктограмі, якщо деякі з ресурсів не вдасться завантажити, <br>для зручності ви можете призначити профіль таким ресурсам через спливаюче меню."
+  },
+  "options_downloadOptions": {
+    "message": "Налаштування завантаження"
+  },
+  "options_downloadOptionsHelp": {
+    "message": "Налаштування частоти, з якою збережені у мережі списки правил та PAC-скрипти будуть оновлюватися."
+  },
+  "options_downloadInterval": {
+    "message": "Періодичність завантаження"
+  },
+  "options_downloadInterval_15": {
+    "message": "15 хвилин"
+  },
+  "options_downloadInterval_60": {
+    "message": "1 година"
+  },
+  "options_downloadInterval_180": {
+    "message": "3 години"
+  },
+  "options_downloadInterval_360": {
+    "message": "6 годин"
+  },
+  "options_downloadInterval_720": {
+    "message": "12 годин"
+  },
+  "options_downloadInterval_1440": {
+    "message": "Кожен день"
+  },
+  "options_downloadInterval_never": {
+    "message": "Ніколи"
+  },
+  "options_group_importExportProfile": {
+    "message": "Профіль"
+  },
+  "options_exportPacFile": {
+    "message": "Вивантажити як PAC-файл"
+  },
+  "options_exportPacFileHelp": {
+    "message": "Експортуйте поточний профіль як файл PAC, щоб ви могли використовувати його в інших браузерах."
+  },
+  "options_exportProfileHelp": {
+    "message": "Щоб вивантажити профіль, використайте панель дій у верхньому правому кутку сторінки профіля."
+  },
+  "options_exportLegacyRuleList": {
+    "message": "Вивантажити список правил у сумісному з Proxy Switchy!/SwitchyPlus/SwitchySharp форматі, якщо це можливо."
+  },
+  "options_exportLegacyRuleListHelp": {
+    "message": "Увімкніть цю функцію, тільки якщо ви публікуєте списки правил для користувачів цих проектів.<br>Подумайте про те, щоб порадити вашим знайомим перейти на SwitchyOmega."
+  },
+  "options_group_importExportSettings": {
+    "message": "налаштування"
+  },
+  "options_makeBackup": {
+    "message": "Зробити резервну копію"
+  },
+  "options_makeBackupHelp": {
+    "message": "Зробити повну резервну копію ваших налаштувань (включно з профілями та усіма іншими налаштуваннями)."
+  },
+  "options_restoreLocal": {
+    "message": "Відновити з файлу"
+  },
+  "options_restoreLocalHelp": {
+    "message": "Відновити параметри SwitchyOmega з локального файлу."
+  },
+  "options_restoreOnline": {
+    "message": "Відновити з онлайну"
+  },
+  "options_restoreOnlinePlaceholder": {
+    "message": "Адреса файла налаштувань (наприклад, 'http://example.com/switchy.bak')"
+  },
+  "options_restoreOnlineSubmit": {
+    "message": "Відновити"
+  },
+  "options_group_syncing": {
+    "message": "Синхронізація (експериментально)"
+  },
+  "options_syncEnable": {
+    "message": "Вмикнути синхронізацію"
+  },
+  "options_syncEnableForce": {
+    "message": "Завантаження синхронізованих налаштувань"
+  },
+  "options_syncDisable": {
+    "message": "Вимкнути синхронізацію"
+  },
+  "options_syncReset": {
+    "message": "Очистити віддалену копію"
+  },
+  "options_syncPristineHelp": {
+    "message": "Тепер ви можете автоматично синхронізувати ваші настройки і профілі на всіх ваших настільних пристроях з браузером Chrome."
+  },
+  "options_syncSyncAlert": {
+    "message": "Ваші налаштування автоматично синхронізовані поміж усіма вашими пристроями."
+  },
+  "options_syncSyncHelp": {
+    "message": "Слід завбачити, що ви повинні увійти в Chrome на кожному з ваших пристроїв (включаючи це), щоб синхронізація дійсно працювала.<br>Ви можете перевірити цей розділ на інших пристроях, щоб переконатися, що він працює."
+  },
+  "options_syncConflictAlert": {
+    "message": "Ви вивантажили копію ваших налаштувань до іншого пристрою за допомогою синхронізації."
+  },
+  "options_syncConflictHelp": {
+    "message": "Ви можете завантажити віддалену копію на свій пристрій, якщо хочете.<br>Однак це призведе до<b>перезапису існуючих налаштувань і профілів</b>на цьому пристрої."
+  },
+  "options_syncUnsupportedHelp": {
+    "message": "Параметри синхронізації не підтримуються на вашій платформі або в браузері. На даний момент підтримується тільки браузер Chrome для настільних пристроїв."
+  },
+  "options_profileSyncDisabled": {
+    "message": "Синхронізація відключена для цього профілю."
+  },
+  "options_profileSyncDisabled_quotaPerItem": {
+    "message": "Синхронізація вимкнена для цього профіля, тому що він використовує забагато місця."
+  },
+  "options_profileTabPrefix": {
+    "message": "Профіль :: "
+  },
+  "options_renameProfile": {
+    "message": "Змінити назву"
+  },
+  "options_deleteProfile": {
+    "message": "Видалити"
+  },
+  "options_profileExportRuleList": {
+    "message": "Опублікувати список правил"
+  },
+  "options_profileExportRuleListHelp": {
+    "message": "Вивантажити Правила перемикань у текстовому форматі для публікації."
+  },
+  "options_profileExportPac": {
+    "message": "Вивантажити PAC"
+  },
+  "options_profileUnsupported": {
+    "message": "Непідтримуваний тип профілю $TYPE$!",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "TYPE": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileUnsupportedHelp": {
+    "message": "Налаштування можуть бути пошкоджені або належати до новішої версії цієї програми."
+  },
+  "options_profileEditSource": {
+    "message": "Змінити вихідний код"
+  },
+  "options_profileEditSourceHelp": {
+    "message": "Показати довідку про формат вихідного коду"
+  },
+  "options_profileEditSourceHelpUrl": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/SwitchyOmega-conditions-format#result-profile"
+  },
+  "options_group_proxyServers": {
+    "message": "Проксі-сервери"
+  },
+  "options_proxy_scheme": {
+    "message": "Схема"
+  },
+  "options_proxy_protocol": {
+    "message": "Протокол"
+  },
+  "options_proxy_server": {
+    "message": "Сервер"
+  },
+  "options_proxy_port": {
+    "message": "Порт"
+  },
+  "options_proxy_auth": {
+    "message": "автентифікація"
+  },
+  "options_proxy_authNotSupported": {
+    "message": "Your browser DOES NOT support $PROTOCOLDISP$ proxy authentication! Please do not report this issue to SwitchyOmega. Contact the support for your browser instead.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROTOCOLDISP": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_proxy_authAllWarningPac": {
+    "message": "Увага: ім'я користувача /пароль можуть бути відправлені на невідомі сервери, спрямовані PAC скриптом."
+  },
+  "options_proxy_authAllWarningPacUrl": {
+    "message": "Будь ласка, переконайтеся, що ви довіряєте скрипту за вказаною вище URL-адресою, перед введенням конфіденційних облікових даних."
+  },
+  "options_proxy_authAllWarningPacScript": {
+    "message": "Будь ласка, переконайтеся, що ви довіряєте наведеним нижче скрипту, перш ніж надавати конфіденційні облікові дані."
+  },
+  "options_proxy_authReferencedWarning": {
+    "message": "Крім того, використання цього профілю в інших профілях (наприклад, перемикати профілю) може привести до відправки імені користувача /пароля на проксі сервера налаштовані в інших профілях."
+  },
+  "options_scheme_default": {
+    "message": "(за замовчуванням)"
+  },
+  "options_protocol_direct": {
+    "message": "БЕЗПОСЕРЕДНЬО"
+  },
+  "options_protocol_useDefault": {
+    "message": "(Типові налаштування)"
+  },
+  "options_proxy_single": {
+    "message": "Використовуати цей проксі для усіх протоколів."
+  },
+  "options_proxy_expand": {
+    "message": "Показати розширені налаштування"
+  },
+  "options_group_bypassList": {
+    "message": "Список ігнорованих вузлів"
+  },
+  "options_bypassListHelp": {
+    "message": "Сервера, для яких ви не хочете використовувати будь-якої проксі: (Один сервер в кожному рядку.)"
+  },
+  "options_bypassListHelpLinkText": {
+    "message": "(Доступні варіанти та інше...)"
+  },
+  "options_group_pacUrl": {
+    "message": "URL-адресу PAC"
+  },
+  "options_pacUrlHelp": {
+    "message": "Скрипт PAC буде оновлено з цього URL-адреси. Якщо він залишиться порожнім, то замість нього буде використовуватися наступний скрипт."
+  },
+  "options_pacUrlFile": {
+    "message": "Профілі PAC з файлом: URL-адреси можуть застосовуватися тільки безпосередньо. Вони не можуть використовуватися в якості профілів результатів, так як доступ до локальних файлів неможливий через обмеження браузера."
+  },
+  "options_pacUrlFileDisabled": {
+    "message": "Тому ви не можете використовувати локальний файл PAC для цього профілю. Ви можете створити новий профіль PAC для цього, якщо ви дійсно цього хочете."
+  },
+  "options_group_pacScript": {
+    "message": "PAC-скрипт"
+  },
+  "options_pacScriptLastUpdate": {
+    "message": "Скрипт PAC завантажений $TIME$:",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "TIME": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_pacScriptObsolete": {
+    "message": "Скрипт PAC застарів через зміни URL-адреси. Натисніть кнопку завантаження вище, щоб оновити."
+  },
+  "options_group_virtualProfile": {
+    "message": "Віртуальний профіль"
+  },
+  "options_virtualProfileTarget": {
+    "message": "Мета"
+  },
+  "options_virtualProfileTargetHelp": {
+    "message": "Коли цей профіль застосовується, він діє точно так же, як профіль, обраний нижче."
+  },
+  "options_group_virtualProfileReplace": {
+    "message": "Перенести в віртуальний профіль"
+  },
+  "options_virtualProfileReplace": {
+    "message": "Замінити цільовий профіль"
+  },
+  "options_virtualProfileReplaceHelp": {
+    "message": "Ви можете перенести існуючі параметри, щоб використовувати цей віртуальний профіль замість $PROFILE$. Це оновить всі існуючі правила, які стосуються $PROFILE$, і вкаже їх на цей віртуальний профіль, щоб їх профіль результатів можна було контролювати тут.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$2"
+      }
+    }
+  },
+  "options_group_ruleListConfig": {
+    "message": "Налаштування списку правил"
+  },
+  "options_ruleListFormat": {
+    "message": "Формат списку правил"
+  },
+  "options_group_ruleListResult": {
+    "message": "Підсумкові профілі списку правил"
+  },
+  "options_ruleListMatchProfile": {
+    "message": "Зіставлений профіль"
+  },
+  "options_ruleListDefaultProfile": {
+    "message": "Профіль за-замовчуванням"
+  },
+  "options_group_ruleListUrl": {
+    "message": "Адреса списку правил"
+  },
+  "options_ruleListUrlHelp": {
+    "message": "Список правил буде оновлено з цього URL-адреси. Якщо він залишається порожнім, замість нього буде проаналізовано наступний текст."
+  },
+  "options_group_ruleListText": {
+    "message": "Текст списку правил"
+  },
+  "options_ruleListLastUpdate": {
+    "message": "Список правил завантажено о $TIME$:",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "TIME": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_ruleListObsolete": {
+    "message": "Список правил застарів через зміни URL-адреси. Натисніть кнопку завантаження вище, щоб оновити."
+  },
+  "options_group_switchRules": {
+    "message": "Правила перемикання"
+  },
+  "options_sort": {
+    "message": "Впорядкувати"
+  },
+  "options_conditionType": {
+    "message": "Тип умови"
+  },
+  "options_showConditionTypeHelp": {
+    "message": "Показати допомогу"
+  },
+  "options_conditionDetails": {
+    "message": "Деталі умови"
+  },
+  "options_resultProfile": {
+    "message": "Профіль"
+  },
+  "options_conditionActions": {
+    "message": "Дії"
+  },
+  "options_addCondition": {
+    "message": "Додати умову"
+  },
+  "options_cloneRule": {
+    "message": "Дублювати"
+  },
+  "options_ruleNote": {
+    "message": "Note"
+  },
+  "options_switchAttachedProfileInCondition": {
+    "message": "Правила списку правил"
+  },
+  "options_switchAttachedProfileInConditionDetails": {
+    "message": "(Будь-який запит, що співпадає зі списком правил нижче)"
+  },
+  "options_switchAttachedProfileInConditionDisabled": {
+    "message": "(Правила списку правил вимкнути)"
+  },
+  "options_switchDefaultProfile": {
+    "message": "За замовчуванням"
+  },
+  "options_hostLevelsBetween": {
+    "message": "≤ рівні хоста ≤"
+  },
+  "options_hourBetween": {
+    "message": "≤ поточна година ≤"
+  },
+  "options_weekDayShort_0": {
+    "message": "Нд"
+  },
+  "options_weekDayShort_1": {
+    "message": "Пн"
+  },
+  "options_weekDayShort_2": {
+    "message": "Вв"
+  },
+  "options_weekDayShort_3": {
+    "message": "Ср"
+  },
+  "options_weekDayShort_4": {
+    "message": "Чт"
+  },
+  "options_weekDayShort_5": {
+    "message": "Пт"
+  },
+  "options_weekDayShort_6": {
+    "message": "Сб"
+  },
+  "options_group_conditionHelp": {
+    "message": "Про типи умов"
+  },
+  "options_group_attachProfile": {
+    "message": "Завантажити список правил з мережі"
+  },
+  "options_attachProfile": {
+    "message": "Додати список правил"
+  },
+  "options_attachProfileHelp": {
+    "message": "Ви можете повторно використовувати онлайн-збірник умов, опублікованих іншими, додавши список правил."
+  },
+  "options_modalHeader_welcome": {
+    "message": "Вітаємо у SwitchyOmega"
+  },
+  "options_welcomeNormal": {
+    "message": "Ви успішно встановили SwitchyOmega, кращий інструмент для налаштування проксі."
+  },
+  "options_welcomeNormalGuide": {
+    "message": "Будь ласка, повідомте SwitchyOmega ваші проксі в параметрах. Подивимося як."
+  },
+  "options_welcomeUpgrade": {
+    "message": "Ви успішно оновилися до SwitchyOmega. Не хвилюйтеся, ваші існуючі параметри повністю збережені."
+  },
+  "options_welcomeUpgradeGuide": {
+    "message": "Тепер давайте пройдемося по короткому керівництву на сторінці нових параметрів."
+  },
+  "options_guideNext": {
+    "message": "Далі"
+  },
+  "options_guideDone": {
+    "message": "Готово"
+  },
+  "options_guideSkip": {
+    "message": "Пропустити навчання"
+  },
+  "options_modalHeader_applyOptions": {
+    "message": "Застосувати налаштування"
+  },
+  "options_optionsNotSaved": {
+    "message": "Ваші зміни параметрів були збережені і будуть втрачені, якщо ви продовжите!"
+  },
+  "options_applyOptionsRequired": {
+    "message": "Ваші зміни в параметри повинні бути застосовані, перш ніж продовжити."
+  },
+  "options_applyOptionsConfirm": {
+    "message": "Хочете зберегти і застосувати параметри?"
+  },
+  "options_modalHeader_renameProfile": {
+    "message": "Перейменувати профіль"
+  },
+  "options_renameProfileName": {
+    "message": "Нова назва профілю"
+  },
+  "options_profileNameConflict": {
+    "message": "Профіль з такою назвою вже існує."
+  },
+  "options_profileNameReserved": {
+    "message": "Назви профілів з подвійним підкреслюванням зарезервовані."
+  },
+  "options_profileNameHidden": {
+    "message": "Профілі з іменами, які починаються часткою з підкреслення, будуть приховані у спливному меню. Проте, вони можуть використовуватися, наприклад, в перемикати профілі."
+  },
+  "options_modalHeader_replaceProfile": {
+    "message": "Замінити профіль"
+  },
+  "options_replaceProfile": {
+    "message": "Замінити профіль"
+  },
+  "options_replaceProfileConfirm": {
+    "message": "Ви дійсно бажаєте замінити $FromProfile$ на $ToProfile$?",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "FromProfile": {
+        "content": "$1"
+      },
+      "ToProfile": {
+        "content": "$2"
+      }
+    }
+  },
+  "options_replaceProfileHelp": {
+    "message": "Якщо ви продовжите, всі правила, що вказують на $FromProfile$, будуть оновлені для використання $ToProfile$. Інші параметри, такі як профіль при запуску і швидке перемикання, також будуть змінені відповідним чином. Однак самі два профілі НЕ будуть змінені або видалені.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "FromProfile": {
+        "content": "$1"
+      },
+      "ToProfile": {
+        "content": "$2"
+      }
+    }
+  },
+  "options_replaceProfileSuccess": {
+    "message": "Налаштування оновлено."
+  },
+  "options_modalHeader_deleteProfile": {
+    "message": "Видалити профіль"
+  },
+  "options_deleteProfileConfirm": {
+    "message": "Ви дійсно хочете видалити наступний профіль?"
+  },
+  "options_modalHeader_cannotDeleteProfile": {
+    "message": "Не вдалося видалити профіль"
+  },
+  "options_profileReferredBy": {
+    "message": "Профіль цього не можна видалити, так як на нього посилаються наступні профілі:"
+  },
+  "options_modifyReferringProfiles": {
+    "message": "Ви повинні змінити ці профілі і змусити їх перестати посилатися на цей профіль, перш ніж ви зможете видалити його."
+  },
+  "options_profileNameEmpty": {
+    "message": "Ім'я профілю не може бути порожньо."
+  },
+  "popup_title": {
+    "message": "Спиваюче вікно SwitchyOmega"
+  },
+  "options_modalHeader_proxyAuth": {
+    "message": "автентифікація проксі"
+  },
+  "options_proxyAuthUsername": {
+    "message": "Ім'я користувача"
+  },
+  "options_proxyAuthPassword": {
+    "message": "Пароль"
+  },
+  "options_proxyAuthShowPassword": {
+    "message": "Show password"
+  },
+  "options_proxyAuthHidePassword": {
+    "message": "Hide password"
+  },
+  "options_proxyAuthNone": {
+    "message": "без автентифікації"
+  },
+  "options_modalHeader_deleteRule": {
+    "message": "Видалити правило"
+  },
+  "options_deleteRuleConfirm": {
+    "message": "Ви дійсно хочете видалити наступне правило?"
+  },
+  "options_deleteRule": {
+    "message": "Видалити"
+  },
+  "options_modalHeader_resetRules": {
+    "message": "Скинути правила"
+  },
+  "options_resetRulesConfirm": {
+    "message": "Ви впевнені, що хочете встановити підсумковий профіль ВСІХ правил для наступного профілю?"
+  },
+  "options_resetRules": {
+    "message": "Скинути правила"
+  },
+  "options_resetRules_help": {
+    "message": "Призначити профіль для усіх правил"
+  },
+  "options_modalHeader_deleteAttached": {
+    "message": "Видалити список правил"
+  },
+  "options_deleteAttachedConfirm": {
+    "message": "Ви дійсно хочете видалити список правил з поточного профілю?"
+  },
+  "options_ruleListLineCount": {
+    "message": "$COUNT$ строчок правил",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "COUNT": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_deleteAttached": {
+    "message": "Видалити список правил"
+  },
+  "options_modalHeader_newProfile": {
+    "message": "Новий профіль"
+  },
+  "options_newProfileName": {
+    "message": "Назва профілю"
+  },
+  "options_profileType": {
+    "message": "Будь ласка, оберіть тип профілю:"
+  },
+  "options_profileTypeFixedProfile": {
+    "message": "Профіль проксі-серверів"
+  },
+  "options_profileDescFixedProfile": {
+    "message": "Тунелює трафік через проксі сервера."
+  },
+  "options_profileTypePacProfile": {
+    "message": "PAC профіль"
+  },
+  "options_profileDescPacProfile": {
+    "message": "Вибирає профіль, використовуючи онлайн або локальний скрипт PAC."
+  },
+  "options_profileDescMorePacProfile": {
+    "message": "Вам це знадобиться тільки в тому випадку, якщо у вас є скрипт PAC або URL-адресу до нього. Не намагайтеся створити його, якщо у вас немає знань про PAC."
+  },
+  "options_profileTypeSwitchProfile": {
+    "message": "Профіль перемикання"
+  },
+  "options_profileDescSwitchProfile": {
+    "message": "Автоматичне застосування різних профілів в різних умовах, таких як домени або шаблони.\nВи також можете імпортувати опубліковані в онлайн правила для зручнішого перемикання. (Замінює саморушнє перемикання + список правил.)"
+  },
+  "options_profileTypeRuleListProfile": {
+    "message": "Профіль списку правил"
+  },
+  "options_profileDescRuleListProfile": {
+    "message": "Використовує онлайн набір умов, опублікованих іншими користувачами."
+  },
+  "options_profileTypeVirtualProfile": {
+    "message": "Віртуальний профіль"
+  },
+  "options_profileDescVirtualProfile": {
+    "message": "Віртуальний профіль може діяти, при необхідності, як будь-який інший профіль. Він добре працює з перемикається профілем, дозволяючи вам змінити результат кількох умов одним клацанням миші."
+  },
+  "options_createProfile": {
+    "message": "Створити"
+  },
+  "options_modalHeader_resetOptions": {
+    "message": "Скинути налаштування"
+  },
+  "options_resetOptionsConfirm": {
+    "message": "Ви дійсно хочете скинути параметри? Всі профілі і налаштування будуть втрачені!"
+  },
+  "options_formInvalid": {
+    "message": "Будь ласка, виправте помилки на цій сторінці."
+  },
+  "options_profileNotFound": {
+    "message": "Профіль $PROFILE $не існує! Параметри можуть бути пошкоджені."
+  },
+  "options_resetSuccess": {
+    "message": "Налаштування скинуто."
+  },
+  "options_saveSuccess": {
+    "message": "Налаштування збережено."
+  },
+  "options_importSuccess": {
+    "message": "Налаштування завантажено."
+  },
+  "options_importFormatError": {
+    "message": "Некорректний файл резервної копії!"
+  },
+  "options_importDownloadError": {
+    "message": "Помилка при заватнаженні файлу резервної копії!"
+  },
+  "options_profileDownloadSuccess": {
+    "message": "Профіль успешно оновлено."
+  },
+  "options_profileDownloadError": {
+    "message": "Помилка при завантаженні даних профіля!"
+  },
+  "options_profileDownloadError_NetworkError": {
+    "message": "При оновленні сталася мережева помилка."
+  },
+  "options_profileDownloadError_HttpError": {
+    "message": "Помилка HTTP ($STATUS$) сталася при оновленні.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "STATUS": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileDownloadError_HttpNotFoundError": {
+    "message": "URL-адресу профілю не знайдений на сервері. Будь ласка, перевірте."
+  },
+  "options_profileDownloadError_HttpServerError": {
+    "message": "При оновленні, віддалений сервер повідомив помилку ( $STATUS$).",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "STATUS": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileDownloadError_ContentTypeRejectedError": {
+    "message": "Завантажені дані невірні! Ви можете відкрити URL-адресу профілю в своєму браузері, щоб перевірити його."
+  },
+  "options_downloadProfileNow": {
+    "message": "Завантажити профіль зараз"
+  },
+  "options_guide_fixedProfileStep": {
+    "message": "<B>Профіль проксі</b>містить настройки, такі як IP-адреса і порт сервера для проксі.<br>Профілі - це основні одиниці конфігурації в SwitchyOmega.<br>Ми вже створили приклад профілю для вас. Спробуйте відкрити його."
+  },
+  "options_guide_fixedServersStep": {
+    "message": "Ви можете тут вказати свій проксі сервер і порт.<br>SwitchyOmega<b>не поставляється з будь-якими проксі серверами</b>.<br>ласка, зверніться до свого провайдера мережі або до керівництва по настройки проксі, якщо ви не знаєте що робити далі."
+  },
+  "options_guide_autoSwitchProfileStep": {
+    "message": "Ви можете попросити SwitchyOmega автоматично перемикатися між проксі серверами за допомогою потужного<b>перемикати профілю</b>.<br>Однак його функції не можуть бути розглянуті в цьому короткому посібнику.<br>Ви можете відкрити цей профіль, щоб пізніше розкрити деякі його можливості."
+  },
+  "options_guide_addMoreProfilesStep": {
+    "message": "Потрібно більше профілів? Ви завжди можете додати більше<b>проксі, перемикань і інших профілів</b><br>для задоволення всіх своїх потреб в проксі.<br>Насолоджуйтесь проксі!"
+  },
+  "options_guide_conditionStep": {
+    "message": "SwitchyOmega може застосовувати різні профілі до запитів на основі<b>умов</b>.<br>Наприклад, умова<b>Шаблон хоста</b>дозволяє вам встановити профіль для всіх URL-адрес в домені."
+  },
+  "options_guide_conditionTypeStep": {
+    "message": "Ви можете використовувати різні типи умов, щоб відповідати хосту або повного URL-адресою.<br>Натисніть на знак питання, щоб відкрити посилання на тип."
+  },
+  "options_guide_conditionProfileStep": {
+    "message": "SwitchyOmega застосовує обраний профіль тут до<b>будь-якого запиту, відповідного умові</b>.<br>Спеціальний профіль<b>«[Безпосередньо]»</b>призведе до відправки запиту без будь-якого проксі."
+  },
+  "options_guide_switchDefaultStep": {
+    "message": "Якщо до якогось запитом не застосовуються ніякі умови, буде використовуватися профіль «Типово».<br>Умови завжди розглядаються по порядку<b>зверху вниз</b>.<br>Ви можете змінити їх порядок, перетягуючи значок сортування."
+  },
+  "options_guide_applySwitchProfileStep": {
+    "message": "Завершивши налаштування профілю перемикання, не забудьте<b>переключитися на нього у спливному меню</b>.<br/>Значок покаже вам<b>застосований</b>профіль для поточної вкладки.<br/><b>Наведення< /b>на значку відкриє підказку з подробицями."
+  },
+  "popup_externalProfile": {
+    "message": "(Зовнішній профіль)"
+  },
+  "popup_externalProfileName": {
+    "message": "назва профілю"
+  },
+  "popup_proxyNotControllable_app": {
+    "message": "Налаштування проксі контролюються іншими застосунками або розширеннями. Будь ласка, вимкніть або видаліть ці програми або розширення."
+  },
+  "popup_proxyNotControllable_policy": {
+    "message": "Налаштування проксі скасовуються системою. Будь ласка, зв'яжіться з вашим адміністратором."
+  },
+  "popup_proxyNotControllable_unknown": {
+    "message": "Налаштуваннями проксі-серверу наразі керувати неможливо. Будь ласка, перевірте налаштування системи та браузеру."
+  },
+  "popup_proxyNotControllable_disabled": {
+    "message": "Налаштування проксі відключені явним запитом інших додатків або розширень."
+  },
+  "popup_proxyNotControllable_upgrade": {
+    "message": "Налаштування проксі тепер контролюються новішою версією SwitchyOmega."
+  },
+  "popup_proxyNotControllableDetails": {
+    "message": "Ви не можете перемикати профілі за допомогою SwitchyOmega, якщо не вирішите проблему вище."
+  },
+  "popup_proxyNotControllableDetails_upgrade": {
+    "message": "Ви не можете включити дві (або більше) версії SwitchyOmega одночасно. Будь ласка, вимкніть одну з них."
+  },
+  "popup_proxyNotControllableManage": {
+    "message": "Керувати розширеннями"
+  },
+  "popup_addConditionTo": {
+    "message": "Додати умову до"
+  },
+  "popup_addCondition": {
+    "message": "Додати умову"
+  },
+  "popup_showOptions": {
+    "message": "Налаштування"
+  },
+  "popup_reportIssues": {
+    "message": "Повідомити про проблеми"
+  },
+  "popup_errorLog": {
+    "message": "Зберегти журнал помилок"
+  },
+  "popup_requestErrorCount": {
+    "message": "$COUNT$ невдало завантажених ресурсів",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "COUNT": {
+        "content": "$1"
+      }
+    }
+  },
+  "popup_requestErrorHeading": {
+    "message": "Ресурси, шо не вдалося завантажити"
+  },
+  "popup_requestErrorWarning": {
+    "message": "Не вдалося завантажити кілька ресурсів через проблеми з мережею, проксі сервером або веб-сторінкою."
+  },
+  "popup_requestErrorWarningHelp": {
+    "message": "SwitchyOmega є просто оглядачем цих проблем, а не їх причиною."
+  },
+  "popup_requestErrorAddCondition": {
+    "message": "Ви можете переглянути наступні домени і використовувати проксі для них при необхідності."
+  },
+  "popup_requestErrorCannotAddCondition": {
+    "message": "Ви можете додати умови перемикання для них тільки при використанні перемикати профілю."
+  },
+  "popup_configureMonitorWebRequests": {
+    "message": "Налаштувати Network Monitor"
+  },
+  "options_resultProfileForSelectedDomains": {
+    "message": "Використати цей профіль для усіх обраних деменів"
+  },
+  "options_pac_profile_unsupported_moz": {
+    "message": "Профілі PAC НЕ будуть працювати в Mozilla Firefox через технічні обмежень!"
+  },
+  "popup_issueTemplate": {
+    "message": "\n\n\n<! - Будь ласка, напишіть свій коментар над цим рядком.-->SwitchyOmega $projectVersion$ $userAgent$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "projectVersion": {
+        "content": "$1"
+      },
+      "userAgent": {
+        "content": "$2"
+      }
+    }
+  },
+  "browserAction_profileDetails_PacProfile": {
+    "message": "(PAC-скрипт)"
+  },
+  "browserAction_profileDetails_SystemProfile": {
+    "message": "(Керований іншими розширеннями або оточенням)"
+  },
+  "browserAction_profileDetails_DirectProfile": {
+    "message": "(не використовується жоден проксі)"
+  },
+  "browserAction_profileDetails_SwitchProfile": {
+    "message": "(перемикання за умовами)"
+  },
+  "browserAction_profileDetails_RuleListProfile": {
+    "message": "(перемикання за списком правил)"
+  },
+  "browserAction_titleNormal": {
+    "message": "SwitchyOmega :: $PROFILE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "browserAction_titleWithResult": {
+    "message": "SwitchyOmega :: $1: PROFILE$ $3: DETAILS$"
+  },
+  "browserAction_titleNewerOptions": {
+    "message": "ПОМИЛКА: для завантаження збережених параметрів потрібна новіша версія SwitchOmega."
+  },
+  "browserAction_titleOptionError": {
+    "message": "ПОМИЛКА: збережені параметри пошкоджені. Натисніть тут, щоб скинути ПАРАМЕТРИ."
+  },
+  "browserAction_titleDownloadFail": {
+    "message": "Попередження: не вдалося завантажити скрипт PAC і /або список правил."
+  },
+  "browserAction_titleExternalProxy": {
+    "message": "Зауваження: в даний момент, настройки проксі контролюються іншим додатком."
+  },
+  "browserAction_titleInspect": {
+    "message": "[Перевірити] $URL$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "URL": {
+        "content": "$1"
+      }
+    }
+  },
+  "browserAction_defaultRuleDetails": {
+    "message": "(за замовчуванням)"
+  },
+  "browserAction_directResult": {
+    "message": "НАПРЯМУ"
+  },
+  "browserAction_attachedPrefix": {
+    "message": "(RL) "
+  },
+  "browserAction_tempRulePrefix": {
+    "message": "(TEMP) "
+  },
+  "contextMenu_inspectPage": {
+    "message": "Перевірте проксі, який використовується для цієї сторінки"
+  },
+  "contextMenu_inspectFrame": {
+    "message": "Перевірте проксі, який використовується для цього фрейму"
+  },
+  "contextMenu_inspectLink": {
+    "message": "Перевірити проксі, якщо ця посилання відкрита"
+  },
+  "contextMenu_inspectElement": {
+    "message": "Перевірити проксі для цього елементу сторінки"
+  },
+  "contextMenu_enableQuickSwitch": {
+    "message": "Включити Швидке перемикання"
+  },
+  "about_title": {
+    "message": "Інформація"
+  },
+  "about_app_description": {
+    "message": "Інструмент для налаштування проксі-серверів"
+  },
+  "about_version": {
+    "message": "Версія $VERSION$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "VERSION": {
+        "content": "$1"
+      }
+    }
+  },
+  "about_experimental_warning_moz": {
+    "message": "Підтримка браузеру Mozilla Firefox вкрай експериментальна! Якщо ви стикнетися із проблемами, повідомте про це, використовуючи кнопки нижче."
+  },
+  "about_disclaimer_networkService": {
+    "message": "SwitchyOmega не надає адреси проксі-серверів, VPN-серверів або інших мережевих сервісів."
+  },
+  "about_disclaimer_privacy": {
+    "message": "SwitchyOmega не відслідковує вас і не вставляє рекламу в веб-сторінки. Будь ласка, ознайомтеся з нашою <ahref='https://github.com/FelisCatus/SwitchyOmega/wiki/Privacy#english'>політикою конфіденційності</a>."
+  },
+  "about_help": {
+    "message": "Інші питання? Потрібна допомога з використанням SwitchyOmega? Будь ласка, дивіться наш <ahref='https://github.com/FelisCatus/SwitchyOmega/wiki/FAQ'>FAQ</a>."
+  },
+  "about_copyright": {
+    "message": "Авторське право 2012-2017 <ahref='https://github.com/FelisCatus/SwitchyOmega/blob/master/AUTHORS'>Автори SwitchyOmega</a>. Всі права захищені."
+  },
+  "about_credits": {
+    "message": "SwitchyOmega стала можливою завдяки проекту <ahref='https://github.com/FelisCatus/SwitchyOmega'>SwitchyOmega</a>з відкритим вихідним кодом і іншому <ahref='https://github.com/FelisCatus/SwitchyOmega /blob /master /AUTHORS'>програмного забезпечення з відкритим вихідним кодом</a>."
+  },
+  "about_license": {
+    "message": "SwitchyOmega - це <ahref='https://www.gnu.org/philosophy/free-sw.en.html'>безкоштовне програмне забезпечення</a>ліцензоване по <ahref='https://www.gnu.org /licenses /gpl.html'>GNU General Public License</a>Версії 3 або пізнішої."
+  }
+}

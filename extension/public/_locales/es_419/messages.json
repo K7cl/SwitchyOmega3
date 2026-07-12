@@ -6,37 +6,37 @@
     "message": "Proxy SwitchyOmega"
   },
   "manifest_app_description": {
-    "message": "Manage and switch between multiple proxies quickly & easily."
+    "message": "Administra e intercambia entre múltiples proxys rápida y fácilmente."
   },
   "manifest_icon_default_title": {
-    "message": "Loading…"
+    "message": "Cargando…"
   },
   "upgrade_profile_auto": {
-    "message": "Auto Switch"
+    "message": "Intercambio automático"
   },
   "profile_direct": {
-    "message": "[Direct]"
+    "message": "[Directo]"
   },
   "profile_system": {
-    "message": "[System Proxy]"
+    "message": "[Proxy del sistema]"
   },
   "condition_HostWildcardCondition": {
-    "message": "Host wildcard"
+    "message": "Host comodín"
   },
   "condition_help_HostWildcardCondition": {
-    "message": "Matches hosts (domain names) by wildcard.<br><b>The asterisk <code>*</code></b> matches zero or more characters.<br><b>The question mark <code>?</code></b> matches exactly one character.<br><br>Note that rules beginning with <code>*.</code> are specially treated only in Host wildcard conditions.<br>Example: <code>*.example.com</code> will match www.example.com <b>AND example.com as well.</b><br>To match subdomains <b>only</b>, use <b>two</b> asterisks like <code>**.example.com</code>."
+    "message": "Coincide con hosts (nombres de dominio) por comodines.<br><b>El asterisco <code>*</code></b> es comodín para cero o más caracteres.<br><b>El signo de interrogación <code>?</code></b> lo es para exactamente un carácter.<br><br>Ten en cuenta que las reglas que comienzan con <code>*.</code> son especialmente tratadas solo en las condiciones de comodines de Host.<br>Ejemplo: <code>*.example.com</code> coincidirá www.ejemplo.com <b>Y ejemplo.com por igual.</b><br>Para coincidir subdominios <b>solamente</b>, usa <b>dos</b> asteriscos como <code>**.ejemplo.com</code>."
   },
   "condition_HostRegexCondition": {
     "message": "Host regex"
   },
   "condition_help_HostRegexCondition": {
-    "message": "Like Host wildcard condition, but matches hosts (domain names) by <a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>.<br>Regular expressions can be hard to construct (and read).<br>It is recommended to use wildcards for most cases and only use regex for conditions that cannot be achieved by any other condition type."
+    "message": "Como la condición de comodín de Host, pero coincide hosts (nombres de dominio) por <a href='https://www.google.com/search?q=expresión%20regular'>expresión regular</a>.<br>Las expresiones regulares pueden ser difíciles de construir (y leer).<br>Es recomendado usar comodines para la mayoría de los casos y solo usar expresiones regulares para las condiciones que no se pueden expresar por ningún otro tipo de condición."
   },
   "condition_HostLevelsCondition": {
-    "message": "Host levels"
+    "message": "Niveles de Host"
   },
   "condition_help_HostLevelsCondition": {
-    "message": "Matches the request if and only if the host level in within the given range.<br>Host level is defined as the <b>number of dot-separated segments</b> of the host (domain name).<br>Example: <code>www.example.com</code> is with a host level of 3, while <code>internal</code> is of host level 1."
+    "message": "Encuentra una coincidencia si y sólo si el nivel del host está dentro del rango.<br>El nivel de host se define como el <b>número de porciones separadas por puntos</b> en el nombre de dominio del host. <br>Ejemplo: <code>www.ejemplo.com</code> tiene un nivel 3 de host, mientras que <code>interno</code> es un host de nivel 1."
   },
   "condition_IpCondition": {
     "message": "IP Literals"
@@ -45,34 +45,34 @@
     "message": "Matches the request if and only if the host is a <b>literal</b> IP address and in the subnet as specified by <a href='https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation'>CIDR notation</a>.<br>For example, given the rule <code>127.0.0.1/16</code>, it matches all IP addresses like <code>127.0.*.*</code>.<br>So <code>127.0.0.1</code> matches while <code>127.1.0.0</code> does not. Host names like <code>localhost</code> will never match because they are <b>not</b> IP literals."
   },
   "condition_UrlWildcardCondition": {
-    "message": "URL wildcard"
+    "message": "Comodín de URL"
   },
   "condition_help_UrlWildcardCondition": {
     "message": "Matches URLs of the request by wildcard.<br>See the Host wildcard section above for a quick wildcard reference.<br>Note that URL wildcards are not specially treated (no subdomain magic as in Host wildcard).<br>So <code>*://*.example.com/*</code> matches http://www.example.com/ but <b>does not</b> match http://example.com/."
   },
   "condition_UrlRegexCondition": {
-    "message": "URL regex"
+    "message": "Expresión regular de URL"
   },
   "condition_help_UrlRegexCondition": {
     "message": "Matches URL by extremely powerful <a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>.<br>However, regular expressions can be hard to construct (and read).<br>It is recommended to use wildcards for most cases and only use regex for conditions that cannot be achieved by any other condition type."
   },
   "condition_KeywordCondition": {
-    "message": "Keyword"
+    "message": "Palabra clave"
   },
   "condition_help_KeywordCondition": {
     "message": "A keyword condition matches if the URL protocol is HTTP, and the pattern is an exact sub-string of the URL.<br>It behaves like the URL wildcard pattern <code>http://*<b>pattern</b>*</code>, where <b>pattern</b> is the keyword pattern.<br>Keyword conditions are useful if you want to bypass a firewall blocking some keywords in the URL, by requesting such URLs through a proxy."
   },
   "condition_FalseCondition": {
-    "message": "(Disabled)"
+    "message": "(Deshabilitado)"
   },
   "condition_details_FalseCondition": {
-    "message": "(Condition ignored when matching)"
+    "message": "(Condición ignorada cuando se haya coincidencia)"
   },
   "condition_help_FalseCondition": {
     "message": "You can disable a condition by setting its type to <code>(Disabled)</code>. A Disabled condition act as if it does not exist.<br>This feature can be used to disable conditions temporarily.<br>Disabled conditions still hold the previous information (like patterns) and can be re-enabled by setting the condition type back to the previous type."
   },
   "condition_TimeCondition": {
-    "message": "Current Time"
+    "message": "Tiempo Actual"
   },
   "condition_help_TimeCondition": {
     "message": "Matches if the current local time is in the range defined by <b>starting hour</b> and <b>ending hour</b>, both inclusive.<br>Local time, starting hour and ending hour are all calculated in <b>24-hour</b> format (from <b>0 to 23</b>). <br>The calculation happens roughly at the moment when the request is sent."
@@ -99,22 +99,22 @@
     "message": "Url"
   },
   "condition_group_special": {
-    "message": "Special"
+    "message": "Especial"
   },
   "ruleListFormat_Switchy": {
     "message": "Switchy"
   },
   "ruleListFormat_AutoProxy": {
-    "message": "AutoProxy"
+    "message": "Proxy Automático"
   },
   "ruleList_usageUrl": {
     "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/RuleListUsage"
   },
   "ruleList_error_resultNotEnabled": {
-    "message": "Missing '@with result' directive!"
+    "message": "¡Falta la directiva '@with result'!"
   },
   "ruleList_error_unknownProfile": {
-    "message": "Unknown profile: $PROFILE$",
+    "message": "Perfil desconocido: $PROFILE$",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -156,37 +156,37 @@
     "message": "Missing default rule with catch-all '*' condition!"
   },
   "dialog_close": {
-    "message": "Close"
+    "message": "Cerrar"
   },
   "dialog_save": {
-    "message": "Save changes"
+    "message": "Guardar cambios"
   },
   "dialog_ok": {
     "message": "OK"
   },
   "dialog_cancel": {
-    "message": "Cancel"
+    "message": "Cancelar"
   },
   "inputClear_clear": {
-    "message": "Clear"
+    "message": "Borrar"
   },
   "inputClear_restore": {
-    "message": "Restore"
+    "message": "Restaurar"
   },
   "options_title": {
-    "message": "SwitchyOmega Options"
+    "message": "Opciones SwitchyOmega"
   },
   "options_experimental_badge": {
     "message": "α"
   },
   "options_navHeader_setting": {
-    "message": "Settings"
+    "message": "Configuraciones"
   },
   "options_navHeader_profiles": {
-    "message": "Profiles"
+    "message": "Perfiles"
   },
   "options_navHeader_actions": {
-    "message": "Actions"
+    "message": "Acciones"
   },
   "options_tab_ui": {
     "message": "Interface"
@@ -195,22 +195,22 @@
     "message": "General"
   },
   "options_tab_importExport": {
-    "message": "Import/Export"
+    "message": "Importar/Exportar"
   },
   "options_newProfile": {
-    "message": "New profile…"
+    "message": "Nuevo perfil…"
   },
   "options_apply": {
-    "message": "Apply changes"
+    "message": "Aplicar cambios"
   },
   "options_discard": {
-    "message": "Discard changes"
+    "message": "Descartar cambios"
   },
   "options_reset": {
-    "message": "Reset options"
+    "message": "Reiniciar las opciones"
   },
   "options_group_miscOptions": {
-    "message": "Misc Options"
+    "message": "Opciones misceláneas"
   },
   "options_confirmDeletion": {
     "message": "Confirm on condition deletion."
@@ -249,7 +249,7 @@
     "message": "Show advanced condition types"
   },
   "options_showConditionTypesAdvancedHelp": {
-    "message": "Unlocks new types of advanced but complicated switch conditions. For most scenarios, the basic condition types should be enough, so this option is not recommended."
+    "message": "Desbloquea nuevos tipos complicados pero avanzados de condiciones 'switch'. Para la mayoría de los casos, los tipos básicos de condición deberían ser suficientes; así que no se recomienda usar esta opción."
   },
   "options_quickSwitch": {
     "message": "Quick Switch"
@@ -1206,7 +1206,7 @@
     "message": "Inspect proxy to be used if this Link is opened"
   },
   "contextMenu_inspectElement": {
-    "message": "Inspect proxy used for this Element"
+    "message": "Inspeccionar proxy utilizado para este Elemento."
   },
   "contextMenu_enableQuickSwitch": {
     "message": "Enable Quick Switch"

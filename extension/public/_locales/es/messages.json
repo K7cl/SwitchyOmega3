@@ -1,0 +1,1252 @@
+{
+  "appNameShort": {
+    "message": "SwitchyOmega"
+  },
+  "manifest_app_name": {
+    "message": "SwitchyOmega Proxy"
+  },
+  "manifest_app_description": {
+    "message": "Gestiona y utiliza diferentes servidores proxy de forma rápida y sencilla."
+  },
+  "manifest_icon_default_title": {
+    "message": "Cargando…"
+  },
+  "upgrade_profile_auto": {
+    "message": "Cambio automático"
+  },
+  "profile_direct": {
+    "message": "[Directo]"
+  },
+  "profile_system": {
+    "message": "[Proxy del sistema]"
+  },
+  "condition_HostWildcardCondition": {
+    "message": "Patrón de servidor"
+  },
+  "condition_help_HostWildcardCondition": {
+    "message": "Detecta servidores (nombres de dominio) según patrones.<br><b>El asterisco <code>*</code></b> equivale a cero o más caracteres.<br><b>La interrogación <code>?</code></b> equivale exactamente a un carácter.<br><br>Tenga en cuenta que reglas que comienzan con <code>*.</code> se tratan de forma especial únicamente al usar patrones de sevidor.<br>Ejemplo: <code>*.example.com</code> detecta www.example.com <b> Y example.com también.</b><br>Para detectar <b>únicamente</b> subdominios, utilice <b>dos</b> asteriscos <code>**.example.com</code>."
+  },
+  "condition_HostRegexCondition": {
+    "message": "Expresión regular de servidor"
+  },
+  "condition_help_HostRegexCondition": {
+    "message": "Igual que los patrones de servidor, pero detecta servidores (nombres de dominio) mediante <a href='https://www.google.com/search?q=regular%20expression'>expresiones regulares</a>.<br>Las expresiones regulares pueden ser díficiles de crear (e interpretar).<br>Generalmente se recomienda usar patrones y utilizar expresiones regulares para condiciones que no se puedan detectar de ninguna otra forma."
+  },
+  "condition_HostLevelsCondition": {
+    "message": "Niveles de servidor"
+  },
+  "condition_help_HostLevelsCondition": {
+    "message": "Detecta la petición únicamente si tiene un determinado nivel de servidor.<br>El nivel de servidor se define como el <b>número de componentes separados por punto</b> en el nombre de dominio.<br>Ejemplo: <code>www.example.com</code> tiene 3 niveles, ,mientras que <code>internal</code> tiene sólo 1."
+  },
+  "condition_IpCondition": {
+    "message": "Literales IP"
+  },
+  "condition_help_IpCondition": {
+    "message": "Detecta peticiones únicamente por direcciones IP <b>literales</b> y en una determinada red especificada en <a href='https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation'>notación CIDR</a>.<br>Por ejemplo, la regla <code>127.0.0.1/16</code>, detecta todas las direcciones IP de tipo <code>127.0.*.*</code>.<br>La IP <code>127.0.0.1</code> cumple la regla, mientras que <code>127.1.0.0</code> no la cumple. Nombres como <code>localhost</code> nunca cumplirán la regla porque <b>no</b> son literales IP."
+  },
+  "condition_UrlWildcardCondition": {
+    "message": "Patrones de URL"
+  },
+  "condition_help_UrlWildcardCondition": {
+    "message": "Detecta patrones en la URL de la petición.<br>Consulte la sección de patrones de servidor para tener una referencia rápida sobre patrones.<br>Tenga presente que para los patrones URL no hay casos especiales (como el de subdominios en los patrones de servidor).<br>Así que <code>*://*.example.com/*</code> detecta http://www.example.com/ pero<b>no</b> detecta http://example.com/."
+  },
+  "condition_UrlRegexCondition": {
+    "message": "Expresión regular URL"
+  },
+  "condition_help_UrlRegexCondition": {
+    "message": "Detecta URL con la potencia de las <a href='https://www.google.com/search?q=regular%20expression'>expresiones regulares</a>.<br>De todas formas,las expresiones regulares son difíciles de crear (e interpretar).<br>Se recomienda utilizar patrones en la mayoría de las situaciones y usar sólo las expresiones regulares cuando no funcionen otros tipos de condiciones."
+  },
+  "condition_KeywordCondition": {
+    "message": "Palabra clave"
+  },
+  "condition_help_KeywordCondition": {
+    "message": "Detecta palabras clave que aparezcan como subcadenas en la URL de peticiones que usen el protocolo HTTP.<br>Funcionan igual que el patrón <code>http://*<b>texto</b>*</code>, donde <b>texto</b> es la palabra clave .<br>Es útil para burlar cortafuegos que bloquean algunas palabras clave en la URL, realizando esas peticiones a través de proxy."
+  },
+  "condition_FalseCondition": {
+    "message": "(Deshabilitado)"
+  },
+  "condition_details_FalseCondition": {
+    "message": "(Condición ignorada al procesar)"
+  },
+  "condition_help_FalseCondition": {
+    "message": "Puede anular una condición cambiando su tipo a <code>(Deshabilitada)</code>. Será como si esa condición no existiera.<br>Esto permite anular condiciones temporalmente.<br>Las condiciones deshabilitadas conservan toda la información (patrones) y se pueden habilitar de nuevo cambiando su tipo al que tuvieran antes."
+  },
+  "condition_TimeCondition": {
+    "message": "Hora actual"
+  },
+  "condition_help_TimeCondition": {
+    "message": "Detecta si la hora actual está en el intervalo definido por <b>hora inicio</b> y <b>hora fin</b>, incluyendo ambas.<br>La hora local, la de inicio y la de fin se calculan en formato de <b>24-horas</b> (entre <b>0 y 23</b>). <br>El cálculo se realiza en el momento en que se envía la petición."
+  },
+  "condition_WeekdayCondition": {
+    "message": "Día de la semana"
+  },
+  "condition_help_WeekdayCondition": {
+    "message": "Detecta si el <b>día de la semana actual</b> es uno de los seleccionados en el detalle de la condición. El día se calcula según la zona horaria local.<br>La petición y su URL se ignoran. El resultado se basa únicamente en el día de la semana en que se envía la petición."
+  },
+  "condition_alert_fullUrlLimitation": {
+    "message": "La detección sobre URL completas no es posible al usar direcciones <code>https://</code> desde la versión 52 de Chrome. <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation'>Más información...</a>"
+  },
+  "condition_alert_fullUrlLimitationLink": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation"
+  },
+  "condition_group_default": {
+    "message": " . "
+  },
+  "condition_group_host": {
+    "message": "Servidor"
+  },
+  "condition_group_url": {
+    "message": "Url"
+  },
+  "condition_group_special": {
+    "message": "Especial"
+  },
+  "ruleListFormat_Switchy": {
+    "message": "Switchy"
+  },
+  "ruleListFormat_AutoProxy": {
+    "message": "Proxy Automático"
+  },
+  "ruleList_usageUrl": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/RuleListUsage"
+  },
+  "ruleList_error_resultNotEnabled": {
+    "message": "¡ Falta directiva '@with result' !"
+  },
+  "ruleList_error_unknownProfile": {
+    "message": "Perfil desconocido: $PROFILE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "ruleList_error_missingResultProfile": {
+    "message": "Falta nombre del perfil en la línea $LNO$: $SOURCE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "LNO": {
+        "content": "$1"
+      },
+      "SOURCE": {
+        "content": "$2"
+      }
+    }
+  },
+  "ruleList_error_invalidRule": {
+    "message": "Regla no válida en la línea $LNO$: $SOURCE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "LNO": {
+        "content": "$1"
+      },
+      "SOURCE": {
+        "content": "$2"
+      }
+    }
+  },
+  "ruleList_error_noDefaultRule": {
+    "message": "¡ Falta regla por defecto con condición universal '*' !"
+  },
+  "dialog_close": {
+    "message": "Cerrar"
+  },
+  "dialog_save": {
+    "message": "Guardar cambios"
+  },
+  "dialog_ok": {
+    "message": "OK"
+  },
+  "dialog_cancel": {
+    "message": "Cancelar"
+  },
+  "inputClear_clear": {
+    "message": "Borrar"
+  },
+  "inputClear_restore": {
+    "message": "Deshacer"
+  },
+  "options_title": {
+    "message": "Opciones SwitchyOmega"
+  },
+  "options_experimental_badge": {
+    "message": "α"
+  },
+  "options_navHeader_setting": {
+    "message": "Ajustes"
+  },
+  "options_navHeader_profiles": {
+    "message": "Perfiles"
+  },
+  "options_navHeader_actions": {
+    "message": "Acciones"
+  },
+  "options_tab_ui": {
+    "message": "Interfaz"
+  },
+  "options_tab_general": {
+    "message": "General"
+  },
+  "options_tab_importExport": {
+    "message": "Importar/Exportar"
+  },
+  "options_newProfile": {
+    "message": "Nuevo perfil…"
+  },
+  "options_apply": {
+    "message": "Aplicar cambios"
+  },
+  "options_discard": {
+    "message": "Descartar cambios"
+  },
+  "options_reset": {
+    "message": "Opciones por defecto"
+  },
+  "options_group_miscOptions": {
+    "message": "Opciones adicionales"
+  },
+  "options_confirmDeletion": {
+    "message": "Confirmar al borrar condición."
+  },
+  "options_refreshOnProfileChange": {
+    "message": "Recargar pestaña actual al cambiar perfil."
+  },
+  "options_showInspectMenu": {
+    "message": "Permitir inspeccionar el proxy utilizado por cada elemento de la página a través del menú contextual."
+  },
+  "options_addConditionsToBottom": {
+    "message": "Agregue nuevas condiciones usando la ventana emergente al final de la lista."
+  },
+  "options_group_keyboardShortcut": {
+    "message": "Atajo de teclado"
+  },
+  "options_menuShortcutHelp": {
+    "message": "Al utilizar el atajo se abrirá el menú emergente. (Predeterminado Alt+May+O)."
+  },
+  "options_menuShortcutMore": {
+    "message": "Los elementos del menú emergente también son accesibles usando el teclado. Pulse ? (o /) en el menú para más información."
+  },
+  "options_menuShortcutConfigure": {
+    "message": "Configurar atajo"
+  },
+  "options_group_switchOptions": {
+    "message": "Opciones del Conmutador"
+  },
+  "options_startupProfile": {
+    "message": "Perfil inicial"
+  },
+  "options_startupProfile_none": {
+    "message": "(Perfil actual)"
+  },
+  "options_showConditionTypesAdvanced": {
+    "message": "Mostrar tipos de condición avanzados"
+  },
+  "options_showConditionTypesAdvancedHelp": {
+    "message": "Habilita nuevos tipos de condiciones avanzadas pero más complicadas. En la mayoría de las situaciones los tipos básicos son más que suficientes, por lo que no se recomienda habilitar los avanzados."
+  },
+  "options_quickSwitch": {
+    "message": "Conmutador Rápido"
+  },
+  "options_cycledProfiles": {
+    "message": "Perfiles cíclicos"
+  },
+  "options_cycledProfilesHelp": {
+    "message": "Cuando pulses el icono(o el atajo superior), los siguientes perfiles se aplicarán en el orden indicado."
+  },
+  "options_cycledProfilesTooFew": {
+    "message": "¡Necesitas seleccionar al menos 2 perfiles para habilitar esta función! Puedes arrastrarlos desde el cuadro inferior."
+  },
+  "options_notCycledProfiles": {
+    "message": "Perfiles no cíclicos"
+  },
+  "options_group_proxyChanges": {
+    "message": "Cambios Proxy"
+  },
+  "options_revertProxyChanges": {
+    "message": "Deshacer cambios de proxy realizados por otras aplicaciones."
+  },
+  "options_group_conflicts": {
+    "message": "Conflictos"
+  },
+  "options_conflicts_introduction": {
+    "message": "Algunas veces, otras aplicaciones también intentarán controlar la configuración del proxy, lo que generará conflictos. Tenga en cuenta que los bloqueadores de anuncios y otras extensiones también pueden usar configuraciones de proxy. Dichos conflictos no se pueden evitar debido a la forma en que funciona el navegador."
+  },
+  "options_conflicts_lowerPriority": {
+    "message": "Una insignia roja como esta en el icono de SwitchyOmega indica que otra aplicación tiene mayor prioridad, por lo que SwitchyOmega no puede controlar la configuración. Intente desinstalar SwitchyOmega y reinstalar, lo que debería aumentar la prioridad de SwitchyOmega. Si sigue viendo conflictos después de la reinstalación, considere eliminar la otra aplicación que causa el conflicto."
+  },
+  "options_conflicts_higherPriority": {
+    "message": "Si SwitchyOmega tiene una prioridad más alta, puede devolver el control a otras aplicaciones o configuraciones del sistema seleccionando $SYSTEMPROFILE$ en el menú emergente.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "SYSTEMPROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_showExternalProfile": {
+    "message": "Mostrar el elemento del menú emergente para importar configuraciones proxy de otras aplicaciones."
+  },
+  "options_showExternalProfileHelp": {
+    "message": "Cuando se selecciona $SYSTEMPROFILE$, puede importar la configuración efectiva del proxy de otras aplicaciones seleccionando $EXTERNALPROFILE$ en el menú emergente. La configuración se importará como un perfil con el nombre que proporcione. Tenga en cuenta que el perfil importado es una instantánea y no reflejará ningún cambio desde la aplicación de origen a partir de entonces.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "SYSTEMPROFILE": {
+        "content": "$1"
+      },
+      "EXTERNALPROFILE": {
+        "content": "$2"
+      }
+    }
+  },
+  "options_group_networkRequests": {
+    "message": "Peticiones de red"
+  },
+  "options_monitorWebRequests": {
+    "message": "Muestra el número de peticiones web con error en la pestaña actual."
+  },
+  "options_monitorWebRequestsHelp": {
+    "message": "Aparecerá un marcador amarillo sobre el icono si no pudieron cargarse algunos recursos,<br> y podrá actualizar el perfil a utilizar para ellos desde el menú emergente."
+  },
+  "options_downloadOptions": {
+    "message": "Opciones de descarga"
+  },
+  "options_downloadOptionsHelp": {
+    "message": "Configurar la frecuencia de actualización en línea de reglas y scripts PAC."
+  },
+  "options_downloadInterval": {
+    "message": "Intervalo de descarga"
+  },
+  "options_downloadInterval_15": {
+    "message": "15 minutos"
+  },
+  "options_downloadInterval_60": {
+    "message": "1 Hora"
+  },
+  "options_downloadInterval_180": {
+    "message": "3 Horas"
+  },
+  "options_downloadInterval_360": {
+    "message": "6 Horas"
+  },
+  "options_downloadInterval_720": {
+    "message": "12 Horas"
+  },
+  "options_downloadInterval_1440": {
+    "message": "a diario"
+  },
+  "options_downloadInterval_never": {
+    "message": "Nunca"
+  },
+  "options_group_importExportProfile": {
+    "message": "Perfil"
+  },
+  "options_exportPacFile": {
+    "message": "Exportar como archivo PAC"
+  },
+  "options_exportPacFileHelp": {
+    "message": "Exporta el perfil actual como un archivo PAC, para poder utilizarlo en otros navegadores."
+  },
+  "options_exportProfileHelp": {
+    "message": "Para exportar un perfil, utilice la barra de acción de arriba a la derecha en la página del perfil."
+  },
+  "options_exportLegacyRuleList": {
+    "message": "Exporta la lista de reglas utilizando, si es posible, un formato compatible con Proxy Switchy!/SwitchyPlus/SwitchySharp."
+  },
+  "options_exportLegacyRuleListHelp": {
+    "message": "Habilite esta opción si publica listas de reglas para usuarios de esos proyectos.<br> Le agradeceríamos que recomendara a sus contactos actualizar a SwitchyOmega para disfrutar de las mejoras."
+  },
+  "options_group_importExportSettings": {
+    "message": "Ajustes"
+  },
+  "options_makeBackup": {
+    "message": "Crear copia de seguridad"
+  },
+  "options_makeBackupHelp": {
+    "message": "Haga una copia de seguridad de sus opciones (incluye perfiles y el resto de opciones)."
+  },
+  "options_restoreLocal": {
+    "message": "Restaurar desde archivo"
+  },
+  "options_restoreLocalHelp": {
+    "message": "Restaura las opciones de SwitchyOmega desde un archivo local."
+  },
+  "options_restoreOnline": {
+    "message": "Restaurar en línea"
+  },
+  "options_restoreOnlinePlaceholder": {
+    "message": "URL del archivo de opciones (p.e. 'http://example.com/switchy.bak')"
+  },
+  "options_restoreOnlineSubmit": {
+    "message": "Restaurar"
+  },
+  "options_group_syncing": {
+    "message": "Sincronizando (Experimental)"
+  },
+  "options_syncEnable": {
+    "message": "Habilitar sincronización"
+  },
+  "options_syncEnableForce": {
+    "message": "Descargar desde la sincronización"
+  },
+  "options_syncDisable": {
+    "message": "Deshabilitar sincronización"
+  },
+  "options_syncReset": {
+    "message": "Borrar copia remota"
+  },
+  "options_syncPristineHelp": {
+    "message": "Puede sincronizar automáticamente sus ajustes y perfiles en todos los dispositivos donde utilice el navegador Chrome."
+  },
+  "options_syncSyncAlert": {
+    "message": "Sus opciones se sincronizan automáticamente en todos sus equipos."
+  },
+  "options_syncSyncHelp": {
+    "message": "Tenga en cuenta que debe iniciar sesión en Chrome en cada uno de sus dispositivos (incluido este) para que la sincronización funcione realmente. <br> Puede verificar esta sección en otros dispositivos para asegurarse de que esté funcionando."
+  },
+  "options_syncConflictAlert": {
+    "message": "Usted ha cargado una copia de sus opciones en otro dispositivo mediante la sincronización."
+  },
+  "options_syncConflictHelp": {
+    "message": "Puede descargar la copia remota a su dispositivo si lo desea. <br> Sin embargo, al hacerlo, <b> sobrescribirá sus configuraciones y perfiles existentes </ b> en este dispositivo."
+  },
+  "options_syncUnsupportedHelp": {
+    "message": "Las opciones de sincronización no son soportadas por su plataforma o navegador. Por ahora, solo el navegador Chrome en el escritorio las soporta."
+  },
+  "options_profileSyncDisabled": {
+    "message": "La sincronización esta inhabilitada para este perfil."
+  },
+  "options_profileSyncDisabled_quotaPerItem": {
+    "message": "La sincronización esta inhabilitada para este perfil por usar mucho espacio de almacenamiento."
+  },
+  "options_profileTabPrefix": {
+    "message": "Perfil :: "
+  },
+  "options_renameProfile": {
+    "message": "Renombrar"
+  },
+  "options_deleteProfile": {
+    "message": "Borrar"
+  },
+  "options_profileExportRuleList": {
+    "message": "Publicar lista de reglas"
+  },
+  "options_profileExportRuleListHelp": {
+    "message": "Exportar Reglas del Conmutador para publicar en formato texto."
+  },
+  "options_profileExportPac": {
+    "message": "Exportar PAC"
+  },
+  "options_profileUnsupported": {
+    "message": "¡Tipo de perfil no soportado $TYPE$!",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "TYPE": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileUnsupportedHelp": {
+    "message": "Las opciones pueden haber fallado, o de una versión mas reciente de este programa."
+  },
+  "options_profileEditSource": {
+    "message": "Editar código fuente"
+  },
+  "options_profileEditSourceHelp": {
+    "message": "Mostrar ayuda sobre el formato del código fuente"
+  },
+  "options_profileEditSourceHelpUrl": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/SwitchyOmega-conditions-format#result-profile"
+  },
+  "options_group_proxyServers": {
+    "message": "Servidores proxy"
+  },
+  "options_proxy_scheme": {
+    "message": "Esquema"
+  },
+  "options_proxy_protocol": {
+    "message": "Protocolo"
+  },
+  "options_proxy_server": {
+    "message": "Servidor"
+  },
+  "options_proxy_port": {
+    "message": "Puerto"
+  },
+  "options_proxy_auth": {
+    "message": "Autenticación"
+  },
+  "options_proxy_authNotSupported": {
+    "message": "¡Tu navegador NO soporta la autenticación proxy $PROTOCOLDISP$! Por favor no reportes esta incidencia a SwitchyOmega. Ponte en contacto con el soporte para tu navegador.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROTOCOLDISP": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_proxy_authAllWarningPac": {
+    "message": "Advertencia: El nombre usuario/contraseña pueden enviarse a servidores inesperados devueltos por el script PAC."
+  },
+  "options_proxy_authAllWarningPacUrl": {
+    "message": "Asegúrese de confiar en el script proporcionado a través de la URL anterior antes de ingresar credenciales confidenciales."
+  },
+  "options_proxy_authAllWarningPacScript": {
+    "message": "Asegúrese de confiar en el script de a continuación antes de proporcionar credenciales confidenciales."
+  },
+  "options_proxy_authReferencedWarning": {
+    "message": "Adicionalmente, el uso de este perfil en otros perfiles (p. ej. Perfil Conmutador) puede hacer que el nombre de usuario/contraseña se envíe a los servidores proxy configurados en otros perfiles."
+  },
+  "options_scheme_default": {
+    "message": "(por defecto)"
+  },
+  "options_protocol_direct": {
+    "message": "DIRECTO"
+  },
+  "options_protocol_useDefault": {
+    "message": "(usa por defecto)"
+  },
+  "options_proxy_single": {
+    "message": "Use el proxy anterior para todos los protocolos."
+  },
+  "options_proxy_expand": {
+    "message": "Mostrar avanzado"
+  },
+  "options_group_bypassList": {
+    "message": "Lista de omisión"
+  },
+  "options_bypassListHelp": {
+    "message": "Servidores para los cuales no desea usar ningún proxy: (Un servidor en cada línea)"
+  },
+  "options_bypassListHelpLinkText": {
+    "message": "(Comodines y más disponible ...)"
+  },
+  "options_group_pacUrl": {
+    "message": "URL PAC"
+  },
+  "options_pacUrlHelp": {
+    "message": "El script PAC será actualizado desde esta URL. Si se deja en blanco, el siguiente script se usará directamente en su lugar."
+  },
+  "options_pacUrlFile": {
+    "message": "Archivos con perfiles PAC: las URL solamente se pueden aplicar directamente. No se pueden usar como perfiles de resultados porque no se puede acceder a los archivos locales debido a una limitación del navegador."
+  },
+  "options_pacUrlFileDisabled": {
+    "message": "Por lo tanto, no puedes usar un archivo PAC local para este perfil. Puedes crear un nuevo perfil PAC para eso si realmente quieres eso."
+  },
+  "options_group_pacScript": {
+    "message": "Script PAC"
+  },
+  "options_pacScriptLastUpdate": {
+    "message": "Script PAC descargado el $TIME$:",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "TIME": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_pacScriptObsolete": {
+    "message": "Script PAC obsoleto debido a cambio de URL. Presiona el botón de descarga de arriba para actualizar."
+  },
+  "options_group_virtualProfile": {
+    "message": "Perfil Virtual"
+  },
+  "options_virtualProfileTarget": {
+    "message": "Objetivo"
+  },
+  "options_virtualProfileTargetHelp": {
+    "message": "Cuando este perfil se aplique, actuará exactamente igual que el perfil seleccionado abajo."
+  },
+  "options_group_virtualProfileReplace": {
+    "message": "Migrar a Perfil Virtual"
+  },
+  "options_virtualProfileReplace": {
+    "message": "Reemplazar perfil objetivo"
+  },
+  "options_virtualProfileReplaceHelp": {
+    "message": "Puedes migrar las opciones existentes para usar este perfil virtual en vez de $PROFILE$. Haciendo esto actualizarás todas las reglas existentes concernientes a $PROFILE$ y apuntarán a este perfil virtual, para que su perfil de resultados pueda ser controlado aquí.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$2"
+      }
+    }
+  },
+  "options_group_ruleListConfig": {
+    "message": "Configuración de la Lista de Reglas"
+  },
+  "options_ruleListFormat": {
+    "message": "Formato de la Lista de Reglas"
+  },
+  "options_group_ruleListResult": {
+    "message": "Perfiles de resultados de la lista de reglas"
+  },
+  "options_ruleListMatchProfile": {
+    "message": "Emparejar perfil"
+  },
+  "options_ruleListDefaultProfile": {
+    "message": "Perfil por defecto"
+  },
+  "options_group_ruleListUrl": {
+    "message": "URL de la lista de reglas"
+  },
+  "options_ruleListUrlHelp": {
+    "message": "Esta lista de reglas será actualizada desde esta URL. Si se deja en blanco, el siguiente texto será interpretado en su lugar."
+  },
+  "options_group_ruleListText": {
+    "message": "Texto de la Lista de Reglas"
+  },
+  "options_ruleListLastUpdate": {
+    "message": "Lista de reglas descargada el $TIME$:",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "TIME": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_ruleListObsolete": {
+    "message": "La lista de reglas está obsoleta debido a un cambio de URL. Presiona el botón descargar de arriba para actualizar."
+  },
+  "options_group_switchRules": {
+    "message": "Reglas de conmutación"
+  },
+  "options_sort": {
+    "message": "Ordenar"
+  },
+  "options_conditionType": {
+    "message": "Tipo de Condición"
+  },
+  "options_showConditionTypeHelp": {
+    "message": "Mostrar ayuda"
+  },
+  "options_conditionDetails": {
+    "message": "Detalles de la Condición"
+  },
+  "options_resultProfile": {
+    "message": "Perfil"
+  },
+  "options_conditionActions": {
+    "message": "Acciones"
+  },
+  "options_addCondition": {
+    "message": "Añadir condición"
+  },
+  "options_cloneRule": {
+    "message": "Clonar"
+  },
+  "options_ruleNote": {
+    "message": "Nota"
+  },
+  "options_switchAttachedProfileInCondition": {
+    "message": "Reglas de la lista de reglas"
+  },
+  "options_switchAttachedProfileInConditionDetails": {
+    "message": "(Cualquier solicitud que coincida con la lista de reglas a continuación)"
+  },
+  "options_switchAttachedProfileInConditionDisabled": {
+    "message": "(Las reglas de la lista de reglas están DESHABILITADAS)"
+  },
+  "options_switchDefaultProfile": {
+    "message": "Por defecto"
+  },
+  "options_hostLevelsBetween": {
+    "message": "≤ niveles de host ≤"
+  },
+  "options_hourBetween": {
+    "message": "≤ hora actual ≤"
+  },
+  "options_weekDayShort_0": {
+    "message": "Lu"
+  },
+  "options_weekDayShort_1": {
+    "message": "Ma"
+  },
+  "options_weekDayShort_2": {
+    "message": "Mi"
+  },
+  "options_weekDayShort_3": {
+    "message": "Ju"
+  },
+  "options_weekDayShort_4": {
+    "message": "Vi"
+  },
+  "options_weekDayShort_5": {
+    "message": "Sa"
+  },
+  "options_weekDayShort_6": {
+    "message": "Do"
+  },
+  "options_group_conditionHelp": {
+    "message": "Acerca de Tipos de Condición"
+  },
+  "options_group_attachProfile": {
+    "message": "Importar lista de reglas en línea"
+  },
+  "options_attachProfile": {
+    "message": "Añadir una lista de reglas"
+  },
+  "options_attachProfileHelp": {
+    "message": "Puedes reusar una colección de condiciones en línea publicada por otros al añadirla a tu lista de reglas."
+  },
+  "options_modalHeader_welcome": {
+    "message": "Bienvenido/a a SwitchyOmega"
+  },
+  "options_welcomeNormal": {
+    "message": "Has instalado exitosamente SwitchyOmega, el proxy switcher definitivo."
+  },
+  "options_welcomeNormalGuide": {
+    "message": "Indica a SwitchyOmega acerca de tus proxies a través de la pagina de opciones. Vamos a ver cómo."
+  },
+  "options_welcomeUpgrade": {
+    "message": "Has actualizado exitosamente a SwitchyOmega. No te asustes, tus opciones existentes han sido completamente preservadas."
+  },
+  "options_welcomeUpgradeGuide": {
+    "message": "Ahora veamos una guía rápida de la nueva página de opciones."
+  },
+  "options_guideNext": {
+    "message": "Siguiente"
+  },
+  "options_guideDone": {
+    "message": "Hecho"
+  },
+  "options_guideSkip": {
+    "message": "Omitir guía"
+  },
+  "options_modalHeader_applyOptions": {
+    "message": "Aplicar Opciones"
+  },
+  "options_optionsNotSaved": {
+    "message": "¡Tus modificaciones de las opciones no han sido guardadas y se perderán si continúas!"
+  },
+  "options_applyOptionsRequired": {
+    "message": "Tus cambios de las opciones deben aplicarse antes de proceder."
+  },
+  "options_applyOptionsConfirm": {
+    "message": "¿Quieres guardar y aplicar las opciones?"
+  },
+  "options_modalHeader_renameProfile": {
+    "message": "Renombrar Perfil"
+  },
+  "options_renameProfileName": {
+    "message": "Nuevo nombre de perfil"
+  },
+  "options_profileNameConflict": {
+    "message": "Ya existe un perfil con este nombre."
+  },
+  "options_profileNameReserved": {
+    "message": "Los nombres de perfil que empiezan con doble guión bajo están reservados."
+  },
+  "options_profileNameHidden": {
+    "message": "Los perfiles con nombres que empiecen por guión bajo se ocultarán en el menú emergente. Sin embargo, pueden seguirse utilizando en sitios como los resultados del perfil conmutador."
+  },
+  "options_modalHeader_replaceProfile": {
+    "message": "Reemplazar Perfil"
+  },
+  "options_replaceProfile": {
+    "message": "Reemplazar perfil"
+  },
+  "options_replaceProfileConfirm": {
+    "message": "¿De verdad deseas reemplazar $FromProfile$ con $ToProfile$?",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "FromProfile": {
+        "content": "$1"
+      },
+      "ToProfile": {
+        "content": "$2"
+      }
+    }
+  },
+  "options_replaceProfileHelp": {
+    "message": "Si continúas, todas las reglas apuntando a $FromProfile$ se actualizarán para usar $ToProfile$ en su lugar. Otras opciones, como el perfil de inicio y el Conmutador Rápido también se modificarán según corresponda. Sin embargo, los dos perfiles en sí NO serán modificados o eliminados.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "FromProfile": {
+        "content": "$1"
+      },
+      "ToProfile": {
+        "content": "$2"
+      }
+    }
+  },
+  "options_replaceProfileSuccess": {
+    "message": "Opciones actualizadas."
+  },
+  "options_modalHeader_deleteProfile": {
+    "message": "Eliminar Perfil"
+  },
+  "options_deleteProfileConfirm": {
+    "message": "¿De verdad quieres borrar el siguiente perfil?"
+  },
+  "options_modalHeader_cannotDeleteProfile": {
+    "message": "Incapaz de Borrar el Perfil"
+  },
+  "options_profileReferredBy": {
+    "message": "Este perfil no puede ser borrado porque está referenciado por los siguientes perfiles:"
+  },
+  "options_modifyReferringProfiles": {
+    "message": "Debes modificar estos perfiles y hacer que dejen de referenciar este perfil antes de que puedas borrarlo."
+  },
+  "options_profileNameEmpty": {
+    "message": "El nombre del perfil no debe estar vacío."
+  },
+  "popup_title": {
+    "message": "Ventana emergente de SwitchyOmega"
+  },
+  "options_modalHeader_proxyAuth": {
+    "message": "Autenticación Proxy"
+  },
+  "options_proxyAuthUsername": {
+    "message": "Nombre de usuario"
+  },
+  "options_proxyAuthPassword": {
+    "message": "Contraseña"
+  },
+  "options_proxyAuthShowPassword": {
+    "message": "Mostrar contraseña"
+  },
+  "options_proxyAuthHidePassword": {
+    "message": "Ocultar contraseña"
+  },
+  "options_proxyAuthNone": {
+    "message": "Sin Autenticación"
+  },
+  "options_modalHeader_deleteRule": {
+    "message": "Eliminar Regla"
+  },
+  "options_deleteRuleConfirm": {
+    "message": "¿De verdad quieres borrar la siguiente regla?"
+  },
+  "options_deleteRule": {
+    "message": "Borrar"
+  },
+  "options_modalHeader_resetRules": {
+    "message": "Reestablecer reglas"
+  },
+  "options_resetRulesConfirm": {
+    "message": "¿Estás seguro/a de establecer el perfil resultante de TODAS las reglas en el siguiente perfil?"
+  },
+  "options_resetRules": {
+    "message": "Reestablecer reglas"
+  },
+  "options_resetRules_help": {
+    "message": "Establecer perfil para todas las reglas"
+  },
+  "options_modalHeader_deleteAttached": {
+    "message": "Eliminar Lista de Reglas"
+  },
+  "options_deleteAttachedConfirm": {
+    "message": "¿Estás seguro/a de querer eliminar la lista de reglas del perfil actual?"
+  },
+  "options_ruleListLineCount": {
+    "message": "$COUNT$ linea(s) de reglas",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "COUNT": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_deleteAttached": {
+    "message": "Eliminar lista de reglas"
+  },
+  "options_modalHeader_newProfile": {
+    "message": "Nuevo Perfil"
+  },
+  "options_newProfileName": {
+    "message": "Nombre del perfil"
+  },
+  "options_profileType": {
+    "message": "Por favor selecciona el tipo de perfil:"
+  },
+  "options_profileTypeFixedProfile": {
+    "message": "Perfil de Proxy"
+  },
+  "options_profileDescFixedProfile": {
+    "message": "Tunelización del tráfico a través de servidores proxy."
+  },
+  "options_profileTypePacProfile": {
+    "message": "Perfil PAC"
+  },
+  "options_profileDescPacProfile": {
+    "message": "Elegir proxies usando un script PAC en línea/local."
+  },
+  "options_profileDescMorePacProfile": {
+    "message": "Solo necesitarás esto si tienes un script PAC o una URL hacia uno. No intentes crear uno a menos que tengas conocimiento sobre PAC."
+  },
+  "options_profileTypeSwitchProfile": {
+    "message": "Perfil Conmutador"
+  },
+  "options_profileDescSwitchProfile": {
+    "message": "Aplicando distintos perfiles automáticamente en diversas condiciones tales como dominios o patrones.\n También puedes importar reglas publicadas en línea para un cambio más fácil. (Reemplaza el modo AutoSwitch + Lista de Reglas.)"
+  },
+  "options_profileTypeRuleListProfile": {
+    "message": "Perfil de Lista de Reglas"
+  },
+  "options_profileDescRuleListProfile": {
+    "message": "Reusando una colección en línea de condiciones publicadas por otros."
+  },
+  "options_profileTypeVirtualProfile": {
+    "message": "Perfil Virtual"
+  },
+  "options_profileDescVirtualProfile": {
+    "message": "Un perfil virtual puede actuar como cualquier otro perfil bajo demanda. Funciona bien con SwitchProfile, permitiondo cambiar el resultado de múltiples condiciones con un solo click."
+  },
+  "options_createProfile": {
+    "message": "Crear"
+  },
+  "options_modalHeader_resetOptions": {
+    "message": "Reestablecer Opciones"
+  },
+  "options_resetOptionsConfirm": {
+    "message": "¿Realmente quieres reestablecer las opciones? ¡Todos los perfiles y configuración se PERDERÁN!"
+  },
+  "options_formInvalid": {
+    "message": "Por favor corrige los errores de esta página."
+  },
+  "options_profileNotFound": {
+    "message": "¡El perfil $PROFILE$ no existe! Las opciones pueden estar corruptas.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_resetSuccess": {
+    "message": "Opciones reestablecidas."
+  },
+  "options_saveSuccess": {
+    "message": "Opciones guardadas."
+  },
+  "options_importSuccess": {
+    "message": "Opciones importadas."
+  },
+  "options_importFormatError": {
+    "message": "¡Archivo de copia de seguridad no válido!"
+  },
+  "options_importDownloadError": {
+    "message": "¡Error descargando el archivo de copia de seguridad!"
+  },
+  "options_profileDownloadSuccess": {
+    "message": "Perfil actualizado existosamente."
+  },
+  "options_profileDownloadError": {
+    "message": "¡Error descargando los datos del perfil!"
+  },
+  "options_profileDownloadError_NetworkError": {
+    "message": "Un error de red ha ocurrido al actualizar."
+  },
+  "options_profileDownloadError_HttpError": {
+    "message": "Un error HTTP ($STATUS$) ha ocurrido al actualizar.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "STATUS": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileDownloadError_HttpNotFoundError": {
+    "message": "La URL del Perfil no ha sido encontrada en el servidor. Por favor vuelve a comprobarla."
+  },
+  "options_profileDownloadError_HttpServerError": {
+    "message": "El servidor remoto ha respondido con error ($STATUS$) al actualizar.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "STATUS": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileDownloadError_ContentTypeRejectedError": {
+    "message": "¡Los datos descargados son inválidos! Puedes abrir la URL del Perfil en tu navegador para inspeccionarla."
+  },
+  "options_downloadProfileNow": {
+    "message": "Descargar el Perfil Ahora"
+  },
+  "options_guide_fixedProfileStep": {
+    "message": "Un <b>Perfil Proxy</b> contiene ajustes como la ip y puerto del servidor para proxy.<br>Los perfiles son las unidades basicas de configuración en SwitchyOmega.<br>Hemos creado un perfil de ejemplo para ti. Intenta abrirlo."
+  },
+  "options_guide_fixedServersStep": {
+    "message": "Puedes completar tu servidor proxy y puerto como desees.<br>SwitchyOmega <b>no viene con ningún servidor proxy</b>.<br>Por favor consulta con tu proveedor de red o con el manual de software de tu proxy si no sabes lo que se debe llenar aquí."
+  },
+  "options_guide_autoSwitchProfileStep": {
+    "message": "Puedes decirle a SwitchyOmega que cambie entre proxies automáticamente a través del poderoso <b>Perfil Conmutador</b>.<br>Sin embargo, sus características no pueden ser cubiertas con esta breve guía.<br>Puedes abrir este perfil para desbloquear su poder más tarde."
+  },
+  "options_guide_addMoreProfilesStep": {
+    "message": "¿Necesitas más perfiles? Siempre puedes añadir más <b>perfiles de tipo Proxy, Conmutador y otros</b><br>para todas tus necesidades de configuración con proxies.<br>¡Disfruta configurando tus proxies!"
+  },
+  "options_guide_conditionStep": {
+    "message": "SwitchyOmega puede aplicar distintos perfiles para peticiones basadas en <b>condiciones</b>.<br> Por ejemplo, la condición <b>Comodín host</b> permite establecer el perfil para todas las URL en un domino."
+  },
+  "options_guide_conditionTypeStep": {
+    "message": "Puedes usar varios tipos de condición para coincidir con el host o la URL completa. <br> Haz clic en el símbolo de interrogación para abrir la referencia de tipo."
+  },
+  "options_guide_conditionProfileStep": {
+    "message": "SwitchyOmega aplica el perfil aquí seleccionado a <b>cualquier petición que coincida con la condición.</b> <br> El <b>perfil especial \"[Por defecto]\"</b> hará que la petición se envíe sin ningún proxy."
+  },
+  "options_guide_switchDefaultStep": {
+    "message": "Si ninguna condición se aplica a alguna solicitud, el perfil \"Por defecto\" será usado. <br>Las condiciones siempre serán consideradas <b>desde arriba hacia abajo</b> en orden.<br>Puedes cambiar el order arrastrando el icono ordenar."
+  },
+  "options_guide_applySwitchProfileStep": {
+    "message": "Cuando termines de configurar el perfil conmutador, no te olvides de <b>cambiar a el en el menú emergente.</b><br/> El icono mostrará el perfil <b>resultante final</b> aplicado a la pestaña actual. <br/> <b>Pasando el cursor</b> sobre el icono revelará información detallada."
+  },
+  "popup_externalProfile": {
+    "message": "(Perfil Externo)"
+  },
+  "popup_externalProfileName": {
+    "message": "nombre del perfil"
+  },
+  "popup_proxyNotControllable_app": {
+    "message": "La configuración del proxy está controlada por otra(s) aplicación(es) o extensión(es). Por favor deshabilita o desinstala las aplicaciones o extensiones en conflicto."
+  },
+  "popup_proxyNotControllable_policy": {
+    "message": "La configuración del proxy está anulada por las políticas. Por favor, póngase en contacto con su administrador."
+  },
+  "popup_proxyNotControllable_unknown": {
+    "message": "La configuración del proxy no puede ser controlada. Por favor, compruebe su sistema y la configuración del navegador."
+  },
+  "popup_proxyNotControllable_disabled": {
+    "message": "La configuración del proxy está deshabilitada por solicitud explícita de otra(s) aplicación(es) o extensión(es)."
+  },
+  "popup_proxyNotControllable_upgrade": {
+    "message": "Las configuraciones de proxy ahora están controladas por una versión más reciente de SwitchyOmega."
+  },
+  "popup_proxyNotControllableDetails": {
+    "message": "No puedes cambiar los perfiles con SwitchyOmega a menos que soluciones el problema anterior."
+  },
+  "popup_proxyNotControllableDetails_upgrade": {
+    "message": "No puede habilitar dos (o más) versiones de SwitchyOmega al mismo tiempo. Por favor deshabilita una de ellas."
+  },
+  "popup_proxyNotControllableManage": {
+    "message": "Administrar extensiones"
+  },
+  "popup_addConditionTo": {
+    "message": "Añadir condición a"
+  },
+  "popup_addCondition": {
+    "message": "Añadir condición"
+  },
+  "popup_showOptions": {
+    "message": "Opciones"
+  },
+  "popup_reportIssues": {
+    "message": "Reportar problemas"
+  },
+  "popup_errorLog": {
+    "message": "Guardar registro de errores"
+  },
+  "popup_requestErrorCount": {
+    "message": "$COUNT$ recursos fallidos",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "COUNT": {
+        "content": "$1"
+      }
+    }
+  },
+  "popup_requestErrorHeading": {
+    "message": "Recursos que no se pudieron cargar"
+  },
+  "popup_requestErrorWarning": {
+    "message": "Algunos recursos no se pudieron cargar debido a problemas con tu red, servidor proxy o la página web."
+  },
+  "popup_requestErrorWarningHelp": {
+    "message": "SwitchyOmega es solo el informador de estos problemas, no la causa de ellos."
+  },
+  "popup_requestErrorAddCondition": {
+    "message": "Puede revisar los siguientes dominios y usar un proxy cuando sea apropiado."
+  },
+  "popup_requestErrorCannotAddCondition": {
+    "message": "Puedes agregar condiciones de conmutación solo cuando se usa un Perfil Conmutador."
+  },
+  "popup_configureMonitorWebRequests": {
+    "message": "Configurar el Monitor de Red"
+  },
+  "options_resultProfileForSelectedDomains": {
+    "message": "Usar este perfil para todos los dominios seleccionados"
+  },
+  "options_pac_profile_unsupported_moz": {
+    "message": "¡Los Perfiles PAC NO funcionan en Mozilla Firefox debido a limitaciones técnicas!"
+  },
+  "popup_issueTemplate": {
+    "message": "\n\n\n<!-- Por favor escribe tu comentario SOBRE esta línea. -->\nSwitchyOmega $projectVersion$\n$userAgent$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "projectVersion": {
+        "content": "$1"
+      },
+      "userAgent": {
+        "content": "$2"
+      }
+    }
+  },
+  "browserAction_profileDetails_PacProfile": {
+    "message": "(Script PAC)"
+  },
+  "browserAction_profileDetails_SystemProfile": {
+    "message": "(controllado por otras extensiones o entorno)"
+  },
+  "browserAction_profileDetails_DirectProfile": {
+    "message": "(sin usar ningún proxy)"
+  },
+  "browserAction_profileDetails_SwitchProfile": {
+    "message": "(cambio basado en condiciones)"
+  },
+  "browserAction_profileDetails_RuleListProfile": {
+    "message": "(cambio basado en la lista de reglas)"
+  },
+  "browserAction_titleNormal": {
+    "message": "SwitchyOmega:: $PROFILE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "browserAction_titleWithResult": {
+    "message": "SwitchyOmega:: $PROFILE$\n$DETAILS$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      },
+      "_unused_2": {
+        "content": "$2"
+      },
+      "DETAILS": {
+        "content": "$3"
+      }
+    }
+  },
+  "browserAction_titleNewerOptions": {
+    "message": "ERROR: Una nueva versión de SwitchOmega es necesaria para cargar las opciones guardadas."
+  },
+  "browserAction_titleOptionError": {
+    "message": "ERROR: Las opciones guardadas están corrompidas. Haz clic aquí para REINICIAR LAS OPCIONES."
+  },
+  "browserAction_titleDownloadFail": {
+    "message": "Advertencia: Error al descargar los scripts PAC y/o las listas de reglas."
+  },
+  "browserAction_titleExternalProxy": {
+    "message": "Nota: La configuración del proxy está actualmente controlada por otra(s) aplicación(es)."
+  },
+  "browserAction_titleInspect": {
+    "message": "[Inspeccionar] $URL$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "URL": {
+        "content": "$1"
+      }
+    }
+  },
+  "browserAction_defaultRuleDetails": {
+    "message": "(por defecto)"
+  },
+  "browserAction_directResult": {
+    "message": "DIRECTO"
+  },
+  "browserAction_attachedPrefix": {
+    "message": "(RL) "
+  },
+  "browserAction_tempRulePrefix": {
+    "message": "(TEMP) "
+  },
+  "contextMenu_inspectPage": {
+    "message": "Inspeccionar proxy usado en esta página"
+  },
+  "contextMenu_inspectFrame": {
+    "message": "Inspeccionar proxy utilizado para este Frame"
+  },
+  "contextMenu_inspectLink": {
+    "message": "Inspeccionar proxy utilizado si este Enlace es abierto"
+  },
+  "contextMenu_inspectElement": {
+    "message": "Inspeccionar proxy utilizado para este Elemento"
+  },
+  "contextMenu_enableQuickSwitch": {
+    "message": "Habilitar Conmutador Rápido"
+  },
+  "about_title": {
+    "message": "Acerca de"
+  },
+  "about_app_description": {
+    "message": "Una herramienta de configuración de proxy"
+  },
+  "about_version": {
+    "message": "Versión $VERSION$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "VERSION": {
+        "content": "$1"
+      }
+    }
+  },
+  "about_experimental_warning_moz": {
+    "message": "¡El soporte de Mozilla Firefox es altamente experimental! Si tienes problemas, informa utilizando los botones a continuación."
+  },
+  "about_disclaimer_networkService": {
+    "message": "SwitchyOmega no proporciona proxies, VPN u otros servicios de red."
+  },
+  "about_disclaimer_privacy": {
+    "message": "SwitchyOmega no te rastrea ni inserta anuncios en páginas web. Por favor ve nuestra <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/Privacy'>política de privacidad</a>."
+  },
+  "about_help": {
+    "message": "¿Otras preguntas? ¿Necesitas ayuda con el uso de SwitchyOmega? Por favor ve nuestro <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/FAQ'>FAQ</a>."
+  },
+  "about_copyright": {
+    "message": "Copyright 2012-2017 <a href='https://github.com/FelisCatus/SwitchyOmega/blob/master/AUTHORS'>Los autores de SwitchyOmega</a>. Todos los derechos reservados."
+  },
+  "about_credits": {
+    "message": "SwitchyOmega es posible gracias al proyecto de código abierto <a href='https://github.com/FelisCatus/SwitchyOmega'>SwitchyOmega</a> y otro <a href='https://github.com/FelisCatus/SwitchyOmega/blob/master/AUTHORS'>software de código abierto</a>."
+  },
+  "about_license": {
+    "message": "SwitchyOmega es <a href='https://www.gnu.org/philosophy/free-sw.en.html'>software libre</a> licenciado bajo <a href='https://www.gnu.org/licenses/gpl.html'>GNU General Public License</a> Versión 3 o posterior."
+  }
+}

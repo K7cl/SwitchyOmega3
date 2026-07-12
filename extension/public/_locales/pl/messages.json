@@ -1,0 +1,23 @@
+{
+  "appNameShort": {
+    "message": "SwitchyOmega"
+  },
+  "manifest_app_name": {
+    "message": "SwitchyOmega Proxy"
+  },
+  "manifest_app_description": {
+    "message": "Zarządzanie i przełączanie się pomiędzy serwerami proxy."
+  },
+  "manifest_icon_default_title": {
+    "message": "Wczytywanie…"
+  },
+  "upgrade_profile_auto": {
+    "message": "Automatyczne przełączanie"
+  },
+  "profile_direct": {
+    "message": "[Bez proxy]"
+  },
+  "profile_system": {
+    "message": "[Proxy systemowe]"
+  }
+}

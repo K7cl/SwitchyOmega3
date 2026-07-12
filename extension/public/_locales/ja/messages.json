@@ -6,85 +6,85 @@
     "message": "Proxy SwitchyOmega"
   },
   "manifest_app_description": {
-    "message": "Manage and switch between multiple proxies quickly & easily."
+    "message": "素早く簡単に複数のプロキシを管理・切替できます。"
   },
   "manifest_icon_default_title": {
-    "message": "Loading…"
+    "message": "読み込んでいます…"
   },
   "upgrade_profile_auto": {
-    "message": "Auto Switch"
+    "message": "自動切替"
   },
   "profile_direct": {
-    "message": "[Direct]"
+    "message": "[直接接続]"
   },
   "profile_system": {
-    "message": "[System Proxy]"
+    "message": "[システムのプロキシ]"
   },
   "condition_HostWildcardCondition": {
-    "message": "Host wildcard"
+    "message": "ホスト名とワイルドカード"
   },
   "condition_help_HostWildcardCondition": {
-    "message": "Matches hosts (domain names) by wildcard.<br><b>The asterisk <code>*</code></b> matches zero or more characters.<br><b>The question mark <code>?</code></b> matches exactly one character.<br><br>Note that rules beginning with <code>*.</code> are specially treated only in Host wildcard conditions.<br>Example: <code>*.example.com</code> will match www.example.com <b>AND example.com as well.</b><br>To match subdomains <b>only</b>, use <b>two</b> asterisks like <code>**.example.com</code>."
+    "message": "ワイルドカードを使ってホスト名（ドメイン名）にマッチします。<br><b>アスタリスク<code>*</code></b>は0個以上の文字にマッチします。<br><b>疑問符<code>?</code></b>は1文字のみにマッチします。特にホストをワイルドカードの条件を使って指定するときに限っては、<br><br><code>*.</code>から始まるルールは特別に扱います。<br><br>例えば、<code>*.example.com</code>はwww.example.comに限らず<b>example.comにも同様にマッチします。</b><br>サブドメイン<b>のみ</b>にマッチさせたいときは、<code>**.example.com</code>といった具合に、アスタリスクを<b>2つ</b>使用してください。"
   },
   "condition_HostRegexCondition": {
-    "message": "Host regex"
+    "message": "ホスト名の正規表現"
   },
   "condition_help_HostRegexCondition": {
-    "message": "Like Host wildcard condition, but matches hosts (domain names) by <a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>.<br>Regular expressions can be hard to construct (and read).<br>It is recommended to use wildcards for most cases and only use regex for conditions that cannot be achieved by any other condition type."
+    "message": "ホスト名のワイルドカード条件と似ていますが、ホスト名（ドメイン名）に<a href='https://www.google.com/search?q=%90%B3%8BK%95%5C%8C%BB'>正規表現＜/a>を利用してマッチします。<br>正規表現は作成や解読が難しくなりことがあります。<br>大抵の場合ではワイルドカードを使い、どうしても他の方法では記述できない場合にのみ正規表現を使った方がよいでしょう。"
   },
   "condition_HostLevelsCondition": {
-    "message": "Host levels"
+    "message": "ホストレベル"
   },
   "condition_help_HostLevelsCondition": {
-    "message": "Matches the request if and only if the host level in within the given range.<br>Host level is defined as the <b>number of dot-separated segments</b> of the host (domain name).<br>Example: <code>www.example.com</code> is with a host level of 3, while <code>internal</code> is of host level 1."
+    "message": "ホストレベルが指定された範囲内にある場合にのみ、リクエストに一致します。<br>ホストレベルは、ホスト（ドメイン名）の<b>ドットで区切られたセグメントの数</b>として定義されます。<br>例：<code>www.example.com</code>のホストレベルは3ですが、<code>internal</code>のホストレベルは1です。"
   },
   "condition_IpCondition": {
-    "message": "IP Literals"
+    "message": "IPリテラル"
   },
   "condition_help_IpCondition": {
     "message": "Matches the request if and only if the host is a <b>literal</b> IP address and in the subnet as specified by <a href='https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation'>CIDR notation</a>.<br>For example, given the rule <code>127.0.0.1/16</code>, it matches all IP addresses like <code>127.0.*.*</code>.<br>So <code>127.0.0.1</code> matches while <code>127.1.0.0</code> does not. Host names like <code>localhost</code> will never match because they are <b>not</b> IP literals."
   },
   "condition_UrlWildcardCondition": {
-    "message": "URL wildcard"
+    "message": "URLワイルドカード"
   },
   "condition_help_UrlWildcardCondition": {
     "message": "Matches URLs of the request by wildcard.<br>See the Host wildcard section above for a quick wildcard reference.<br>Note that URL wildcards are not specially treated (no subdomain magic as in Host wildcard).<br>So <code>*://*.example.com/*</code> matches http://www.example.com/ but <b>does not</b> match http://example.com/."
   },
   "condition_UrlRegexCondition": {
-    "message": "URL regex"
+    "message": "URL正規表現"
   },
   "condition_help_UrlRegexCondition": {
     "message": "Matches URL by extremely powerful <a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>.<br>However, regular expressions can be hard to construct (and read).<br>It is recommended to use wildcards for most cases and only use regex for conditions that cannot be achieved by any other condition type."
   },
   "condition_KeywordCondition": {
-    "message": "Keyword"
+    "message": "キーワード"
   },
   "condition_help_KeywordCondition": {
     "message": "A keyword condition matches if the URL protocol is HTTP, and the pattern is an exact sub-string of the URL.<br>It behaves like the URL wildcard pattern <code>http://*<b>pattern</b>*</code>, where <b>pattern</b> is the keyword pattern.<br>Keyword conditions are useful if you want to bypass a firewall blocking some keywords in the URL, by requesting such URLs through a proxy."
   },
   "condition_FalseCondition": {
-    "message": "(Disabled)"
+    "message": "（無効）"
   },
   "condition_details_FalseCondition": {
-    "message": "(Condition ignored when matching)"
+    "message": "（マッチ時に無視される条件）"
   },
   "condition_help_FalseCondition": {
     "message": "You can disable a condition by setting its type to <code>(Disabled)</code>. A Disabled condition act as if it does not exist.<br>This feature can be used to disable conditions temporarily.<br>Disabled conditions still hold the previous information (like patterns) and can be re-enabled by setting the condition type back to the previous type."
   },
   "condition_TimeCondition": {
-    "message": "Current Time"
+    "message": "現在の時刻"
   },
   "condition_help_TimeCondition": {
     "message": "Matches if the current local time is in the range defined by <b>starting hour</b> and <b>ending hour</b>, both inclusive.<br>Local time, starting hour and ending hour are all calculated in <b>24-hour</b> format (from <b>0 to 23</b>). <br>The calculation happens roughly at the moment when the request is sent."
   },
   "condition_WeekdayCondition": {
-    "message": "Day of the Week"
+    "message": "曜日"
   },
   "condition_help_WeekdayCondition": {
     "message": "Matches if the <b>current day of week</b> is selected in condition details. Day is calculated according to local timezone.<br>The request and its URL don't matter to this condition. The result is solely based on the day of the week when the request is sent."
   },
   "condition_alert_fullUrlLimitation": {
-    "message": "Full URL matching is no longer possible for <code>https://</code> URLs as of Chrome 52. <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation'>Learn more...</a>"
+    "message": "URL全体のマッチは <code>https://</code> を使用したURLにおいてはChrome 52からできなくなりました。 <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation'>詳細はこちら</a>"
   },
   "condition_alert_fullUrlLimitationLink": {
     "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation"
@@ -93,28 +93,28 @@
     "message": ""
   },
   "condition_group_host": {
-    "message": "Host"
+    "message": "ホスト"
   },
   "condition_group_url": {
-    "message": "Url"
+    "message": "URL"
   },
   "condition_group_special": {
-    "message": "Special"
+    "message": "特別"
   },
   "ruleListFormat_Switchy": {
     "message": "Switchy"
   },
   "ruleListFormat_AutoProxy": {
-    "message": "AutoProxy"
+    "message": "自動プロキシ"
   },
   "ruleList_usageUrl": {
     "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/RuleListUsage"
   },
   "ruleList_error_resultNotEnabled": {
-    "message": "Missing '@with result' directive!"
+    "message": "'@with result'の部分がありません！"
   },
   "ruleList_error_unknownProfile": {
-    "message": "Unknown profile: $PROFILE$",
+    "message": "不明なプロファイル: $PROFILE$",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -139,15 +139,15 @@
     }
   },
   "ruleList_error_invalidRule": {
-    "message": "Invalid rule at Line $LNO$: $SOURCE$",
+    "message": "$SOURCE$の$LNO$:のルールは無効です",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
       },
-      "LNO": {
+      "SOURCE": {
         "content": "$1"
       },
-      "SOURCE": {
+      "LNO": {
         "content": "$2"
       }
     }
@@ -156,67 +156,67 @@
     "message": "Missing default rule with catch-all '*' condition!"
   },
   "dialog_close": {
-    "message": "Close"
+    "message": "閉じる"
   },
   "dialog_save": {
-    "message": "Save changes"
+    "message": "変更を保存する"
   },
   "dialog_ok": {
     "message": "OK"
   },
   "dialog_cancel": {
-    "message": "Cancel"
+    "message": "キャンセル"
   },
   "inputClear_clear": {
-    "message": "Clear"
+    "message": "クリア"
   },
   "inputClear_restore": {
-    "message": "Restore"
+    "message": "復元"
   },
   "options_title": {
-    "message": "SwitchyOmega Options"
+    "message": "SwitchyOmega オプション"
   },
   "options_experimental_badge": {
     "message": "α"
   },
   "options_navHeader_setting": {
-    "message": "Settings"
+    "message": "設定"
   },
   "options_navHeader_profiles": {
-    "message": "Profiles"
+    "message": "プロファイル"
   },
   "options_navHeader_actions": {
     "message": "Actions"
   },
   "options_tab_ui": {
-    "message": "Interface"
+    "message": "インターフェイス"
   },
   "options_tab_general": {
-    "message": "General"
+    "message": "総合"
   },
   "options_tab_importExport": {
-    "message": "Import/Export"
+    "message": "インポート/エクスポート"
   },
   "options_newProfile": {
-    "message": "New profile…"
+    "message": "新しくプロファイルを作る…"
   },
   "options_apply": {
-    "message": "Apply changes"
+    "message": "変更を適用"
   },
   "options_discard": {
-    "message": "Discard changes"
+    "message": "変更を破棄"
   },
   "options_reset": {
-    "message": "Reset options"
+    "message": "設定をリセットする"
   },
   "options_group_miscOptions": {
-    "message": "Misc Options"
+    "message": "その他の設定"
   },
   "options_confirmDeletion": {
-    "message": "Confirm on condition deletion."
+    "message": "条件を削除する際に確認する。"
   },
   "options_refreshOnProfileChange": {
-    "message": "Refresh current tab on profile change."
+    "message": "プロファイルの変更にともなって現在のタブを更新する。"
   },
   "options_showInspectMenu": {
     "message": "Allow inspecting proxy used for page elements via context menu."
@@ -225,34 +225,34 @@
     "message": "Put new conditions added using the popup to the bottom of the list."
   },
   "options_group_keyboardShortcut": {
-    "message": "Keyboard Shortcut"
+    "message": "キーボードショートカット"
   },
   "options_menuShortcutHelp": {
-    "message": "Pressing the shortcut will open the switch popup menu. (Defaults to Alt+Shift+O)."
+    "message": "ショートカットを押すと切替ポップアップメニューが開きます。(デフォルトではAlt+Shift+O)"
   },
   "options_menuShortcutMore": {
-    "message": "The items in the popup menu can also be accessed using the keyboard. Press ? (or /) in the menu to learn more."
+    "message": "ポップアップメニューの項目は、キーボードを使ってもアクセスすることができます。キーボードの「？」(または「/」) を押して詳細を表示します。"
   },
   "options_menuShortcutConfigure": {
-    "message": "Configure shortcut"
+    "message": "ショートカットの設定"
   },
   "options_group_switchOptions": {
-    "message": "Switch Options"
+    "message": "切替オプション"
   },
   "options_startupProfile": {
-    "message": "Startup Profile"
+    "message": "起動時プロファイル"
   },
   "options_startupProfile_none": {
-    "message": "(Current profile)"
+    "message": "（現在のプロファイル）"
   },
   "options_showConditionTypesAdvanced": {
-    "message": "Show advanced condition types"
+    "message": "高度な条件の種類を表示する"
   },
   "options_showConditionTypesAdvancedHelp": {
-    "message": "Unlocks new types of advanced but complicated switch conditions. For most scenarios, the basic condition types should be enough, so this option is not recommended."
+    "message": "新しいタイプの高度で複雑なスイッチ条件のロックを解除します。ほとんどのシナリオでは、基本的な条件タイプで十分であるため、このオプションはお勧めしません。"
   },
   "options_quickSwitch": {
-    "message": "Quick Switch"
+    "message": "クイック切替"
   },
   "options_cycledProfiles": {
     "message": "Cycled Profiles"
@@ -261,7 +261,7 @@
     "message": "When you click on the icon (or use the shortcut above), the following profiles will be applied in their order."
   },
   "options_cycledProfilesTooFew": {
-    "message": "You need to select at least 2 profiles to enable this function! You can drag them from the box below."
+    "message": "この機能を有効にするには最低でも二つのプロファイルを選択する必要があります。下のボックスからアイテムをドラッグすることができます。"
   },
   "options_notCycledProfiles": {
     "message": "Not Cycled Profiles"
@@ -273,13 +273,13 @@
     "message": "Revert proxy changes done by other apps."
   },
   "options_group_conflicts": {
-    "message": "Conflicts"
+    "message": "競合"
   },
   "options_conflicts_introduction": {
-    "message": "Sometimes, other apps will also try to control the proxy settings, resulting in conflicts. Note that ad blockers and other extensions may also use proxy settings under the hood. Such conflicts cannot be avoided due to how the browser works."
+    "message": "他のアプリもプロキシ設定を制御しようとするため、競合が発生することがあります。広告ブロッカーやその他の拡張機能も、プロキシ設定を水面下で使用している可能性があることに気をつけてください。このような競合は、ブラウザの仕組み上、避けることができません。"
   },
   "options_conflicts_lowerPriority": {
-    "message": "A red badge like this on the SwitchyOmega icon indicates that another app has higher priority so SwitchyOmega cannot control the settings. Please try to uninstall SwitchyOmega and reinstall, which should raise SwitchyOmega's priority. If you still see conflicts after reinstallation, please consider removing the other app causing the conflict."
+    "message": "SwitchyOmegaのアイコンにこのような赤いバッジが表示されるのは、他のアプリの方が優先度が高く、SwitchyOmegaが設定をコントロールできないことを示しています。SwitchyOmegaを一度アンインストールして再インストールすると、SwitchyOmegaの優先順位が上がるはずなので、試してみてください。再インストール後も競合が発生する場合は、競合の原因となっている他のアプリを削除することを検討してください。"
   },
   "options_conflicts_higherPriority": {
     "message": "If SwitchyOmega has higher priority, you can give the control back to other apps or system settings by selecting $SYSTEMPROFILE$ in the popup menu.",
@@ -325,25 +325,25 @@
     "message": "Configure the update frequency of online rule lists and PAC scripts."
   },
   "options_downloadInterval": {
-    "message": "Download Interval"
+    "message": "更新間隔"
   },
   "options_downloadInterval_15": {
     "message": "15 Minutes"
   },
   "options_downloadInterval_60": {
-    "message": "1 Hour"
+    "message": "1時間"
   },
   "options_downloadInterval_180": {
-    "message": "3 Hours"
+    "message": "3時間"
   },
   "options_downloadInterval_360": {
-    "message": "6 Hours"
+    "message": "6時間"
   },
   "options_downloadInterval_720": {
-    "message": "12 Hours"
+    "message": "12時間"
   },
   "options_downloadInterval_1440": {
-    "message": "Every day"
+    "message": "每日"
   },
   "options_downloadInterval_never": {
     "message": "Never"
@@ -367,7 +367,7 @@
     "message": "Enable this option only if you publish rule lists for users of those projects.<br>Please consider advising your audience to upgrade to SwitchyOmega for the improvements."
   },
   "options_group_importExportSettings": {
-    "message": "Settings"
+    "message": "設定"
   },
   "options_makeBackup": {
     "message": "Make backup"
@@ -731,13 +731,13 @@
     "message": "Done"
   },
   "options_guideSkip": {
-    "message": "Skip guide"
+    "message": "チュートリアルをスキップ"
   },
   "options_modalHeader_applyOptions": {
-    "message": "Apply Options"
+    "message": "変更を適応"
   },
   "options_optionsNotSaved": {
-    "message": "Your modifications to the options have not been saved and will be lost if you proceed!"
+    "message": "変更点は保存されていないため、このまま続行すると変更は失われます。"
   },
   "options_applyOptionsRequired": {
     "message": "Your changes to the options must be applied before you proceed."

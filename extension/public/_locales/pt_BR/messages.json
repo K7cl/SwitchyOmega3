@@ -6,31 +6,31 @@
     "message": "Proxy SwitchyOmega"
   },
   "manifest_app_description": {
-    "message": "Manage and switch between multiple proxies quickly & easily."
+    "message": "Gerencie e alterne entre vários proxies com rapidez e facilidade."
   },
   "manifest_icon_default_title": {
-    "message": "Loading…"
+    "message": "Carregando…"
   },
   "upgrade_profile_auto": {
-    "message": "Auto Switch"
+    "message": "Troca Automática"
   },
   "profile_direct": {
     "message": "[Direct]"
   },
   "profile_system": {
-    "message": "[System Proxy]"
+    "message": "[Proxy do Sistema]"
   },
   "condition_HostWildcardCondition": {
-    "message": "Host wildcard"
+    "message": "Host curinga"
   },
   "condition_help_HostWildcardCondition": {
-    "message": "Matches hosts (domain names) by wildcard.<br><b>The asterisk <code>*</code></b> matches zero or more characters.<br><b>The question mark <code>?</code></b> matches exactly one character.<br><br>Note that rules beginning with <code>*.</code> are specially treated only in Host wildcard conditions.<br>Example: <code>*.example.com</code> will match www.example.com <b>AND example.com as well.</b><br>To match subdomains <b>only</b>, use <b>two</b> asterisks like <code>**.example.com</code>."
+    "message": "Matches de hosts (domínios) por curinga.<br><b>O asterisco <code>*</code></b> match de zero ou mais caracteres.<br><b>O ponto de interrogação <code>?</code></b> match de exatamente um carácter.<br><br>Note que regras começando com <code>*.</code> são especialmente tratadas apenas em um host com condições curinga.<br>Exemplo: <code>*.exemplo.com</code> vai dar match em www.exemplo.com <b>E também exemplo.com.</b><br>Para <b>apenas</b> subdomínios , use <b>dois</b> asteriscos como: <code>**.exemplo.com</code>."
   },
   "condition_HostRegexCondition": {
     "message": "Host regex"
   },
   "condition_help_HostRegexCondition": {
-    "message": "Like Host wildcard condition, but matches hosts (domain names) by <a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>.<br>Regular expressions can be hard to construct (and read).<br>It is recommended to use wildcards for most cases and only use regex for conditions that cannot be achieved by any other condition type."
+    "message": "Parecido com a condição curinga, mas dá matchs em hosts (nomes de domínios) por <a href='https://www.google.com.br/search?q=regular%20expression'>regular expression</a>.<br>As expressões regulares podem ser difíceis de construir (e ler).<br> É recomendado usar curingas para a maioria dos casos e usar regex apenas em condições que não pode ser conseguido em nenhum outro tipo de condição."
   },
   "condition_HostLevelsCondition": {
     "message": "Host levels"
@@ -57,13 +57,13 @@
     "message": "Matches URL by extremely powerful <a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>.<br>However, regular expressions can be hard to construct (and read).<br>It is recommended to use wildcards for most cases and only use regex for conditions that cannot be achieved by any other condition type."
   },
   "condition_KeywordCondition": {
-    "message": "Keyword"
+    "message": "Palavra chave"
   },
   "condition_help_KeywordCondition": {
     "message": "A keyword condition matches if the URL protocol is HTTP, and the pattern is an exact sub-string of the URL.<br>It behaves like the URL wildcard pattern <code>http://*<b>pattern</b>*</code>, where <b>pattern</b> is the keyword pattern.<br>Keyword conditions are useful if you want to bypass a firewall blocking some keywords in the URL, by requesting such URLs through a proxy."
   },
   "condition_FalseCondition": {
-    "message": "(Disabled)"
+    "message": "(Desativado)"
   },
   "condition_details_FalseCondition": {
     "message": "(Condition ignored when matching)"
@@ -234,22 +234,22 @@
     "message": "The items in the popup menu can also be accessed using the keyboard. Press ? (or /) in the menu to learn more."
   },
   "options_menuShortcutConfigure": {
-    "message": "Configure shortcut"
+    "message": "Configurar atalho"
   },
   "options_group_switchOptions": {
-    "message": "Switch Options"
+    "message": "Opções de alteração"
   },
   "options_startupProfile": {
-    "message": "Startup Profile"
+    "message": "Perfil de inicialização"
   },
   "options_startupProfile_none": {
-    "message": "(Current profile)"
+    "message": "(Perfil atual)"
   },
   "options_showConditionTypesAdvanced": {
     "message": "Show advanced condition types"
   },
   "options_showConditionTypesAdvancedHelp": {
-    "message": "Unlocks new types of advanced but complicated switch conditions. For most scenarios, the basic condition types should be enough, so this option is not recommended."
+    "message": "Desbloqueia novos tipos de avançadas, porém complicadas, condições de mudança. Para a maioria dos cenários, as condições básicas devem ser suficientes, logo esta opção não é recomendada."
   },
   "options_quickSwitch": {
     "message": "Quick Switch"
@@ -1247,6 +1247,6 @@
     "message": "SwitchyOmega is made possible by the <a href='https://github.com/FelisCatus/SwitchyOmega'>SwitchyOmega</a> open source project and other <a href='https://github.com/FelisCatus/SwitchyOmega/blob/master/AUTHORS'>open source software</a>."
   },
   "about_license": {
-    "message": "SwitchyOmega is <a href='https://www.gnu.org/philosophy/free-sw.en.html'>free software</a> licensed under <a href='https://www.gnu.org/licenses/gpl.html'>GNU General Public License</a> Version 3 or later."
+    "message": "SwitchyOmega é um <a href='https://www.gnu.org/philosophy/free-sw.en.html'>software gratuito</a> licenciado sob <a href='https://www.gnu.org/licenses/gpl.html'>Licença Pública Geral GNU</a> Versão 3 ou posterior."
   }
 }

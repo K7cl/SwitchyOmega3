@@ -1,0 +1,150 @@
+{
+  "appNameShort": {
+    "message": "SwitchyOmega"
+  },
+  "manifest_app_name": {
+    "message": "Proxy SwitchyOmega"
+  },
+  "manifest_app_description": {
+    "message": "Organizza e scegli fra proxy multipli in maniera facile e veloce."
+  },
+  "manifest_icon_default_title": {
+    "message": "Caricamento…"
+  },
+  "upgrade_profile_auto": {
+    "message": "Auto Switch"
+  },
+  "profile_direct": {
+    "message": "[Diretto]"
+  },
+  "profile_system": {
+    "message": "[Proxy di Sistema]"
+  },
+  "condition_HostWildcardCondition": {
+    "message": "Host wildcard"
+  },
+  "condition_HostRegexCondition": {
+    "message": "Host regex"
+  },
+  "condition_UrlWildcardCondition": {
+    "message": "URL wildcard"
+  },
+  "condition_UrlRegexCondition": {
+    "message": "URL regex"
+  },
+  "condition_KeywordCondition": {
+    "message": "Parole chiave"
+  },
+  "condition_FalseCondition": {
+    "message": "(Disabilitato)"
+  },
+  "condition_details_FalseCondition": {
+    "message": "(Condizioni ignorate quando riscontrate)"
+  },
+  "condition_TimeCondition": {
+    "message": "Tempo attuale"
+  },
+  "condition_WeekdayCondition": {
+    "message": "Giorno della settimana"
+  },
+  "condition_alert_fullUrlLimitationLink": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation"
+  },
+  "condition_group_host": {
+    "message": "Host"
+  },
+  "condition_group_url": {
+    "message": "Url"
+  },
+  "condition_group_special": {
+    "message": "Speciale"
+  },
+  "ruleListFormat_Switchy": {
+    "message": "Switchy"
+  },
+  "ruleListFormat_AutoProxy": {
+    "message": "AutoProxy"
+  },
+  "ruleList_usageUrl": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/RuleListUsage"
+  },
+  "ruleList_error_unknownProfile": {
+    "message": "Profilo sconosciuto: $PROFILE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "ruleList_error_invalidRule": {
+    "message": "Regola non valida alla linea $LNO$: $SOURCE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "LNO": {
+        "content": "$1"
+      },
+      "SOURCE": {
+        "content": "$2"
+      }
+    }
+  },
+  "dialog_close": {
+    "message": "Chiusa"
+  },
+  "dialog_save": {
+    "message": "Salva le modifiche"
+  },
+  "dialog_ok": {
+    "message": "OK"
+  },
+  "dialog_cancel": {
+    "message": "Cancella"
+  },
+  "inputClear_clear": {
+    "message": "Pulisci"
+  },
+  "inputClear_restore": {
+    "message": "Ripristina"
+  },
+  "options_title": {
+    "message": "Opzioni di SwitchyOmega"
+  },
+  "options_experimental_badge": {
+    "message": "α"
+  },
+  "options_navHeader_setting": {
+    "message": "Impostazioni"
+  },
+  "options_navHeader_profiles": {
+    "message": "Profili"
+  },
+  "options_navHeader_actions": {
+    "message": "Azioni"
+  },
+  "options_tab_ui": {
+    "message": "Interfaccia"
+  },
+  "options_tab_general": {
+    "message": "Generale"
+  },
+  "options_tab_importExport": {
+    "message": "Importa/Esporta"
+  },
+  "options_newProfile": {
+    "message": "Nuovo profilo…"
+  },
+  "options_apply": {
+    "message": "Applica i cambiamenti"
+  },
+  "options_discard": {
+    "message": "Scarta i cambiamenti"
+  },
+  "options_reset": {
+    "message": "Ripristina le opzioni"
+  }
+}

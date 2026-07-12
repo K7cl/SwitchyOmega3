@@ -6,43 +6,43 @@
     "message": "Proxy SwitchyOmega"
   },
   "manifest_app_description": {
-    "message": "Manage and switch between multiple proxies quickly & easily."
+    "message": "Gérez et alternez entre plusieurs serveurs proxy rapidement et facilement."
   },
   "manifest_icon_default_title": {
-    "message": "Loading…"
+    "message": "Chargement…"
   },
   "upgrade_profile_auto": {
-    "message": "Auto Switch"
+    "message": "Automatique"
   },
   "profile_direct": {
     "message": "[Direct]"
   },
   "profile_system": {
-    "message": "[System Proxy]"
+    "message": "[Proxy du système]"
   },
   "condition_HostWildcardCondition": {
-    "message": "Host wildcard"
+    "message": "Hôtes (wildcard)"
   },
   "condition_help_HostWildcardCondition": {
-    "message": "Matches hosts (domain names) by wildcard.<br><b>The asterisk <code>*</code></b> matches zero or more characters.<br><b>The question mark <code>?</code></b> matches exactly one character.<br><br>Note that rules beginning with <code>*.</code> are specially treated only in Host wildcard conditions.<br>Example: <code>*.example.com</code> will match www.example.com <b>AND example.com as well.</b><br>To match subdomains <b>only</b>, use <b>two</b> asterisks like <code>**.example.com</code>."
+    "message": "Correspondance des hôtes (noms de domaines) par joker.<br><b>L’astérisque <code>*</code></b> correspond à zéro ou plusieurs caractères.<br><b>Le point d'interrogation <code>?</code></b> correspond à exactement un caractère.<br><br>Les règles de correspondance qui commencent par <code>*.</code> ont un fonctionnement différent, uniquement avec les règles d'hôtes génériques.<br>Exemple : <code>*.example.com</code> correspond à www.example.com <b>ET aussi à example.com.</b><br>Pour ne faire correspondre <b>que</b> les sous-domaines, utilisez <b>deux</b> astérisques : <code>**.example.com</code>."
   },
   "condition_HostRegexCondition": {
-    "message": "Host regex"
+    "message": "Hôte (RegExp)"
   },
   "condition_help_HostRegexCondition": {
-    "message": "Like Host wildcard condition, but matches hosts (domain names) by <a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>.<br>Regular expressions can be hard to construct (and read).<br>It is recommended to use wildcards for most cases and only use regex for conditions that cannot be achieved by any other condition type."
+    "message": "À la différence des règles d'hôtes génériques, une <a href='https://fr.wikipedia.org/wiki/Expression_r%C3%A9guli%C3%A8re'>expression rationnelle</a> est utilisée pour faire correspondre les hôtes (noms de domaines).<br>Les expressions rationnelles peuvent être compliquées à écrire (et à relire).<br>Il est conseillé d'utilisé les jokers dans le cas général, et de n'utiliser les expressions rationnelles que dans le cas où les autres types de correspondance ne peuvent être utilisés."
   },
   "condition_HostLevelsCondition": {
-    "message": "Host levels"
+    "message": "Niveaux d'hôte"
   },
   "condition_help_HostLevelsCondition": {
-    "message": "Matches the request if and only if the host level in within the given range.<br>Host level is defined as the <b>number of dot-separated segments</b> of the host (domain name).<br>Example: <code>www.example.com</code> is with a host level of 3, while <code>internal</code> is of host level 1."
+    "message": "Correspond à la demande si et seulement si le niveau de l'hôte est dans la plage donnée.<br>Le niveau d'hôte est défini comme le <b>nombre de segments séparés par un point</b> de l'hôte (nom de domaine).<br>Par exemple : <code>www.example.com</code> correspond à un niveau d'hôte de 3, alors que <code>internal</code> correspond à un niveau 1."
   },
   "condition_IpCondition": {
     "message": "IP Literals"
   },
   "condition_help_IpCondition": {
-    "message": "Matches the request if and only if the host is a <b>literal</b> IP address and in the subnet as specified by <a href='https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation'>CIDR notation</a>.<br>For example, given the rule <code>127.0.0.1/16</code>, it matches all IP addresses like <code>127.0.*.*</code>.<br>So <code>127.0.0.1</code> matches while <code>127.1.0.0</code> does not. Host names like <code>localhost</code> will never match because they are <b>not</b> IP literals."
+    "message": "Correspond à la demande si et seulement si l'hôte est une adresse IP <b>littérale</b> et est dans le sous-réseau, comme spécifié par la<a href='https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation'>notation CIDR</a>.<br>Par exemple, étant donné la règles <code>127.0.0.1/16</code>, cela correspond à toute adresse IP comme <code>127.0.*.*</code>.<br>Donc <code>127.0.0.1</code> correspond alors que ce n'est pa sle cas pour <code>127.1.0.0</code>. Les noms d'hôte comme <code>localhost</code> ne correspondront jamais parce qu'ils ne sont <b>pas</b> des IP littérales."
   },
   "condition_UrlWildcardCondition": {
     "message": "URL wildcard"
@@ -57,13 +57,13 @@
     "message": "Matches URL by extremely powerful <a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>.<br>However, regular expressions can be hard to construct (and read).<br>It is recommended to use wildcards for most cases and only use regex for conditions that cannot be achieved by any other condition type."
   },
   "condition_KeywordCondition": {
-    "message": "Keyword"
+    "message": "Mot-clé"
   },
   "condition_help_KeywordCondition": {
     "message": "A keyword condition matches if the URL protocol is HTTP, and the pattern is an exact sub-string of the URL.<br>It behaves like the URL wildcard pattern <code>http://*<b>pattern</b>*</code>, where <b>pattern</b> is the keyword pattern.<br>Keyword conditions are useful if you want to bypass a firewall blocking some keywords in the URL, by requesting such URLs through a proxy."
   },
   "condition_FalseCondition": {
-    "message": "(Disabled)"
+    "message": "(Désactivé)"
   },
   "condition_details_FalseCondition": {
     "message": "(Condition ignored when matching)"
@@ -72,13 +72,13 @@
     "message": "You can disable a condition by setting its type to <code>(Disabled)</code>. A Disabled condition act as if it does not exist.<br>This feature can be used to disable conditions temporarily.<br>Disabled conditions still hold the previous information (like patterns) and can be re-enabled by setting the condition type back to the previous type."
   },
   "condition_TimeCondition": {
-    "message": "Current Time"
+    "message": "Heure actuelle"
   },
   "condition_help_TimeCondition": {
     "message": "Matches if the current local time is in the range defined by <b>starting hour</b> and <b>ending hour</b>, both inclusive.<br>Local time, starting hour and ending hour are all calculated in <b>24-hour</b> format (from <b>0 to 23</b>). <br>The calculation happens roughly at the moment when the request is sent."
   },
   "condition_WeekdayCondition": {
-    "message": "Day of the Week"
+    "message": "Jour de la semaine"
   },
   "condition_help_WeekdayCondition": {
     "message": "Matches if the <b>current day of week</b> is selected in condition details. Day is calculated according to local timezone.<br>The request and its URL don't matter to this condition. The result is solely based on the day of the week when the request is sent."
@@ -99,7 +99,7 @@
     "message": "Url"
   },
   "condition_group_special": {
-    "message": "Special"
+    "message": "Spécial"
   },
   "ruleListFormat_Switchy": {
     "message": "Switchy"
@@ -249,7 +249,7 @@
     "message": "Show advanced condition types"
   },
   "options_showConditionTypesAdvancedHelp": {
-    "message": "Unlocks new types of advanced but complicated switch conditions. For most scenarios, the basic condition types should be enough, so this option is not recommended."
+    "message": "Permet l'usage de nouvaux types de conditions complexes. Pour la plupart des scénarios, les conditions de base devraient être suffisantes. Cette option n'est donc pas recommandée."
   },
   "options_quickSwitch": {
     "message": "Quick Switch"
@@ -1212,10 +1212,10 @@
     "message": "Enable Quick Switch"
   },
   "about_title": {
-    "message": "About"
+    "message": "À propos"
   },
   "about_app_description": {
-    "message": "A proxy configuration tool"
+    "message": "Un outil de configuration de mandataire"
   },
   "about_version": {
     "message": "Version $VERSION$",

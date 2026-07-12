@@ -1,0 +1,209 @@
+{
+  "appNameShort": {
+    "message": "SwitchyOmega"
+  },
+  "manifest_app_name": {
+    "message": "Proxy SwitchyOmega"
+  },
+  "manifest_app_description": {
+    "message": "Gira e troque entre vários proxies rápida e facilmente."
+  },
+  "manifest_icon_default_title": {
+    "message": "A carregar…"
+  },
+  "upgrade_profile_auto": {
+    "message": "Auto Troca"
+  },
+  "profile_direct": {
+    "message": "[Direto]"
+  },
+  "profile_system": {
+    "message": "[Proxy do Sistema]"
+  },
+  "condition_HostWildcardCondition": {
+    "message": "Host curinga"
+  },
+  "condition_help_HostWildcardCondition": {
+    "message": "Matches de hosts (domínios) por curinga.<br><b>O asterisco <code>*</code></b> match de zero ou mais caracteres.<br><b>O ponto de interrogação <code>?</code></b> match de exatamente um carácter.<br><br>Note que regras a começar com <code>*.</code> são especialmente tratadas apenas num host com condições curinga.<br>Exemplo: <code>*.exemplo.com</code> vai dar match em www.exemplo.com <b>E também exemplo.com.</b><br>Para <b>apenas</b> subdomínios , use <b>dois</b> asteriscos como: <code>**.exemplo.com</code>."
+  },
+  "condition_help_HostRegexCondition": {
+    "message": "Parecido com a condição curinga, mas dá matchs em hosts (nomes de domínios) por <a href='https://www.google.com.br/search?q=regular%20expression'>regular expression</a>.<br>As expressões regulares podem ser difíceis de construir (e ler).<br> É recomendado usar curingas para a maioria dos casos e usar regex apenas em condições que não pode ser conseguido em nenhum outro tipo de condição."
+  },
+  "condition_UrlWildcardCondition": {
+    "message": "URL wildcard"
+  },
+  "condition_UrlRegexCondition": {
+    "message": "URL regex"
+  },
+  "condition_KeywordCondition": {
+    "message": "Palavra chave"
+  },
+  "condition_FalseCondition": {
+    "message": "(Desativado)"
+  },
+  "condition_alert_fullUrlLimitationLink": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation"
+  },
+  "condition_group_default": {
+    "message": ""
+  },
+  "condition_group_host": {
+    "message": "Host"
+  },
+  "condition_group_url": {
+    "message": "Url"
+  },
+  "condition_group_special": {
+    "message": "Special"
+  },
+  "ruleList_usageUrl": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/RuleListUsage"
+  },
+  "dialog_ok": {
+    "message": "OK"
+  },
+  "options_title": {
+    "message": "SwitchyOmega Options"
+  },
+  "options_experimental_badge": {
+    "message": "α"
+  },
+  "options_navHeader_actions": {
+    "message": "Actions"
+  },
+  "options_tab_ui": {
+    "message": "Interface"
+  },
+  "options_tab_general": {
+    "message": "General"
+  },
+  "options_tab_importExport": {
+    "message": "Import/Export"
+  },
+  "options_reset": {
+    "message": "Reset options"
+  },
+  "options_menuShortcutConfigure": {
+    "message": "Configurar atalho"
+  },
+  "options_group_switchOptions": {
+    "message": "Opções de alteração"
+  },
+  "options_startupProfile": {
+    "message": "Perfil de inicialização"
+  },
+  "options_startupProfile_none": {
+    "message": "(Perfil atual)"
+  },
+  "options_showConditionTypesAdvancedHelp": {
+    "message": "Desbloqueia novos tipos de avançadas, porém complicadas, condições de mudança. Para a maioria dos cenários, as condições básicas devem ser suficientes, logo esta opção não é recomendada."
+  },
+  "options_downloadOptions": {
+    "message": "Opções des descarrega"
+  },
+  "options_downloadInterval_15": {
+    "message": "15 Minutes"
+  },
+  "options_restoreOnlinePlaceholder": {
+    "message": "Options file URL (e.g. 'http://example.com/switchy.bak')"
+  },
+  "options_deleteProfile": {
+    "message": "Delete"
+  },
+  "options_profileEditSourceHelpUrl": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/SwitchyOmega-conditions-format#result-profile"
+  },
+  "options_group_proxyServers": {
+    "message": "Proxy servers"
+  },
+  "options_proxy_protocol": {
+    "message": "Protocol"
+  },
+  "options_proxy_server": {
+    "message": "Server"
+  },
+  "options_proxy_port": {
+    "message": "Port"
+  },
+  "options_proxy_auth": {
+    "message": "Authentication"
+  },
+  "options_scheme_default": {
+    "message": "(default)"
+  },
+  "options_protocol_direct": {
+    "message": "DIRECT"
+  },
+  "options_group_pacUrl": {
+    "message": "PAC URL"
+  },
+  "options_conditionActions": {
+    "message": "Actions"
+  },
+  "options_ruleNote": {
+    "message": "Note"
+  },
+  "options_switchDefaultProfile": {
+    "message": "Default"
+  },
+  "options_weekDayShort_0": {
+    "message": "Su"
+  },
+  "options_weekDayShort_1": {
+    "message": "Mo"
+  },
+  "options_weekDayShort_2": {
+    "message": "Tu"
+  },
+  "options_weekDayShort_3": {
+    "message": "We"
+  },
+  "options_weekDayShort_4": {
+    "message": "Th"
+  },
+  "options_weekDayShort_5": {
+    "message": "Fr"
+  },
+  "options_weekDayShort_6": {
+    "message": "Sa"
+  },
+  "options_guideNext": {
+    "message": "Next"
+  },
+  "options_modalHeader_proxyAuth": {
+    "message": "Proxy Authentication"
+  },
+  "options_proxyAuthPassword": {
+    "message": "Password"
+  },
+  "options_proxyAuthNone": {
+    "message": "No Authentication"
+  },
+  "options_deleteRule": {
+    "message": "Delete"
+  },
+  "options_modalHeader_resetOptions": {
+    "message": "Reset Options"
+  },
+  "options_resetSuccess": {
+    "message": "Options reset."
+  },
+  "popup_showOptions": {
+    "message": "Options"
+  },
+  "browserAction_defaultRuleDetails": {
+    "message": "(default)"
+  },
+  "browserAction_directResult": {
+    "message": "DIRECT"
+  },
+  "browserAction_attachedPrefix": {
+    "message": "(RL) "
+  },
+  "browserAction_tempRulePrefix": {
+    "message": "(TEMP) "
+  },
+  "about_license": {
+    "message": "SwitchyOmega é um <a href='https://www.gnu.org/philosophy/free-sw.en.html'>software gratuito</a> licenciado sob <a href='https://www.gnu.org/licenses/gpl.html'>Licença Pública Geral GNU</a> Versão 3 ou posterior."
+  }
+}

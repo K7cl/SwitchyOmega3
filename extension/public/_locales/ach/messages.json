@@ -249,7 +249,7 @@
     "message": "Show advanced condition types"
   },
   "options_showConditionTypesAdvancedHelp": {
-    "message": "Unlocks new types of advanced but complicated switch conditions. For most scenarios, the basic condition types should be enough, so this option is not recommended."
+    "message": "Unlocks new types of advanced but complicated switch conditions. For most senarios, the basic condition types should be enough, so this option is not recommended."
   },
   "options_quickSwitch": {
     "message": "Quick Switch"

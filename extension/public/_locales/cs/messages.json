@@ -3,40 +3,40 @@
     "message": "SwitchyOmega"
   },
   "manifest_app_name": {
-    "message": "Proxy SwitchyOmega"
+    "message": "Proxy přepínač SwitchyOmega"
   },
   "manifest_app_description": {
-    "message": "Manage and switch between multiple proxies quickly & easily."
+    "message": "Správa a přepínání mezi více proxy servery ."
   },
   "manifest_icon_default_title": {
-    "message": "Loading…"
+    "message": "Načítám…"
   },
   "upgrade_profile_auto": {
-    "message": "Auto Switch"
+    "message": "Automatický přepínač"
   },
   "profile_direct": {
-    "message": "[Direct]"
+    "message": "[Přímé připojení]"
   },
   "profile_system": {
-    "message": "[System Proxy]"
+    "message": "[Systémová Proxy]"
   },
   "condition_HostWildcardCondition": {
     "message": "Host wildcard"
   },
   "condition_help_HostWildcardCondition": {
-    "message": "Matches hosts (domain names) by wildcard.<br><b>The asterisk <code>*</code></b> matches zero or more characters.<br><b>The question mark <code>?</code></b> matches exactly one character.<br><br>Note that rules beginning with <code>*.</code> are specially treated only in Host wildcard conditions.<br>Example: <code>*.example.com</code> will match www.example.com <b>AND example.com as well.</b><br>To match subdomains <b>only</b>, use <b>two</b> asterisks like <code>**.example.com</code>."
+    "message": "Zápasy hostitelé (názvy domén) od zástupný znak.<br><b>Hvězdičky <code>*</code></b> odpovídá žádnému nebo více znakům.<br><b>Otazník <code>?</code></b> odpovídá právě jeden znak.<br><br>Poznámka, že pravidla s <code>*.</code> jsou speciálně ošetřeny pouze v podmínkách hostitele zástupné. <br>Příklad: <code>*. priklad.cz</code> bude odpovídat www.example.com <b>a example.com stejně.</b><br>Subdomény <b>pouze</b> zápas, použijte <b>dvě</b> hvězdičky jako <code>**. example.com</code>."
   },
   "condition_HostRegexCondition": {
-    "message": "Host regex"
+    "message": "Regulární výraz host"
   },
   "condition_help_HostRegexCondition": {
-    "message": "Like Host wildcard condition, but matches hosts (domain names) by <a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>.<br>Regular expressions can be hard to construct (and read).<br>It is recommended to use wildcards for most cases and only use regex for conditions that cannot be achieved by any other condition type."
+    "message": "Jako hostitele zástupné stav, ale zápasy hostí (názvy domén) <a href='https://www.google.com/search?q=regular%20expression'> regulární</a> výraz.<br>Regulární výrazy mohou být těžké sestavit (a číst).<br>Se doporučuje použít zástupné znaky pro většinu případů a pouze používat regex pro podmínky, které nelze dosáhnout jiným typ podmínky."
   },
   "condition_HostLevelsCondition": {
-    "message": "Host levels"
+    "message": "Host úrovně"
   },
   "condition_help_HostLevelsCondition": {
-    "message": "Matches the request if and only if the host level in within the given range.<br>Host level is defined as the <b>number of dot-separated segments</b> of the host (domain name).<br>Example: <code>www.example.com</code> is with a host level of 3, while <code>internal</code> is of host level 1."
+    "message": "Odpovídá žádosti pokud úroveň hostitele v v daném rozsahu.Úroveň hostitele <br>je definována jako <b>počet segmentů oddělených tečkou</b> hostitele (název domény).<br>Příklad: <code>www.example.com</code> je na úrovni hostitele 3, zatímco <code>vnitřní</code> hostitele úrovně 1."
   },
   "condition_IpCondition": {
     "message": "IP Literals"
@@ -48,37 +48,37 @@
     "message": "URL wildcard"
   },
   "condition_help_UrlWildcardCondition": {
-    "message": "Matches URLs of the request by wildcard.<br>See the Host wildcard section above for a quick wildcard reference.<br>Note that URL wildcards are not specially treated (no subdomain magic as in Host wildcard).<br>So <code>*://*.example.com/*</code> matches http://www.example.com/ but <b>does not</b> match http://example.com/."
+    "message": "Odpovídá URL požadavku pomocí zástupných znaků.<br>Viz hostitele zástupné sekce výše pro rychlé zástupných.<br>Všimněte si, že URL zástupné znaky nejsou speciálně ošetřené (bez subdomény magic jako v hostitele zástupné).<br>Tak <code>*://*.example.com/*</code> zápasy http://www.example.com/ ale <b>není</b> odpovídat http://example.com/."
   },
   "condition_UrlRegexCondition": {
-    "message": "URL regex"
+    "message": "URL regulární výraz"
   },
   "condition_help_UrlRegexCondition": {
-    "message": "Matches URL by extremely powerful <a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>.<br>However, regular expressions can be hard to construct (and read).<br>It is recommended to use wildcards for most cases and only use regex for conditions that cannot be achieved by any other condition type."
+    "message": "Adresa URL odpovídá mimořádně mocné <a href='https://www.google.com/search?q=regular%20expression'> regulární výraz</a>.<br>Však může být obtížné sestavit (a číst) regulární výrazy.<br>Se doporučuje použít zástupné znaky pro většinu případů a pouze používat regex pro podmínky, které nelze dosáhnout jiným typ podmínky."
   },
   "condition_KeywordCondition": {
-    "message": "Keyword"
+    "message": "Klíčové slovo"
   },
   "condition_help_KeywordCondition": {
-    "message": "A keyword condition matches if the URL protocol is HTTP, and the pattern is an exact sub-string of the URL.<br>It behaves like the URL wildcard pattern <code>http://*<b>pattern</b>*</code>, where <b>pattern</b> is the keyword pattern.<br>Keyword conditions are useful if you want to bypass a firewall blocking some keywords in the URL, by requesting such URLs through a proxy."
+    "message": "Klíčové slovo stav odpovídá, pokud je adresa URL protokol HTTP a vzorek je přesný dílčí řetězec adresy URL.<br>Se chová jako maska zástupných znaků adresy URL <code>http://* <b>vzor</b> *</code>, kde <b>vzorek</b> je vzorek klíčové slovo.<br>Klíčové podmínky jsou užitečné, pokud chcete obejít firewall blokuje některá klíčová slova v URL, vyžádáním takových URL prostřednictvím serveru proxy."
   },
   "condition_FalseCondition": {
-    "message": "(Disabled)"
+    "message": "(Vypnuto)"
   },
   "condition_details_FalseCondition": {
-    "message": "(Condition ignored when matching)"
+    "message": "(Podmínky ignorovány při porovnání)"
   },
   "condition_help_FalseCondition": {
-    "message": "You can disable a condition by setting its type to <code>(Disabled)</code>. A Disabled condition act as if it does not exist.<br>This feature can be used to disable conditions temporarily.<br>Disabled conditions still hold the previous information (like patterns) and can be re-enabled by setting the condition type back to the previous type."
+    "message": "Podmínku můžete zakázat nastavením jeho typ <code>(</code> zakázáno). Stav zakázáno chovat, jako by již neexistuje.<br>Tuto funkci lze použít k zakázání podmínky dočasně.<br>Zakázáno podmínky stále drží předchozí informace (např modely) a lze znovu povolit nastavením podmínky typ zpět do předchozího typu."
   },
   "condition_TimeCondition": {
-    "message": "Current Time"
+    "message": "Aktuální čas"
   },
   "condition_help_TimeCondition": {
     "message": "Matches if the current local time is in the range defined by <b>starting hour</b> and <b>ending hour</b>, both inclusive.<br>Local time, starting hour and ending hour are all calculated in <b>24-hour</b> format (from <b>0 to 23</b>). <br>The calculation happens roughly at the moment when the request is sent."
   },
   "condition_WeekdayCondition": {
-    "message": "Day of the Week"
+    "message": "Den v týdnu"
   },
   "condition_help_WeekdayCondition": {
     "message": "Matches if the <b>current day of week</b> is selected in condition details. Day is calculated according to local timezone.<br>The request and its URL don't matter to this condition. The result is solely based on the day of the week when the request is sent."
@@ -99,22 +99,22 @@
     "message": "Url"
   },
   "condition_group_special": {
-    "message": "Special"
+    "message": "Speciální"
   },
   "ruleListFormat_Switchy": {
-    "message": "Switchy"
+    "message": "Přepínač"
   },
   "ruleListFormat_AutoProxy": {
-    "message": "AutoProxy"
+    "message": "Automatická Proxy"
   },
   "ruleList_usageUrl": {
     "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/RuleListUsage"
   },
   "ruleList_error_resultNotEnabled": {
-    "message": "Missing '@with result' directive!"
+    "message": "Schází '@s výsledkem' directive!"
   },
   "ruleList_error_unknownProfile": {
-    "message": "Unknown profile: $PROFILE$",
+    "message": "Neznámý profil: $PROFILE$",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -125,7 +125,7 @@
     }
   },
   "ruleList_error_missingResultProfile": {
-    "message": "Missing result profile name at Line $LNO$: $SOURCE$",
+    "message": "Schází výsledný profil na řádce $LNO$: $SOURCE$",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -139,7 +139,7 @@
     }
   },
   "ruleList_error_invalidRule": {
-    "message": "Invalid rule at Line $LNO$: $SOURCE$",
+    "message": "Nesprávná podmínka na řádku $LNO$: $SOURCE$",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -153,127 +153,127 @@
     }
   },
   "ruleList_error_noDefaultRule": {
-    "message": "Missing default rule with catch-all '*' condition!"
+    "message": "Chybí výchozí pravidlo s catch-all '*' podmínkou!"
   },
   "dialog_close": {
-    "message": "Close"
+    "message": "Zavřít"
   },
   "dialog_save": {
-    "message": "Save changes"
+    "message": "Uložit změny"
   },
   "dialog_ok": {
     "message": "OK"
   },
   "dialog_cancel": {
-    "message": "Cancel"
+    "message": "Storno"
   },
   "inputClear_clear": {
-    "message": "Clear"
+    "message": "Vymazat"
   },
   "inputClear_restore": {
-    "message": "Restore"
+    "message": "Obnovit"
   },
   "options_title": {
-    "message": "SwitchyOmega Options"
+    "message": "SwitchyOmega Nastavení"
   },
   "options_experimental_badge": {
     "message": "α"
   },
   "options_navHeader_setting": {
-    "message": "Settings"
+    "message": "Nastavení"
   },
   "options_navHeader_profiles": {
-    "message": "Profiles"
+    "message": "Profily"
   },
   "options_navHeader_actions": {
-    "message": "Actions"
+    "message": "Akce"
   },
   "options_tab_ui": {
-    "message": "Interface"
+    "message": "Rozhraní"
   },
   "options_tab_general": {
-    "message": "General"
+    "message": "Obecné"
   },
   "options_tab_importExport": {
     "message": "Import/Export"
   },
   "options_newProfile": {
-    "message": "New profile…"
+    "message": "Nový profil…"
   },
   "options_apply": {
-    "message": "Apply changes"
+    "message": "Použít změny"
   },
   "options_discard": {
-    "message": "Discard changes"
+    "message": "Zahodit změny"
   },
   "options_reset": {
-    "message": "Reset options"
+    "message": "Obnovit nastavení"
   },
   "options_group_miscOptions": {
-    "message": "Misc Options"
+    "message": "Ostatní nastavení"
   },
   "options_confirmDeletion": {
-    "message": "Confirm on condition deletion."
+    "message": "Potvrdit smazání podmínky."
   },
   "options_refreshOnProfileChange": {
-    "message": "Refresh current tab on profile change."
+    "message": "Obnovit aktuální záložku při změnu profilu."
   },
   "options_showInspectMenu": {
-    "message": "Allow inspecting proxy used for page elements via context menu."
+    "message": "Povolit kontrolu proxy pro prvky stránky přes kontextové menu."
   },
   "options_addConditionsToBottom": {
     "message": "Put new conditions added using the popup to the bottom of the list."
   },
   "options_group_keyboardShortcut": {
-    "message": "Keyboard Shortcut"
+    "message": "Klávesové zkratky"
   },
   "options_menuShortcutHelp": {
-    "message": "Pressing the shortcut will open the switch popup menu. (Defaults to Alt+Shift+O)."
+    "message": "Stisknutím zástupce aktivujete místní nabídku.  (Výchozí Alt+Shift+O)."
   },
   "options_menuShortcutMore": {
-    "message": "The items in the popup menu can also be accessed using the keyboard. Press ? (or /) in the menu to learn more."
+    "message": "Položky v kontextovém menu jsou také přistupné pomocí klávesnice. Stisknutím ? (nebo /)  v menu se dozvíte více."
   },
   "options_menuShortcutConfigure": {
-    "message": "Configure shortcut"
+    "message": "Konfigurovat zástupce"
   },
   "options_group_switchOptions": {
-    "message": "Switch Options"
+    "message": "Nastavení přepínání"
   },
   "options_startupProfile": {
-    "message": "Startup Profile"
+    "message": "Profil při spuštění"
   },
   "options_startupProfile_none": {
-    "message": "(Current profile)"
+    "message": "(Aktuální profil)"
   },
   "options_showConditionTypesAdvanced": {
-    "message": "Show advanced condition types"
+    "message": "Zobrazit pokročilé typy podmínek"
   },
   "options_showConditionTypesAdvancedHelp": {
-    "message": "Unlocks new types of advanced but complicated switch conditions. For most scenarios, the basic condition types should be enough, so this option is not recommended."
+    "message": "Odemknout nové typy pokročilých, ale komplikovaných přepínačů. Pro běžnou práci stačí základní nastavení, proto se tato možnost nedoporučuje."
   },
   "options_quickSwitch": {
-    "message": "Quick Switch"
+    "message": "Rychlé přepínání"
   },
   "options_cycledProfiles": {
-    "message": "Cycled Profiles"
+    "message": "Opakované profily"
   },
   "options_cycledProfilesHelp": {
-    "message": "When you click on the icon (or use the shortcut above), the following profiles will be applied in their order."
+    "message": "Pokud kliknete na ikonu (nebo použijte klávesovou zkratku), následující profily budou řazeny dle jejich pořadí."
   },
   "options_cycledProfilesTooFew": {
-    "message": "You need to select at least 2 profiles to enable this function! You can drag them from the box below."
+    "message": "Pro tuto funkci musíte vybrat alespoň 2 profily! Můžete je přetáhnout z níže uvedeného pole."
   },
   "options_notCycledProfiles": {
-    "message": "Not Cycled Profiles"
+    "message": "Ne-opakované profily"
   },
   "options_group_proxyChanges": {
-    "message": "Proxy Changes"
+    "message": "Změny proxy"
   },
   "options_revertProxyChanges": {
-    "message": "Revert proxy changes done by other apps."
+    "message": "Reverzní proxy změněné jinou aplikací."
   },
   "options_group_conflicts": {
-    "message": "Conflicts"
+    "message": "Konflikty"
   },
   "options_conflicts_introduction": {
     "message": "Sometimes, other apps will also try to control the proxy settings, resulting in conflicts. Note that ad blockers and other extensions may also use proxy settings under the hood. Such conflicts cannot be avoided due to how the browser works."
@@ -310,145 +310,145 @@
     }
   },
   "options_group_networkRequests": {
-    "message": "Network Requests"
+    "message": "Síťové požadavky"
   },
   "options_monitorWebRequests": {
-    "message": "Show count of failed web requests for resources in the current tab."
+    "message": "Zobrazit počet neúspěšných webových žádostí o prostředky na aktuální kartě."
   },
   "options_monitorWebRequestsHelp": {
-    "message": "A yellow badge will be displayed on the icon if some resources fail to load,<br>and you can set the profile for such resources conveniently via the popup menu."
+    "message": "Žlutý odznak se zobrazí na ikoně Pokud některé zdroje selhání načtení, <br>a můžete nastavit profil pro tyto zdroje přes místní nabídku."
   },
   "options_downloadOptions": {
-    "message": "Download Options"
+    "message": "Nastavení stahování"
   },
   "options_downloadOptionsHelp": {
-    "message": "Configure the update frequency of online rule lists and PAC scripts."
+    "message": "Konfigurace četnosti aktualizace online pravidla seznamů a PAC skriptů."
   },
   "options_downloadInterval": {
-    "message": "Download Interval"
+    "message": "Interval stahování"
   },
   "options_downloadInterval_15": {
-    "message": "15 Minutes"
+    "message": "15 minut"
   },
   "options_downloadInterval_60": {
-    "message": "1 Hour"
+    "message": "1 Hodina"
   },
   "options_downloadInterval_180": {
-    "message": "3 Hours"
+    "message": "3 Hodiny"
   },
   "options_downloadInterval_360": {
-    "message": "6 Hours"
+    "message": "6 Hodin"
   },
   "options_downloadInterval_720": {
-    "message": "12 Hours"
+    "message": "12 Hodin"
   },
   "options_downloadInterval_1440": {
-    "message": "Every day"
+    "message": "Každý den"
   },
   "options_downloadInterval_never": {
-    "message": "Never"
+    "message": "Nikdy"
   },
   "options_group_importExportProfile": {
-    "message": "Profile"
+    "message": "Profil"
   },
   "options_exportPacFile": {
-    "message": "Export as PAC File"
+    "message": "Exportovat jako PAC soubor"
   },
   "options_exportPacFileHelp": {
-    "message": "Export the current profile as a PAC file, so you can use it in other browsers."
+    "message": "Exportujte aktuální profil jako soubor PAC, takže můžete použít v jiných prohlížečích."
   },
   "options_exportProfileHelp": {
-    "message": "To export a profile, use the top-right action bar on the profile page."
+    "message": "Chcete-li exportovat profil, pomocí panelu Akce shora zprava na stránce profil."
   },
   "options_exportLegacyRuleList": {
-    "message": "Export rule lists using Proxy Switchy!/SwitchyPlus/SwitchySharp compatible format when possible."
+    "message": "Exportovat pravidla seznamy pomocí Proxy Switchy!/SwitchyPlus/SwitchySharp kompatibilní formát pokud je to možné."
   },
   "options_exportLegacyRuleListHelp": {
-    "message": "Enable this option only if you publish rule lists for users of those projects.<br>Please consider advising your audience to upgrade to SwitchyOmega for the improvements."
+    "message": "Tuto možnost použijte, pouze v případě, že publikujete pravidlo seznamy pro uživatele těchto projektů.<br>Prosím zvažte aktualizovat na  SwitchyOmega pro zlepšení."
   },
   "options_group_importExportSettings": {
-    "message": "Settings"
+    "message": "Nastavení"
   },
   "options_makeBackup": {
-    "message": "Make backup"
+    "message": "Provést zálohu"
   },
   "options_makeBackupHelp": {
-    "message": "Make a full backup of your options (including profiles and all other options)."
+    "message": "Provést plnou záloho Vašeho nastavení (obsahuje profily a veškeré další nastavení)."
   },
   "options_restoreLocal": {
-    "message": "Restore from file"
+    "message": "Obnovit ze souboru"
   },
   "options_restoreLocalHelp": {
-    "message": "Restore your SwitchyOmega options from a local file."
+    "message": "Obnovit Vaše SwitchyOmega nastavení z lokálního souboru."
   },
   "options_restoreOnline": {
-    "message": "Restore from online"
+    "message": "Obnovit z online"
   },
   "options_restoreOnlinePlaceholder": {
-    "message": "Options file URL (e.g. 'http://example.com/switchy.bak')"
+    "message": "URL souboru nastavení (e.g. 'http://example.com/switchy.bak')"
   },
   "options_restoreOnlineSubmit": {
-    "message": "Restore"
+    "message": "Obnovit"
   },
   "options_group_syncing": {
-    "message": "Syncing (Experimental)"
+    "message": "Synchronizace (Experimentální)"
   },
   "options_syncEnable": {
-    "message": "Enable Syncing"
+    "message": "Povolit synchronizaci"
   },
   "options_syncEnableForce": {
-    "message": "Download from Syncing"
+    "message": "Stáhnout ze synchronizace"
   },
   "options_syncDisable": {
-    "message": "Disable syncing"
+    "message": "Zrušit synchronizaci"
   },
   "options_syncReset": {
-    "message": "Clear remote copy"
+    "message": "Odstranit vzdálenou kopii"
   },
   "options_syncPristineHelp": {
-    "message": "You can now automatically synchronize your settings and profiles across all your desktop devices running Chrome browser."
+    "message": "Vy můžete nyní automaticky synchronizovat Vaše nastavení, profily napříč všemi desktop spuštěnými Chrome prohlížeči."
   },
   "options_syncSyncAlert": {
-    "message": "Your options are automatically synchronized with your other devices."
+    "message": "Vaše nastavení jsou automaticky synchronizování s dalšími zařízeními."
   },
   "options_syncSyncHelp": {
-    "message": "Please note that you must sign in to Chrome on each of your devices (including this one) for the syncing to actually work. <br> You may check this section on other devices to ensure that it is working."
+    "message": "Vezměte prosím na vědomí, že musíte se přihlásit k Chrome na každém zařízení (včetně této) pro synchronizaci skutečně pracovat. <br>Můžete zkontrolovat tuto sekci na jiných zařízeních, aby bylo zajištěno, že to funguje."
   },
   "options_syncConflictAlert": {
-    "message": "You have uploaded a copy of your options on another device via syncing."
+    "message": "Načetli jste kopii svých nastavení/možností na jiném zařízení prostřednictvím synchronizace."
   },
   "options_syncConflictHelp": {
-    "message": "You may download the remote copy to your device if you like. <br>However, doing so would <b>overwrite your existing settings and profiles</b> on this device."
+    "message": "Pokud budete chtít můžete stáhnout vzdálenou kopii do zařízení. <br>To tak by však <b>přepsat stávající nastavení a profily</b> v tomto zařízení."
   },
   "options_syncUnsupportedHelp": {
-    "message": "Options syncing is not supported on your platform or browser. For now, only Chrome browser on desktop is supported."
+    "message": "Možnosti synchronizace není podporována na platformě nebo prohlížeče. Pro tuto chvíli je podporován pouze prohlížeč Chrome na desktopu."
   },
   "options_profileSyncDisabled": {
-    "message": "Syncing is disabled for this profile."
+    "message": "Synchronizace je vypnutá pro tento profil."
   },
   "options_profileSyncDisabled_quotaPerItem": {
-    "message": "Syncing is disabled for this profile for using too much storage space."
+    "message": "Synchronizace je zakázána pro tento profil pro použití příliš mnoho úložného prostoru."
   },
   "options_profileTabPrefix": {
-    "message": "Profile :: "
+    "message": "Profil :: "
   },
   "options_renameProfile": {
-    "message": "Rename"
+    "message": "Přejmenovat"
   },
   "options_deleteProfile": {
-    "message": "Delete"
+    "message": "Smazat"
   },
   "options_profileExportRuleList": {
-    "message": "Publish rule list"
+    "message": "Publikovat tento seznam podmínek"
   },
   "options_profileExportRuleListHelp": {
-    "message": "Export Switch Rules as text format for publishing."
+    "message": "Exportovat podmínky jako prostý text pro publikování."
   },
   "options_profileExportPac": {
-    "message": "Export PAC"
+    "message": "Exportovat PAC"
   },
   "options_profileUnsupported": {
-    "message": "Unsupported profile type $TYPE$!",
+    "message": "Nepodporovaný profil typu $TYPE$!",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -459,25 +459,25 @@
     }
   },
   "options_profileUnsupportedHelp": {
-    "message": "The options could be broken, or from a newer version of this program."
+    "message": "Tato možnost může zlobit s novější verzí tohoto programu."
   },
   "options_profileEditSource": {
-    "message": "Edit source code"
+    "message": "Editovat zdrojový kód"
   },
   "options_profileEditSourceHelp": {
-    "message": "Show help about the source code format"
+    "message": "Zobraz nápovědu o formátování zdrojového kódu"
   },
   "options_profileEditSourceHelpUrl": {
     "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/SwitchyOmega-conditions-format#result-profile"
   },
   "options_group_proxyServers": {
-    "message": "Proxy servers"
+    "message": "Proxy servery"
   },
   "options_proxy_scheme": {
-    "message": "Scheme"
+    "message": "Schéma"
   },
   "options_proxy_protocol": {
-    "message": "Protocol"
+    "message": "Protokol"
   },
   "options_proxy_server": {
     "message": "Server"
@@ -486,7 +486,7 @@
     "message": "Port"
   },
   "options_proxy_auth": {
-    "message": "Authentication"
+    "message": "Ověřování"
   },
   "options_proxy_authNotSupported": {
     "message": "Your browser DOES NOT support $PROTOCOLDISP$ proxy authentication! Please do not report this issue to SwitchyOmega. Contact the support for your browser instead.",
@@ -500,58 +500,58 @@
     }
   },
   "options_proxy_authAllWarningPac": {
-    "message": "Warning: The username/password may be sent to unexpected servers returned by the PAC script."
+    "message": "Varování: Uživatelské jméno a heslo může být nečekané serverům zaslána vrácenou skriptem PAC."
   },
   "options_proxy_authAllWarningPacUrl": {
-    "message": "Please make sure that you trust the script provided via the URL above before entering sensitive credentials."
+    "message": "Ujistěte se prosím, důvěryhodných skriptů poskytované prostřednictvím adresy URL nad před vstupem do citlivých pověření."
   },
   "options_proxy_authAllWarningPacScript": {
-    "message": "Please make sure that you trust the script below before providing sensitive credentials."
+    "message": "Přesvědčte se, zda důvěřovat skript níže než poskytnutí citlivých pověření."
   },
   "options_proxy_authReferencedWarning": {
-    "message": "Additionally, using this profile in other profiles (e.g. Switch Profile) may cause the username/password to be sent to proxy servers configured in other profiles."
+    "message": "Navíc použití tohoto profilu v jiných profilech (např. profil Switch) může způsobit uživatelské jméno a heslo k odeslání k serverům proxy, které jsou nakonfigurovány v jiných profilech."
   },
   "options_scheme_default": {
-    "message": "(default)"
+    "message": "(výchozí)"
   },
   "options_protocol_direct": {
-    "message": "DIRECT"
+    "message": "PŘÍMÉ"
   },
   "options_protocol_useDefault": {
-    "message": "(use default)"
+    "message": "(použít výchozí)"
   },
   "options_proxy_single": {
-    "message": "Use the proxy above for all protocols."
+    "message": "Používejte proxy výše pro všechny protokoly."
   },
   "options_proxy_expand": {
-    "message": "Show Advanced"
+    "message": "Zobraz pokročilé"
   },
   "options_group_bypassList": {
-    "message": "Bypass List"
+    "message": "Seznam vynechaných serverů"
   },
   "options_bypassListHelp": {
-    "message": "Servers for which you do not want to use any proxy: (One server on each line.)"
+    "message": "Servery, které chcete použít při  proxy: (jeden server na každém řádku.)"
   },
   "options_bypassListHelpLinkText": {
-    "message": "(Wildcards and more available…)"
+    "message": "(Wildcards and more available...)"
   },
   "options_group_pacUrl": {
     "message": "PAC URL"
   },
   "options_pacUrlHelp": {
-    "message": "The PAC script will be updated from this URL. If it is left blank, the following script will be used directly instead."
+    "message": "PAC skript bude aktualizován z této adresy URL. Pokud je ponechán prázdný, následující skript bude použit přímo."
   },
   "options_pacUrlFile": {
-    "message": "PAC profiles with file: URLs can only be applied directly. They cannot be used as result profiles because local files cannot be accessed due to browser limitation."
+    "message": "PAC profily s souboru: adresy URL lze použít pouze přímo. Jejich nelze použít jako výsledek profily, protože místní soubory není přístupná z důvodu omezení prohlížeče."
   },
   "options_pacUrlFileDisabled": {
-    "message": "Therefore, you cannot use local PAC file for this profile. You can create a new PAC profile for that if you really want that."
+    "message": "Proto nelze použít místní soubor PAC pro tento profil. Pokud opravdu chcete, můžete vytvořit nový profil PAC."
   },
   "options_group_pacScript": {
-    "message": "PAC Script"
+    "message": "PAC Skript"
   },
   "options_pacScriptLastUpdate": {
-    "message": "PAC script downloaded at $TIME$:",
+    "message": "PAC skript stažený v $TIME$:",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -562,25 +562,25 @@
     }
   },
   "options_pacScriptObsolete": {
-    "message": "PAC script is obsolete due to URL change. Press the download button above to update."
+    "message": "PAC skript je zastaralá kvůli změně adresy URL. Stiskněte tlačítko Stáhnout výše k aktualizaci."
   },
   "options_group_virtualProfile": {
-    "message": "Virtual Profile"
+    "message": "Virtuální profil"
   },
   "options_virtualProfileTarget": {
-    "message": "Target"
+    "message": "Cíl"
   },
   "options_virtualProfileTargetHelp": {
-    "message": "When this profile is applied, it acts exactly the same as the profile selected below."
+    "message": "Při použití tohoto profilu, funguje stejně jako profilu vybraný níže."
   },
   "options_group_virtualProfileReplace": {
-    "message": "Migrate to Virtual Profile"
+    "message": "Migrovat do virtuálního profilu"
   },
   "options_virtualProfileReplace": {
-    "message": "Replace target profile"
+    "message": "Nahradit cílový profil"
   },
   "options_virtualProfileReplaceHelp": {
-    "message": "You can migrate existing options to use this virtual profile instead of $PROFILE$. Doing so will update all existing rules concerning $PROFILE$ and point them to this virtual profile, so that their result profile can be controlled here.",
+    "message": "Můžete migrovat existující možnosti používat tento virtuální profil namísto $PROFILE$. Tak bude aktualizovat všechny existující pravidla týkající se $PROFILE$ a nasměrovat do tohoto virtuálního profilu tak, aby jejich výsledek profil je možné ovládat zde.",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -591,31 +591,31 @@
     }
   },
   "options_group_ruleListConfig": {
-    "message": "Rule List Config"
+    "message": "Konfigurace seznamu pravidel"
   },
   "options_ruleListFormat": {
-    "message": "Rule List Format"
+    "message": "Formát seznamu podmínek"
   },
   "options_group_ruleListResult": {
-    "message": "Rule list result profiles"
+    "message": "Seznam pravidel výsledků profilů"
   },
   "options_ruleListMatchProfile": {
-    "message": "Match profile"
+    "message": "Porovnat profil"
   },
   "options_ruleListDefaultProfile": {
-    "message": "Default profile"
+    "message": "Výchozí profil"
   },
   "options_group_ruleListUrl": {
-    "message": "Rule List URL"
+    "message": "Adresa URL podmínek"
   },
   "options_ruleListUrlHelp": {
-    "message": "The rule list will be updated from this URL. If it is left blank, the following text will be parsed instead."
+    "message": "Seznam pravidel bude aktualizován z této adresy URL. Pokud je ponechán prázdný, bude následující text analyzován."
   },
   "options_group_ruleListText": {
-    "message": "Rule List Text"
+    "message": "Text seznamu pravidel"
   },
   "options_ruleListLastUpdate": {
-    "message": "Rule list downloaded at $TIME$:",
+    "message": "Seznam pravidel stažen $TIME$:",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -626,52 +626,52 @@
     }
   },
   "options_ruleListObsolete": {
-    "message": "Rule list is obsolete due to URL change. Press the download button above to update."
+    "message": "Seznam pravidel je zastaralá kvůli změně adresy URL. Stiskněte tlačítko Stáhnout výše k aktualizaci."
   },
   "options_group_switchRules": {
-    "message": "Switch rules"
+    "message": "Přepínač pravidel"
   },
   "options_sort": {
-    "message": "Sort"
+    "message": "Řadit"
   },
   "options_conditionType": {
-    "message": "Condition Type"
+    "message": "Typ podmínek"
   },
   "options_showConditionTypeHelp": {
-    "message": "Show help"
+    "message": "Zobrazit nápovědu"
   },
   "options_conditionDetails": {
-    "message": "Condition Details"
+    "message": "Podrobnosti o podmínce"
   },
   "options_resultProfile": {
-    "message": "Profile"
+    "message": "Profil"
   },
   "options_conditionActions": {
-    "message": "Actions"
+    "message": "Akce"
   },
   "options_addCondition": {
-    "message": "Add condition"
+    "message": "Přidat podmínku"
   },
   "options_cloneRule": {
-    "message": "Clone"
+    "message": "Klonovat"
   },
   "options_ruleNote": {
     "message": "Note"
   },
   "options_switchAttachedProfileInCondition": {
-    "message": "Rule list rules"
+    "message": "Pravidlo seznamu pravidel"
   },
   "options_switchAttachedProfileInConditionDetails": {
-    "message": "(Any request matching the rule list below)"
+    "message": "(Každá žádost odpovídající pravidlo seznam níže)"
   },
   "options_switchAttachedProfileInConditionDisabled": {
-    "message": "(Rule list rules are DISABLED)"
+    "message": "(Seznam pravidel je ZAKÁZÁN)"
   },
   "options_switchDefaultProfile": {
-    "message": "Default"
+    "message": "Výchozí"
   },
   "options_hostLevelsBetween": {
-    "message": "≤ host levels ≤"
+    "message": "≤ host úrovně ≤"
   },
   "options_hourBetween": {
     "message": "≤ current hour ≤"
@@ -698,76 +698,76 @@
     "message": "Sa"
   },
   "options_group_conditionHelp": {
-    "message": "About Condition Types"
+    "message": "O typech podmínek"
   },
   "options_group_attachProfile": {
-    "message": "Import online rule lists"
+    "message": "Importovat seznamy online pravidla"
   },
   "options_attachProfile": {
-    "message": "Add a rule list"
+    "message": "Přidat seznam pravidel"
   },
   "options_attachProfileHelp": {
-    "message": "You can reuse an online collection of conditions published by others by adding a rule list."
+    "message": "Můžete použít on-line sbírku podmínek vydané ostatními a přidáním do seznamu pravidel."
   },
   "options_modalHeader_welcome": {
-    "message": "Welcome to SwitchyOmega"
+    "message": "Vítejte v SwitchyOmega"
   },
   "options_welcomeNormal": {
-    "message": "You have successfully installed SwitchyOmega, the ultimate proxy switcher."
+    "message": "Úspěšně jste nainstalovali SwitchyOmega, ultimate proxy přepínač."
   },
   "options_welcomeNormalGuide": {
-    "message": "Please tell SwitchyOmega about your proxies through the options page. Let's see how."
+    "message": "Prosím, řekněte SwitchyOmega o vaší proxy prostřednictvím stránky možnosti. Podívejme se, jak."
   },
   "options_welcomeUpgrade": {
-    "message": "You have successfully upgraded to SwitchyOmega. Don't panic, your existing options are fully preserved."
+    "message": "Úspěšně jste inovovali na SwitchyOmega. Buďte v klidu, vaše stávající možnosti jsou plně zachovány."
   },
   "options_welcomeUpgradeGuide": {
-    "message": "Now let's go through a quick guide of the new options page."
+    "message": "Teď pojďme projít stručného průvodce a nové možnosti stránky."
   },
   "options_guideNext": {
-    "message": "Next"
+    "message": "Další"
   },
   "options_guideDone": {
-    "message": "Done"
+    "message": "Hotovo"
   },
   "options_guideSkip": {
-    "message": "Skip guide"
+    "message": "Přeskočit průvodce"
   },
   "options_modalHeader_applyOptions": {
-    "message": "Apply Options"
+    "message": "Použít možnosti"
   },
   "options_optionsNotSaved": {
-    "message": "Your modifications to the options have not been saved and will be lost if you proceed!"
+    "message": "Vaše změny nebyly uloženy a budou ztracena, pokud budete pokračovat!"
   },
   "options_applyOptionsRequired": {
-    "message": "Your changes to the options must be applied before you proceed."
+    "message": "Než budete pokračovat, je třeba použít vaše změny možností."
   },
   "options_applyOptionsConfirm": {
-    "message": "Do you want to save and apply the options?"
+    "message": "Přejete si uložit a aplikovat nastavení?"
   },
   "options_modalHeader_renameProfile": {
-    "message": "Rename Profile"
+    "message": "Přejmenovat profil"
   },
   "options_renameProfileName": {
-    "message": "New profile name"
+    "message": "Název nového profilu"
   },
   "options_profileNameConflict": {
-    "message": "A profile with this name already exists."
+    "message": "Profil s tímto názvem již existuje."
   },
   "options_profileNameReserved": {
-    "message": "Profile names beginning with double-underscore are reserved."
+    "message": "Profil názvy začínající dvojité podtržítko, jsou vyhrazena."
   },
   "options_profileNameHidden": {
-    "message": "Profiles with names starting with underscore will be hidden on the popup menu. However, they can still be used in places like switch profile results."
+    "message": "Profily s názvy začínají podtržítkem skrytý v místní nabídce. Však stále používají se v místech, jako je přepnutí profilu výsledky."
   },
   "options_modalHeader_replaceProfile": {
-    "message": "Replace Profile"
+    "message": "Nahradit profil"
   },
   "options_replaceProfile": {
-    "message": "Replace Profile"
+    "message": "Nahradit profil"
   },
   "options_replaceProfileConfirm": {
-    "message": "Do you really want to replace $FromProfile$ with $ToProfile$?",
+    "message": "Opravdu chcete nahradit $FromProfile$ s $ToProfile$?",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -781,7 +781,7 @@
     }
   },
   "options_replaceProfileHelp": {
-    "message": "If you proceed, all rules pointing to $FromProfile$ will be updated to use $ToProfile$ instead. Other options, such as startup profile and Quick Switch will also be modified as appropriate. However, the two profile themselves will NOT be changed or deleted.",
+    "message": "Budete-li pokračovat, všechna pravidla, směřující na $FromProfile$ bude aktualizován tak, místo toho použít $ToProfile$. Další možnosti, například při spuštění profilu a rychlé přepínače budou také změněny podle potřeby. Však sami dva profil nebude být změněn nebo odstraněn.",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -795,37 +795,37 @@
     }
   },
   "options_replaceProfileSuccess": {
-    "message": "Options updated."
+    "message": "Nastavení aktualizováno."
   },
   "options_modalHeader_deleteProfile": {
-    "message": "Delete Profile"
+    "message": "Odstranit profil"
   },
   "options_deleteProfileConfirm": {
-    "message": "Do you really want to delete the following profile?"
+    "message": "Opravdu chcete odstranit tento profil?"
   },
   "options_modalHeader_cannotDeleteProfile": {
-    "message": "Unable to Delete Profile"
+    "message": "Nelze odstranit profil"
   },
   "options_profileReferredBy": {
-    "message": "This profile cannot be deleted because it is referred by the following profiles:"
+    "message": "Tento profil nelze odstranit, protože se označuje následující profily:"
   },
   "options_modifyReferringProfiles": {
-    "message": "You must modify these profiles and make them stop referring to this profile before you can delete it."
+    "message": "Je třeba upravit tyto profily a zastavit, odkazující k tomuto profilu předtím, než můžete odstranit."
   },
   "options_profileNameEmpty": {
-    "message": "The name of the profile must not be empty."
+    "message": "Název profilu nesmí být prázdný."
   },
   "popup_title": {
-    "message": "SwitchyOmega Popup"
+    "message": "SwitchyOmega Vyskakovací okno"
   },
   "options_modalHeader_proxyAuth": {
-    "message": "Proxy Authentication"
+    "message": "Ověřování proxy serveru"
   },
   "options_proxyAuthUsername": {
-    "message": "Username"
+    "message": "Uživatelské jméno"
   },
   "options_proxyAuthPassword": {
-    "message": "Password"
+    "message": "Heslo"
   },
   "options_proxyAuthShowPassword": {
     "message": "Show password"
@@ -834,37 +834,37 @@
     "message": "Hide password"
   },
   "options_proxyAuthNone": {
-    "message": "No Authentication"
+    "message": "Bez ověřování"
   },
   "options_modalHeader_deleteRule": {
-    "message": "Delete Rule"
+    "message": "Odstranit pravidlo"
   },
   "options_deleteRuleConfirm": {
-    "message": "Do you really want to delete the following rule?"
+    "message": "Opravdu chcete odstranit toto pravidlo?"
   },
   "options_deleteRule": {
-    "message": "Delete"
+    "message": "Odstranit"
   },
   "options_modalHeader_resetRules": {
-    "message": "Reset rules"
+    "message": "Obnovit pravidla"
   },
   "options_resetRulesConfirm": {
-    "message": "Are you sure to set the result profile of ALL rules to the following profile?"
+    "message": "Jste si jisti, nastavte profil výsledek všech pravidel pro tento profil?"
   },
   "options_resetRules": {
-    "message": "Reset rules"
+    "message": "Obnovit pravidla"
   },
   "options_resetRules_help": {
-    "message": "Set profile for all rules"
+    "message": "Nastavit profil pro všechna pravidla"
   },
   "options_modalHeader_deleteAttached": {
-    "message": "Remove Rule List"
+    "message": "Odstranit seznam pravidel"
   },
   "options_deleteAttachedConfirm": {
-    "message": "Do you really want to remove the rule list from the current profile?"
+    "message": "Opravdu chcete odstranit seznam pravidel z aktuálního profilu?"
   },
   "options_ruleListLineCount": {
-    "message": "$COUNT$ line(s) of rules",
+    "message": "$COUNT$ řádky pravidel",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -875,64 +875,64 @@
     }
   },
   "options_deleteAttached": {
-    "message": "Remove rule list"
+    "message": "Odstranit seznam pravidel"
   },
   "options_modalHeader_newProfile": {
-    "message": "New Profile"
+    "message": "Nový profil"
   },
   "options_newProfileName": {
-    "message": "Profile name"
+    "message": "Název profilu"
   },
   "options_profileType": {
-    "message": "Please select the type of the profile:"
+    "message": "Vyberte prosím typ profilu:"
   },
   "options_profileTypeFixedProfile": {
-    "message": "Proxy Profile"
+    "message": "Profil serveru proxy"
   },
   "options_profileDescFixedProfile": {
-    "message": "Tunneling traffic through proxy servers."
+    "message": "Tunelování provozu přes proxy servery."
   },
   "options_profileTypePacProfile": {
-    "message": "PAC Profile"
+    "message": "PAC Profil"
   },
   "options_profileDescPacProfile": {
-    "message": "Choosing proxies using an online/local PAC script."
+    "message": "Volba proxy pomocí skriptu PAC online nebo místní."
   },
   "options_profileDescMorePacProfile": {
-    "message": "You will only need this if you have a PAC script or a URL to it. Don't try to create one unless you have knowledge about PAC."
+    "message": "Budete potřebovat pouze to máte PAC skript nebo URL k němu. Nesnažte se vytvořit jeden, pokud nemáte znalosti o PAC."
   },
   "options_profileTypeSwitchProfile": {
-    "message": "Switch Profile"
+    "message": "Přepnout profil"
   },
   "options_profileDescSwitchProfile": {
-    "message": "Applying different profiles automatically on various conditions such as domains or patterns.\n You can also import rules published online for easier switching. (Replaces AutoSwitch mode + Rule List.)"
+    "message": "Použití různých profilů automaticky na různých podmínkách domén nebo vzory.\n Můžete také importovat pravidla zveřejněny online pro snadnější přepínání. (Nahrazuje automatické přepínání režimu + seznam pravidlo.)"
   },
   "options_profileTypeRuleListProfile": {
-    "message": "Rule List Profile"
+    "message": "Pravidla seznamu profilu"
   },
   "options_profileDescRuleListProfile": {
-    "message": "Reusing an online collection of conditions published by others."
+    "message": "Opětovné použití on-line sbírku podmínek vydané ostatní."
   },
   "options_profileTypeVirtualProfile": {
-    "message": "Virtual Profile"
+    "message": "Virtuální profil"
   },
   "options_profileDescVirtualProfile": {
-    "message": "A virtual profile can act as any of the other profiles on demand. It works well with SwitchProfile, allowing you to change the result of multiple conditions by one click."
+    "message": "Virtuální profil mohou působit jako kterýkoli z ostatních profilů na požádání. To funguje dobře s SwitchProfile, což umožňuje změnit výsledek více podmínek jedním kliknutím."
   },
   "options_createProfile": {
-    "message": "Create"
+    "message": "Vytvořit"
   },
   "options_modalHeader_resetOptions": {
-    "message": "Reset Options"
+    "message": "Obnovit nastavení"
   },
   "options_resetOptionsConfirm": {
-    "message": "Do you really want to reset the options? All profiles and settings will be LOST!"
+    "message": "Opravdu chcete obnovit možnosti? Všechny profily a nastavení bude ztraceno!"
   },
   "options_formInvalid": {
-    "message": "Please correct the errors in this page."
+    "message": "Opravte chyby na této stránce."
   },
   "options_profileNotFound": {
-    "message": "Profile $PROFILE$ does not exist! The options may be corrupted.",
+    "message": "Profil $PROFILE$ neexistuje! Nastavení může být špatné.",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -943,25 +943,25 @@
     }
   },
   "options_resetSuccess": {
-    "message": "Options reset."
+    "message": "Obnovit nastavení."
   },
   "options_saveSuccess": {
-    "message": "Options saved."
+    "message": "Nastavení uloženo."
   },
   "options_importSuccess": {
-    "message": "Options imported."
+    "message": "Nastavení importováno."
   },
   "options_importFormatError": {
-    "message": "Invalid backup file!"
+    "message": "Soubor ze zálohy je neplatný!"
   },
   "options_importDownloadError": {
-    "message": "Error downloading backup file!"
+    "message": "Chyba při stahování zálohovaného souboru!"
   },
   "options_profileDownloadSuccess": {
-    "message": "Successfully updated profile."
+    "message": "Profil byl úspěšně aktualizován."
   },
   "options_profileDownloadError": {
-    "message": "Error downloading profile data!"
+    "message": "Chyba při stahování dat profilu!"
   },
   "options_profileDownloadError_NetworkError": {
     "message": "A network error occurred when updating."
@@ -995,82 +995,82 @@
     "message": "The downloaded data is invalid! You may open the Profile URL in your browser to inspect it."
   },
   "options_downloadProfileNow": {
-    "message": "Download Profile Now"
+    "message": "Stáhnout profil"
   },
   "options_guide_fixedProfileStep": {
-    "message": "A <b>Proxy Profile</b> contains settings like server ip &amp; port for proxy.<br>Profiles are the the basic configuration units in SwitchyOmega.<br>We have already created an example profile for you. Try opening it."
+    "message": "<b>Proxy profil</b> obsahuje nastavení jako server ip a port serveru proxy.<br>Profily jsou základní konfiguraci jednotky v SwitchyOmega.<br>Jsme již vytvořili příklad profil pro vás. Pokuste se jej otevřít."
   },
   "options_guide_fixedServersStep": {
-    "message": "You can fill in your proxy server and port here as you like.<br>SwitchyOmega <b>does not come with any proxy servers</b>.<br>Please consult your network provider or proxy software manual if you don't know what should be filled in here."
+    "message": "Můžete vyplnit serveru proxy a portu zde jak se vám líbí.<br>, SwitchyOmega, <b>nepřichází s proxy servery</b>.<br>Prosím poraďte se s poskytovatelem sítě nebo server proxy software manuál Pokud nevíte, co by mělo být vyplněno zde."
   },
   "options_guide_autoSwitchProfileStep": {
-    "message": "You can tell SwitchyOmega to switch between proxies automatically through the mighty <b>Switch Profile</b>.<br>However, its features cannot be covered in this quick guide.<br>You can open this profile to unlock its power some time later."
+    "message": "Poznáte SwitchyOmega přepínat mezi proxy automaticky prostřednictvím mohutné <b>Přepnutí profilu</b>.<br>Však nelze pokrýt jeho rysy v tomto rychlém průvodci.<br>Můžete otevřít tento profil odemknout její moci nějaký čas později."
   },
   "options_guide_addMoreProfilesStep": {
-    "message": "Need more profiles? You can always add more <b>Proxy, Switch and other profiles</b><br>for all your proxying needs.<br>Enjoy proxying!"
+    "message": "Potřebujete další profily? Pro potřeby vaší proxy, můžete vždy přidat více <b>Proxy, Switch a další profily</b> <br>. <br>Užijte si proxy!"
   },
   "options_guide_conditionStep": {
-    "message": "SwitchyOmega can apply different profiles to requests based on <b>conditions</b>.<br> For example, the <b>Host wildcard</b> condition allows you to set the profile for all URLs in a domain."
+    "message": "SwitchyOmega profily je možné použít různé žádosti na základě <b>podmínek</b>.<br>Například <b>hostitele zástupné</b> stavu umožňuje nastavit profil pro všechny adresy URL v doméně."
   },
   "options_guide_conditionTypeStep": {
-    "message": "You can use various condition types to match the host or full URL. <br> Click on the question mark to open the type reference."
+    "message": "Můžete použít různé typy podmínek hostitele nebo úplnou adresu URL. <br>Klepněte na otazník zobrazíte typ odkazu."
   },
   "options_guide_conditionProfileStep": {
-    "message": "SwitchyOmega applies the selected profile here to <b>any request matching the condition.</b> <br> The special <b>\"[Direct]\" profile</b> will cause the request to be sent without any proxy."
+    "message": "SwitchyOmega použije vybraný profil zde na <b>žádost odpovídající podmínky.</b> <br>Speciální <b>\"[]\" profilu</b> způsobí požadavek na odeslání bez jakékoli proxy."
   },
   "options_guide_switchDefaultStep": {
-    "message": "If no condition applies to some request, the \"Default\" profile will be used. <br>Conditions are always considered <b>from top to bottom</b> in order.<br>You can change their order by dragging the sort icon."
+    "message": "Pokud žádná podmínka se vztahuje na některé žádosti, bude použit profil \"Výchozí\". <br>Podmínky jsou vždy považovány za <b>shora dolů</b> v pořadí.<br>Jejich pořadí můžete změnit přetažením ikony řazení."
   },
   "options_guide_applySwitchProfileStep": {
-    "message": "When you are done setting the switch profile, don't forget to <b>switch to it in the popup menu.</b><br/> The icon will show you the <b>final result</b> profile applied for the current tab. <br/> <b>Hovering</b> on the icon will reveal a tooltip with details."
+    "message": "Po dokončení nastavení přepínače profilu, nezapomeňte <b>Přepněte do ní v kontextovém menu.</b> <br/> Ikona se zobrazí <b>konečný výsledek</b> profilu použité pro aktuální kartu <br/> <b>Hovering</b> na ikonu odhalí tooltip s detaily."
   },
   "popup_externalProfile": {
-    "message": "(External Profile)"
+    "message": "(Externí profil)"
   },
   "popup_externalProfileName": {
-    "message": "profile name"
+    "message": "název profilu"
   },
   "popup_proxyNotControllable_app": {
-    "message": "The proxy settings are controlled by other app(s) or extension(s). Please disable or uninstall the apps or extensions in conflict."
+    "message": "Nastavení serveru proxy jsou řízeny jinými app(s) nebo přípony. Zakázat nebo odinstalovat aplikace nebo rozšíření v konfliktu."
   },
   "popup_proxyNotControllable_policy": {
-    "message": "The proxy settings are overruled by policies. Please contact your administrator."
+    "message": "Nastavení serveru proxy byly přepsány politikou. Obraťte se na správce systému."
   },
   "popup_proxyNotControllable_unknown": {
-    "message": "The proxy settings cannot be controlled. Please check your system and browser settings."
+    "message": "Nastavení serveru proxy nelze ovládat. Zkontrolujte nastavení systému a prohlížeče."
   },
   "popup_proxyNotControllable_disabled": {
-    "message": "The proxy settings are disabled by explicit request from other app(s) or extension(s)."
+    "message": "Nastavení serveru proxy jsou zakázány výslovný požadavek od jiných app(s) nebo rozšířeními."
   },
   "popup_proxyNotControllable_upgrade": {
-    "message": "Proxy settings are now controlled by a newer version of SwitchyOmega."
+    "message": "Nastavení serveru proxy jsou nyní řízeny pomocí novější verze SwitchyOmega."
   },
   "popup_proxyNotControllableDetails": {
-    "message": "You cannot switch profiles with SwitchyOmega unless you fix the problem above."
+    "message": "Dokud nevyřešíte problém výše, nelze přepnout profily s SwitchyOmega."
   },
   "popup_proxyNotControllableDetails_upgrade": {
-    "message": "You can't enable two (or more) versions of SwitchyOmega at the same time. Please disable one of them."
+    "message": "Současně nelze povolit dvě (nebo více) verze SwitchyOmega. Zakažte jednu z nich."
   },
   "popup_proxyNotControllableManage": {
-    "message": "Manage extensions"
+    "message": "Správa rozšíření"
   },
   "popup_addConditionTo": {
-    "message": "Add condition to"
+    "message": "Přidat podmínku do"
   },
   "popup_addCondition": {
-    "message": "Add condition"
+    "message": "Přidat podmínku"
   },
   "popup_showOptions": {
-    "message": "Options"
+    "message": "Možnosti"
   },
   "popup_reportIssues": {
-    "message": "Report issues"
+    "message": "Report problémů"
   },
   "popup_errorLog": {
-    "message": "Save error log"
+    "message": "Uložit protokol chyb"
   },
   "popup_requestErrorCount": {
-    "message": "$COUNT$ failed resources",
+    "message": "$COUNT$ chybových požadavků",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -1081,31 +1081,31 @@
     }
   },
   "popup_requestErrorHeading": {
-    "message": "Resources that failed to load"
+    "message": "Zdroje, které se nepodařilo načíst"
   },
   "popup_requestErrorWarning": {
-    "message": "A few resources failed to load due to issues with your network, proxy server or the webpage."
+    "message": "Několik zdrojů se nepodařilo načíst kvůli potížím se sítí."
   },
   "popup_requestErrorWarningHelp": {
-    "message": "SwitchyOmega is just the reporter of these issues, not the cause of them."
+    "message": "SwitchyOmega jen reportuje tyto chyby, ale není příčinou těchto chyb."
   },
   "popup_requestErrorAddCondition": {
-    "message": "You can review the following domains and use proxy for them when appropriate."
+    "message": "Můžete zkontrolovat následující domény a použít proxy server pro ně v případě potřeby."
   },
   "popup_requestErrorCannotAddCondition": {
-    "message": "You can add switch conditions for them only when using a Switch Profile."
+    "message": "Můžete přidat podmínky, přepínač se použije pouze při použití Přepnout profil."
   },
   "popup_configureMonitorWebRequests": {
-    "message": "Configure Network Monitor"
+    "message": "Konfigurovat monitor sítě"
   },
   "options_resultProfileForSelectedDomains": {
-    "message": "Use this profile for all selected domains"
+    "message": "Použít tento profil pro všechny vybrané domény"
   },
   "options_pac_profile_unsupported_moz": {
     "message": "PAC Profiles WILL NOT work in Mozilla Firefox due to technical limitations!"
   },
   "popup_issueTemplate": {
-    "message": "\n\n\n<!-- Please write your comment ABOVE this line. -->\nSwitchyOmega $projectVersion$\n$userAgent$",
+    "message": "\n\n\n<!-- Please write your comment ABOVE this line. -->\nPřeložil Filip Havlin\nSwitchyOmega $projectVersion$\n$userAgent$",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -1119,22 +1119,22 @@
     }
   },
   "browserAction_profileDetails_PacProfile": {
-    "message": "(PAC script)"
+    "message": "(PAC skript)"
   },
   "browserAction_profileDetails_SystemProfile": {
-    "message": "(controlled by other extensions or environment)"
+    "message": "(kontrolované jinými rozšířeními nebo prostředím)"
   },
   "browserAction_profileDetails_DirectProfile": {
-    "message": "(not using any proxy)"
+    "message": "(nepoužívá žádné proxy)"
   },
   "browserAction_profileDetails_SwitchProfile": {
-    "message": "(switching based on conditions)"
+    "message": "(přepínání na základě podmínek)"
   },
   "browserAction_profileDetails_RuleListProfile": {
-    "message": "(switching based on rule list)"
+    "message": "(přepínání na základě seznamu pravidel)"
   },
   "browserAction_titleNormal": {
-    "message": "SwitchyOmega:: $PROFILE$",
+    "message": "Switchy Omega:: $PROFILE$",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -1145,7 +1145,7 @@
     }
   },
   "browserAction_titleWithResult": {
-    "message": "SwitchyOmega:: $PROFILE$\n$DETAILS$",
+    "message": "Switchy Omega:: $PROFILE$\n$DETAILS$",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -1162,19 +1162,19 @@
     }
   },
   "browserAction_titleNewerOptions": {
-    "message": "ERROR: A newer version of SwitchOmega is required to load the stored options."
+    "message": "Chyba: Novější verze SwitchOmega je potřeba pro uložené nastavení/možnosti."
   },
   "browserAction_titleOptionError": {
-    "message": "ERROR: The stored options are corrupted. Click here to RESET OPTIONS."
+    "message": "Chyba: Uložené volby jsou poškozeny. Chcete-li obnovit možnosti klikněte zde."
   },
   "browserAction_titleDownloadFail": {
-    "message": "Warning: Failed to download PAC scripts and/or rule lists."
+    "message": "Upozornění: Nepodařilo se stáhnout PAC skripty nebo seznam pravidel."
   },
   "browserAction_titleExternalProxy": {
-    "message": "Note: The proxy settings are currently controlled by other app(s)."
+    "message": "Poznámka: Nastavení serveru proxy jsou v současnosti řízena jinými aplikacemi."
   },
   "browserAction_titleInspect": {
-    "message": "[Inspect] $URL$",
+    "message": "[Prohlédnout] $URL$",
     "placeholders": {
       "_unused_0": {
         "content": "$0"
@@ -1185,31 +1185,31 @@
     }
   },
   "browserAction_defaultRuleDetails": {
-    "message": "(default)"
+    "message": "(výchozí)"
   },
   "browserAction_directResult": {
-    "message": "DIRECT"
+    "message": "PŘÍMÉ"
   },
   "browserAction_attachedPrefix": {
     "message": "(RL) "
   },
   "browserAction_tempRulePrefix": {
-    "message": "(TEMP) "
+    "message": "(DOČASNÉ) "
   },
   "contextMenu_inspectPage": {
-    "message": "Inspect proxy used for this page"
+    "message": "Zkontrolujte proxy pro tuto stránku"
   },
   "contextMenu_inspectFrame": {
-    "message": "Inspect proxy used for this Frame"
+    "message": "Zkontrolujte proxy pro tento Frame"
   },
   "contextMenu_inspectLink": {
-    "message": "Inspect proxy to be used if this Link is opened"
+    "message": "Zkontrolujte, zda server proxy používaná tento prvek"
   },
   "contextMenu_inspectElement": {
-    "message": "Inspect proxy used for this Element"
+    "message": "Zkontrolujte, zda server proxy používaná tento prvek"
   },
   "contextMenu_enableQuickSwitch": {
-    "message": "Enable Quick Switch"
+    "message": "Povolit rychlé přepínání"
   },
   "about_title": {
     "message": "About"

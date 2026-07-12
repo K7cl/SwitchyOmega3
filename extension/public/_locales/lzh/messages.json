@@ -1,0 +1,65 @@
+{
+  "appNameShort": {
+    "message": "SwitchyOmega"
+  },
+  "manifest_app_name": {
+    "message": "Proxy SwitchyOmega"
+  },
+  "manifest_app_description": {
+    "message": "迅速易事地管理並切換多個代理。"
+  },
+  "manifest_icon_default_title": {
+    "message": "載入中…"
+  },
+  "upgrade_profile_auto": {
+    "message": "自動更迭"
+  },
+  "profile_direct": {
+    "message": "[直指]"
+  },
+  "profile_system": {
+    "message": "[系統代理]"
+  },
+  "condition_HostWildcardCondition": {
+    "message": "主機萬象"
+  },
+  "condition_help_HostWildcardCondition": {
+    "message": "依域名（主機名）匹配請求。<br><b>星號 <code>*</code></b> 匹配零個或者多個字符。<br><b>問號 <code>?</code></b> 匹配任意一字符。<br><br>請注意以 <code>*.</code> 起首之規則有特別處理，能同時匹配子域名與自身。<br>例如: <code>*.example.com</code> 能匹配 www.example.com ，<b>且亦能匹配 example.com。</b><br>若<b>僅需匹配子域名</b>，請以<b>兩個</b>星號起首，如 <code>**.example.com</code>。"
+  },
+  "condition_HostRegexCondition": {
+    "message": "域名綴形法"
+  },
+  "condition_help_HostRegexCondition": {
+    "message": "如主機萬象之規，但以<a href='https://www.google.com/search?q=regular%20expression'>綴形法</a>匹配主機（域名）。<br>綴形法可能難於構建（及閱讀）。<br>建議於大多數情況下使用萬象，僅於其他條件無法實現時使用綴形法。"
+  },
+  "condition_HostLevelsCondition": {
+    "message": "域名層數"
+  },
+  "condition_help_HostLevelsCondition": {
+    "message": "若且惟若主機層次在所給範圍內，則匹配該請求.<br>主機層次被定義為主機（域名）之<b>以點分隔的片段數</b>.<br>例如：<code>www.example.com</code> 的主機層次為3，而 <code>internal</code> 的層次為1."
+  },
+  "condition_help_UrlWildcardCondition": {
+    "message": "依通配符規則以匹配網址。<br>關於通配符之表達式，詳見上文域名通配符一節之述。<br>須知網址通配符無特殊處理，不會特殊處理子域名等。<br>故<code>://.example.com/*</code> 可匹配 http://www.example.com/ 然 <b>不匹配</b> http://example.com/."
+  },
+  "condition_UrlRegexCondition": {
+    "message": "網址之正則式"
+  },
+  "condition_help_UrlRegexCondition": {
+    "message": "以功能強大之<a href='https://www.google.com/search?q=regular%20expression'>regular expression</a>正則式匹配網址。<br>然正則表達式難書而可讀性差。<br>因此，故建議大多數情況下用通配符，僅於他法不可行時用正則式。"
+  },
+  "condition_KeywordCondition": {
+    "message": "關鍵字"
+  },
+  "condition_FalseCondition": {
+    "message": "（禁用）"
+  },
+  "condition_help_FalseCondition": {
+    "message": "設規則類型為<code>(禁用)</code>可暫禁某條件。禁用之條件匹配時視為無。<br>條件禁用後，先前數據（如通配符或正則）仍存，故需時可將條件類型改回先前，以重新啟用。"
+  },
+  "condition_TimeCondition": {
+    "message": "當前時辰"
+  },
+  "condition_help_TimeCondition": {
+    "message": "若當前本地時辰在某範圍內，則匹配。此範圍由<b>始時</b>與<b>終時</b>確定，包含始時與終時。<br>本地時辰、始時與終時皆依<b>24小時制</b>計（自<b>0至23</b>）。<br>此條件約在請求發出瞬時，乃算是否匹配。"
+  }
+}

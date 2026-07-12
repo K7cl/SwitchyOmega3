@@ -1,0 +1,796 @@
+{
+  "appNameShort": {
+    "message": "SwitchyOmega"
+  },
+  "manifest_app_name": {
+    "message": "Mellomtjeneren SwitchyOmega"
+  },
+  "manifest_app_description": {
+    "message": "Behandle og bytt mellom flerfoldige mellomtjenere raskt og enkelt."
+  },
+  "manifest_icon_default_title": {
+    "message": "Laster inn…"
+  },
+  "upgrade_profile_auto": {
+    "message": "Automatisk bytte"
+  },
+  "profile_direct": {
+    "message": "[Direkte]"
+  },
+  "profile_system": {
+    "message": "[Systemmellomtjener]"
+  },
+  "condition_HostWildcardCondition": {
+    "message": "Vertsjokertegn"
+  },
+  "condition_HostRegexCondition": {
+    "message": "Regulært uttrykk for vert"
+  },
+  "condition_HostLevelsCondition": {
+    "message": "Vertsnivåer"
+  },
+  "condition_IpCondition": {
+    "message": "IP Literals"
+  },
+  "condition_help_IpCondition": {
+    "message": "Matches the request if and only if the host is a <b>literal</b> IP address and in the subnet as specified by <a href='https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation'>CIDR notation</a>.<br>For example, given the rule <code>127.0.0.1/16</code>, it matches all IP addresses like <code>127.0.*.*</code>.<br>So <code>127.0.0.1</code> matches while <code>127.1.0.0</code> does not. Host names like <code>localhost</code> will never match because they are <b>not</b> IP literals."
+  },
+  "condition_UrlWildcardCondition": {
+    "message": "Nettadressejokertegn"
+  },
+  "condition_UrlRegexCondition": {
+    "message": "Regulært uttrykk for URL"
+  },
+  "condition_help_UrlRegexCondition": {
+    "message": "Samsvarer med URL-er i kraft av ekstremt mektige <a href='https://www.google.com/search?q=regular%20expression'>regulære uttrykk</a>.<br>Dog kan regulære uttrykk være vanskelige å lage (og lese).<br>Det er anbefalt å bruke wildcards i de fleste fall og bare bruke regulære uttrykk for tilstander som ikke kan oppnås av noen annen tilstandstype."
+  },
+  "condition_KeywordCondition": {
+    "message": "Nøkkelord"
+  },
+  "condition_FalseCondition": {
+    "message": "(Avskrudd)"
+  },
+  "condition_details_FalseCondition": {
+    "message": "(Tilstand sett bort fra ved jamførelse)"
+  },
+  "condition_TimeCondition": {
+    "message": "Gjeldende tid"
+  },
+  "condition_WeekdayCondition": {
+    "message": "Ukedag"
+  },
+  "condition_alert_fullUrlLimitation": {
+    "message": "Full URL matching is no longer possible for <code>https://</code> URLs as of Chrome 52. <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation'>Learn more...</a>"
+  },
+  "condition_alert_fullUrlLimitationLink": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation"
+  },
+  "condition_group_default": {
+    "message": ""
+  },
+  "condition_group_host": {
+    "message": "Vert"
+  },
+  "condition_group_url": {
+    "message": "URL"
+  },
+  "condition_group_special": {
+    "message": "Spesiell"
+  },
+  "ruleListFormat_Switchy": {
+    "message": "Byttende"
+  },
+  "ruleListFormat_AutoProxy": {
+    "message": "AutoProxy"
+  },
+  "ruleList_usageUrl": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/RuleListUsage"
+  },
+  "ruleList_error_unknownProfile": {
+    "message": "Ukjent profil: $PROFILE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "dialog_close": {
+    "message": "Lukk"
+  },
+  "dialog_save": {
+    "message": "Lagre endringer"
+  },
+  "dialog_ok": {
+    "message": "OK"
+  },
+  "dialog_cancel": {
+    "message": "Avbryt"
+  },
+  "inputClear_clear": {
+    "message": "Tøm"
+  },
+  "inputClear_restore": {
+    "message": "Gjenopprett"
+  },
+  "options_title": {
+    "message": "SwitchyOmega-valg"
+  },
+  "options_experimental_badge": {
+    "message": "α"
+  },
+  "options_navHeader_setting": {
+    "message": "Innstillinger"
+  },
+  "options_navHeader_profiles": {
+    "message": "Profiler"
+  },
+  "options_navHeader_actions": {
+    "message": "Handlinger"
+  },
+  "options_tab_ui": {
+    "message": "Grensesnitt"
+  },
+  "options_tab_importExport": {
+    "message": "Importer/Exporter"
+  },
+  "options_newProfile": {
+    "message": "Ny profil…"
+  },
+  "options_apply": {
+    "message": "Legg til endringer"
+  },
+  "options_discard": {
+    "message": "Forkast endringer"
+  },
+  "options_reset": {
+    "message": "Tilbakestill valg"
+  },
+  "options_group_miscOptions": {
+    "message": "Ymse valg"
+  },
+  "options_refreshOnProfileChange": {
+    "message": "Gjenoppfrisk gjeldende fane ved profilendring."
+  },
+  "options_addConditionsToBottom": {
+    "message": "Put new conditions added using the popup to the bottom of the list."
+  },
+  "options_group_keyboardShortcut": {
+    "message": "Tastatursnarvei"
+  },
+  "options_menuShortcutConfigure": {
+    "message": "Sett opp snarvei"
+  },
+  "options_group_switchOptions": {
+    "message": "Bytt valg"
+  },
+  "options_startupProfile": {
+    "message": "Oppstartsprofil"
+  },
+  "options_startupProfile_none": {
+    "message": "(Gjeldende profil)"
+  },
+  "options_group_proxyChanges": {
+    "message": "Mellomtjenerendringer"
+  },
+  "options_revertProxyChanges": {
+    "message": "Tilbakestill mellomtjenerinnstillinger gjort av andre programmer."
+  },
+  "options_group_conflicts": {
+    "message": "Conflicts"
+  },
+  "options_conflicts_introduction": {
+    "message": "Sometimes, other apps will also try to control the proxy settings, resulting in conflicts. Note that ad blockers and other extensions may also use proxy settings under the hood. Such conflicts cannot be avoided due to how the browser works."
+  },
+  "options_conflicts_lowerPriority": {
+    "message": "A red badge like this on the SwitchyOmega icon indicates that another app has higher priority so SwitchyOmega cannot control the settings. Please try to uninstall SwitchyOmega and reinstall, which should raise SwitchyOmega's priority. If you still see conflicts after reinstallation, please consider removing the other app causing the conflict."
+  },
+  "options_conflicts_higherPriority": {
+    "message": "If SwitchyOmega has higher priority, you can give the control back to other apps or system settings by selecting $SYSTEMPROFILE$ in the popup menu.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "SYSTEMPROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_showExternalProfile": {
+    "message": "Show popup menu item to import proxy settings from other apps."
+  },
+  "options_showExternalProfileHelp": {
+    "message": "When $SYSTEMPROFILE$ is selected, you can import the effective proxy settings from other apps by selecting $EXTERNALPROFILE$ on the popup menu. The settings will be imported as a profile using the name you provide. Please note that the imported profile is a snapshot and will not reflect any changes from the source app thereafter.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "SYSTEMPROFILE": {
+        "content": "$1"
+      },
+      "EXTERNALPROFILE": {
+        "content": "$2"
+      }
+    }
+  },
+  "options_group_networkRequests": {
+    "message": "Nettverksforespørsler"
+  },
+  "options_monitorWebRequests": {
+    "message": "Vis antall feilede nettforespørsler for ressurser i gjeldende fane."
+  },
+  "options_downloadOptions": {
+    "message": "Nedlastingsvalg"
+  },
+  "options_downloadOptionsHelp": {
+    "message": "Sett oppdateringsfrekvensen for nettbaserte regellister og PAC-skript."
+  },
+  "options_downloadInterval": {
+    "message": "Nedlastingsintervall"
+  },
+  "options_downloadInterval_15": {
+    "message": "15 minutter"
+  },
+  "options_downloadInterval_60": {
+    "message": "en time"
+  },
+  "options_downloadInterval_180": {
+    "message": "tre timer"
+  },
+  "options_downloadInterval_360": {
+    "message": "seks timer"
+  },
+  "options_downloadInterval_720": {
+    "message": "12 timer"
+  },
+  "options_downloadInterval_1440": {
+    "message": "Hver dag"
+  },
+  "options_downloadInterval_never": {
+    "message": "Aldri"
+  },
+  "options_group_importExportProfile": {
+    "message": "Profil"
+  },
+  "options_exportPacFile": {
+    "message": "Eksporter som PAC-fil"
+  },
+  "options_exportPacFileHelp": {
+    "message": "Eksporter gjeldende profil som PAC-fil, slik at du kan bruke den i andre nettlesere."
+  },
+  "options_exportProfileHelp": {
+    "message": "For å eksportere en profil, bruk handlingsfeltet øverst til høyre på profilsiden."
+  },
+  "options_group_importExportSettings": {
+    "message": "Innstillinger"
+  },
+  "options_makeBackup": {
+    "message": "Ta sikkerhetskopi"
+  },
+  "options_makeBackupHelp": {
+    "message": "Ta full sikkerhetskopi av dine valg (inkludert profiler og alle andre valg)."
+  },
+  "options_restoreLocal": {
+    "message": "Gjenopprett fra fil"
+  },
+  "options_restoreLocalHelp": {
+    "message": "Gjennopprett dine SwitchyOmega-valg fra ei lokal fil."
+  },
+  "options_restoreOnline": {
+    "message": "Gjenopprett fra nett"
+  },
+  "options_restoreOnlinePlaceholder": {
+    "message": "URL til valg-fil (f.eks. 'http://eksempel.no/switchy.bak')"
+  },
+  "options_restoreOnlineSubmit": {
+    "message": "Gjenopprett"
+  },
+  "options_group_syncing": {
+    "message": "Synkroniserer (eksperimentelt)"
+  },
+  "options_syncEnable": {
+    "message": "Skru på synkronisering"
+  },
+  "options_syncDisable": {
+    "message": "Skru av synkronisering"
+  },
+  "options_renameProfile": {
+    "message": "Gi nytt navn"
+  },
+  "options_deleteProfile": {
+    "message": "Slett"
+  },
+  "options_profileExportRuleList": {
+    "message": "Offentliggjør regelliste"
+  },
+  "options_profileExportPac": {
+    "message": "Eksporter PAC"
+  },
+  "options_profileUnsupported": {
+    "message": "Ustøttet profiltype $TYPE$!",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "TYPE": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileUnsupportedHelp": {
+    "message": "Valg kan være skadelidende, eller fra en nyere versjon av programmet."
+  },
+  "options_profileEditSource": {
+    "message": "Rediger kildekode"
+  },
+  "options_profileEditSourceHelp": {
+    "message": "Vis hjelp om kildekodeformatet"
+  },
+  "options_profileEditSourceHelpUrl": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/SwitchyOmega-conditions-format#result-profile"
+  },
+  "options_group_proxyServers": {
+    "message": "Tjenere for mellomtjening"
+  },
+  "options_proxy_protocol": {
+    "message": "Protokoll"
+  },
+  "options_proxy_server": {
+    "message": "Tjener"
+  },
+  "options_proxy_port": {
+    "message": "Port"
+  },
+  "options_proxy_auth": {
+    "message": "Identitetsbekreftelse"
+  },
+  "options_proxy_authNotSupported": {
+    "message": "Your browser DOES NOT support $PROTOCOLDISP$ proxy authentication! Please do not report this issue to SwitchyOmega. Contact the support for your browser instead.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROTOCOLDISP": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_proxy_authAllWarningPac": {
+    "message": "Advarsel: Brukernavn/passord kan bli sendt til uventede tjenere fra PAC-skriptet."
+  },
+  "options_scheme_default": {
+    "message": "(forvalg)"
+  },
+  "options_protocol_direct": {
+    "message": "DIREKTE"
+  },
+  "options_protocol_useDefault": {
+    "message": "(bruk forvalg)"
+  },
+  "options_proxy_single": {
+    "message": "Bruk mellomtjeneren ovenfor for alle protokoller."
+  },
+  "options_proxy_expand": {
+    "message": "Vis avanserte valg"
+  },
+  "options_virtualProfileTarget": {
+    "message": "Mål"
+  },
+  "options_conditionActions": {
+    "message": "Handlinger"
+  },
+  "options_ruleNote": {
+    "message": "Note"
+  },
+  "options_weekDayShort_0": {
+    "message": "Søn"
+  },
+  "options_weekDayShort_1": {
+    "message": "Man"
+  },
+  "options_weekDayShort_2": {
+    "message": "Tirs"
+  },
+  "options_weekDayShort_3": {
+    "message": "Ons"
+  },
+  "options_weekDayShort_4": {
+    "message": "Tors"
+  },
+  "options_weekDayShort_5": {
+    "message": "Fre"
+  },
+  "options_weekDayShort_6": {
+    "message": "Lør"
+  },
+  "options_attachProfile": {
+    "message": "Legg til en regelliste"
+  },
+  "options_modalHeader_welcome": {
+    "message": "Velkommen til SwitchyOmega"
+  },
+  "options_guideNext": {
+    "message": "Neste"
+  },
+  "options_guideDone": {
+    "message": "Ferdig"
+  },
+  "options_guideSkip": {
+    "message": "Hopp over guide"
+  },
+  "options_modalHeader_applyOptions": {
+    "message": "Legg til valg"
+  },
+  "options_modalHeader_renameProfile": {
+    "message": "Gi profil nytt navn"
+  },
+  "options_renameProfileName": {
+    "message": "Nytt profilnavn"
+  },
+  "options_profileNameConflict": {
+    "message": "En profil ved dette navnet finnes allerede."
+  },
+  "options_profileNameReserved": {
+    "message": "Profilnavn som begynner med dobbel understrek er reservert."
+  },
+  "options_modalHeader_replaceProfile": {
+    "message": "Erstatt profil"
+  },
+  "options_replaceProfile": {
+    "message": "Erstatt profil"
+  },
+  "options_replaceProfileConfirm": {
+    "message": "Ønsker du virkelig å erstatte $FromProfile$ med $ToProfile$?",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "FromProfile": {
+        "content": "$1"
+      },
+      "ToProfile": {
+        "content": "$2"
+      }
+    }
+  },
+  "options_modalHeader_deleteProfile": {
+    "message": "Slett profil"
+  },
+  "options_deleteProfileConfirm": {
+    "message": "Ønsker du virkelig å slette følgende profil?"
+  },
+  "options_modalHeader_cannotDeleteProfile": {
+    "message": "Kunne ikke slette profil"
+  },
+  "options_profileReferredBy": {
+    "message": "Denne profilen kunne ikke slettes fordi den vises til av følgende profiler:"
+  },
+  "popup_title": {
+    "message": "Oppsprettsvindu for SwitchyOmega"
+  },
+  "options_modalHeader_proxyAuth": {
+    "message": "Identitetsbekreftelse for mellomtjener"
+  },
+  "options_proxyAuthUsername": {
+    "message": "Brukernavn"
+  },
+  "options_proxyAuthPassword": {
+    "message": "Passord"
+  },
+  "options_proxyAuthShowPassword": {
+    "message": "Show password"
+  },
+  "options_proxyAuthHidePassword": {
+    "message": "Hide password"
+  },
+  "options_proxyAuthNone": {
+    "message": "Ingen identitetsbekreftelse"
+  },
+  "options_modalHeader_deleteRule": {
+    "message": "Slett regel"
+  },
+  "options_deleteRuleConfirm": {
+    "message": "Ønsker du virkelig å slette følgende regel?"
+  },
+  "options_deleteRule": {
+    "message": "Slett"
+  },
+  "options_modalHeader_resetRules": {
+    "message": "Tilbakestill regler"
+  },
+  "options_resetRules": {
+    "message": "Tilbakestill regler"
+  },
+  "options_resetRules_help": {
+    "message": "Sett profil for alle regler"
+  },
+  "options_modalHeader_deleteAttached": {
+    "message": "Fjern regelliste"
+  },
+  "options_deleteAttachedConfirm": {
+    "message": "Ønsker du virkelig å slette regellisten fra gjeldende profil?"
+  },
+  "options_ruleListLineCount": {
+    "message": "$COUNT$ linje(r) med regler",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "COUNT": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_deleteAttached": {
+    "message": "Slett regelliste"
+  },
+  "options_modalHeader_newProfile": {
+    "message": "Ny profil"
+  },
+  "options_newProfileName": {
+    "message": "Profilnavn"
+  },
+  "options_profileTypeFixedProfile": {
+    "message": "Mellomtjenerprofil"
+  },
+  "options_profileTypePacProfile": {
+    "message": "PAC-profil"
+  },
+  "options_profileTypeSwitchProfile": {
+    "message": "Bytt profil"
+  },
+  "options_profileTypeVirtualProfile": {
+    "message": "Virtuell profil"
+  },
+  "options_createProfile": {
+    "message": "Opprett"
+  },
+  "options_modalHeader_resetOptions": {
+    "message": "Tilbakestill valg"
+  },
+  "options_resetOptionsConfirm": {
+    "message": "Lnsker du virkelig å tilbakestille valgene? Alle profiler og innstillinger vil gå TAPT!"
+  },
+  "options_formInvalid": {
+    "message": "Korriger feilene på denne siden."
+  },
+  "options_profileNotFound": {
+    "message": "Profilen $PROFILE$ finnes ikke! Valgene kan være skadet.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_resetSuccess": {
+    "message": "Valg tilbakestilt."
+  },
+  "options_saveSuccess": {
+    "message": "Valg lagret."
+  },
+  "options_importSuccess": {
+    "message": "Valg importert."
+  },
+  "options_importFormatError": {
+    "message": "Ugyldig sikkerhetskopifil!"
+  },
+  "options_profileDownloadSuccess": {
+    "message": "Vellykket oppdatering av profil."
+  },
+  "options_profileDownloadError": {
+    "message": "Feil ved nedlasting av profildata!"
+  },
+  "options_profileDownloadError_NetworkError": {
+    "message": "A network error occurred when updating."
+  },
+  "options_profileDownloadError_HttpError": {
+    "message": "An HTTP error ($STATUS$) occurred when updating.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "STATUS": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileDownloadError_HttpNotFoundError": {
+    "message": "The Profile URL was not found on the server. Please double-check."
+  },
+  "options_profileDownloadError_HttpServerError": {
+    "message": "The remote server responded with error ($STATUS$) when updating.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "STATUS": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileDownloadError_ContentTypeRejectedError": {
+    "message": "The downloaded data is invalid! You may open the Profile URL in your browser to inspect it."
+  },
+  "options_downloadProfileNow": {
+    "message": "Last ned profil nå"
+  },
+  "popup_externalProfile": {
+    "message": "(Ekstern profil)"
+  },
+  "popup_externalProfileName": {
+    "message": "profilnavn"
+  },
+  "popup_proxyNotControllableManage": {
+    "message": "Behandle tillegg"
+  },
+  "popup_showOptions": {
+    "message": "Valg"
+  },
+  "popup_reportIssues": {
+    "message": "Rapporter feil"
+  },
+  "popup_errorLog": {
+    "message": "Lagre feilrettingslogg"
+  },
+  "popup_requestErrorCount": {
+    "message": "$COUNT$ failede ressurser",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "COUNT": {
+        "content": "$1"
+      }
+    }
+  },
+  "popup_requestErrorHeading": {
+    "message": "Ressurser som ikke kunne lastes inn"
+  },
+  "popup_requestErrorWarning": {
+    "message": "En del ressurser kunne ikke lastes inn på grunn av feil med ditt nettverk, mellomtjeneren eller nettsiden."
+  },
+  "popup_requestErrorWarningHelp": {
+    "message": "SwitchyOmega rapporterer bare disse feilene, det er ikke opphavet."
+  },
+  "popup_requestErrorAddCondition": {
+    "message": "Du kan se over følgende domener og bruke mellomtjener for dem når det høver seg."
+  },
+  "popup_configureMonitorWebRequests": {
+    "message": "Sett opp nettverksoversikt"
+  },
+  "options_resultProfileForSelectedDomains": {
+    "message": "Bruk denne profilen for alle valgte domener"
+  },
+  "options_pac_profile_unsupported_moz": {
+    "message": "PAC Profiles WILL NOT work in Mozilla Firefox due to technical limitations!"
+  },
+  "popup_issueTemplate": {
+    "message": "\n\n\n<!-- Skriv kommentaren din OVER denne linjen. -->\nSwitchyOmega $projectVersion$\n$userAgent$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "projectVersion": {
+        "content": "$1"
+      },
+      "userAgent": {
+        "content": "$2"
+      }
+    }
+  },
+  "browserAction_profileDetails_PacProfile": {
+    "message": "(PAC-skript)"
+  },
+  "browserAction_profileDetails_SystemProfile": {
+    "message": "(styrt av andre tillegg eller miljø)"
+  },
+  "browserAction_profileDetails_DirectProfile": {
+    "message": "(bruker ikke noen mellomtjener)"
+  },
+  "browserAction_titleNormal": {
+    "message": "SwitchyOmega:: $PROFILE$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "browserAction_titleWithResult": {
+    "message": "SwitchyOmega:: $PROFILE$\n$DETAILS$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROFILE": {
+        "content": "$1"
+      },
+      "_unused_2": {
+        "content": "$2"
+      },
+      "DETAILS": {
+        "content": "$3"
+      }
+    }
+  },
+  "browserAction_titleNewerOptions": {
+    "message": "FEIL: En nyere versjon av SwitchOmega kreves for å laste de lagrede valgene."
+  },
+  "browserAction_titleOptionError": {
+    "message": "FEIL: Lagrede valg skadet. Klikk her for å TILBAKESTILLE VALG."
+  },
+  "browserAction_titleDownloadFail": {
+    "message": "Advarsel: Kunne ikke laste ned PAC-skript og/eller regellister."
+  },
+  "browserAction_titleInspect": {
+    "message": "[Se over] $URL$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "URL": {
+        "content": "$1"
+      }
+    }
+  },
+  "browserAction_defaultRuleDetails": {
+    "message": "(forvalg)"
+  },
+  "browserAction_directResult": {
+    "message": "DIREKTE"
+  },
+  "browserAction_tempRulePrefix": {
+    "message": "(MIDLERTIDIG) "
+  },
+  "contextMenu_inspectPage": {
+    "message": "Se over mellomtjenerbruk for denne siden"
+  },
+  "contextMenu_enableQuickSwitch": {
+    "message": "Skru på raskt bytte"
+  },
+  "about_title": {
+    "message": "About"
+  },
+  "about_app_description": {
+    "message": "A proxy configuration tool"
+  },
+  "about_version": {
+    "message": "Version $VERSION$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "VERSION": {
+        "content": "$1"
+      }
+    }
+  },
+  "about_experimental_warning_moz": {
+    "message": "Mozilla Firefox support is highly experimental! If you encounter issues, please report using the buttons below."
+  },
+  "about_disclaimer_networkService": {
+    "message": "SwitchyOmega does not provide proxies, VPNs, or other network services."
+  },
+  "about_disclaimer_privacy": {
+    "message": "SwitchyOmega does not track you or insert ads into webpages. Please see our <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/Privacy#english'>privacy policy</a>."
+  },
+  "about_help": {
+    "message": "Other questions? Need help with using SwitchyOmega? Please see our <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/FAQ'>FAQ</a>."
+  },
+  "about_copyright": {
+    "message": "Copyright 2012-2017 <a href='https://github.com/FelisCatus/SwitchyOmega/blob/master/AUTHORS'>The SwitchyOmega Authors</a>. All rights reserved."
+  },
+  "about_credits": {
+    "message": "SwitchyOmega is made possible by the <a href='https://github.com/FelisCatus/SwitchyOmega'>SwitchyOmega</a> open source project and other <a href='https://github.com/FelisCatus/SwitchyOmega/blob/master/AUTHORS'>open source software</a>."
+  },
+  "about_license": {
+    "message": "SwitchyOmega is <a href='https://www.gnu.org/philosophy/free-sw.en.html'>free software</a> licensed under <a href='https://www.gnu.org/licenses/gpl.html'>GNU General Public License</a> Version 3 or later."
+  }
+}

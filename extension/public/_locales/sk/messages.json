@@ -1,0 +1,161 @@
+{
+  "appNameShort": {
+    "message": "SwitchyOmega"
+  },
+  "manifest_app_name": {
+    "message": "Proxy SwitchyOmega"
+  },
+  "manifest_app_description": {
+    "message": "Spravuj a prepínaj medzi viacerými proxy rýchlo a jednoducho."
+  },
+  "manifest_icon_default_title": {
+    "message": "Načítavanie…"
+  },
+  "condition_IpCondition": {
+    "message": "IP Literals"
+  },
+  "condition_help_IpCondition": {
+    "message": "Matches the request if and only if the host is a <b>literal</b> IP address and in the subnet as specified by <a href='https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation'>CIDR notation</a>.<br>For example, given the rule <code>127.0.0.1/16</code>, it matches all IP addresses like <code>127.0.*.*</code>.<br>So <code>127.0.0.1</code> matches while <code>127.1.0.0</code> does not. Host names like <code>localhost</code> will never match because they are <b>not</b> IP literals."
+  },
+  "condition_alert_fullUrlLimitation": {
+    "message": "Full URL matching is no longer possible for <code>https://</code> URLs as of Chrome 52. <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation'>Learn more...</a>"
+  },
+  "condition_alert_fullUrlLimitationLink": {
+    "message": "https://github.com/FelisCatus/SwitchyOmega/wiki/Chromium-Full-URL-Limitation"
+  },
+  "options_experimental_badge": {
+    "message": "α"
+  },
+  "options_addConditionsToBottom": {
+    "message": "Put new conditions added using the popup to the bottom of the list."
+  },
+  "options_group_conflicts": {
+    "message": "Conflicts"
+  },
+  "options_conflicts_introduction": {
+    "message": "Sometimes, other apps will also try to control the proxy settings, resulting in conflicts. Note that ad blockers and other extensions may also use proxy settings under the hood. Such conflicts cannot be avoided due to how the browser works."
+  },
+  "options_conflicts_lowerPriority": {
+    "message": "A red badge like this on the SwitchyOmega icon indicates that another app has higher priority so SwitchyOmega cannot control the settings. Please try to uninstall SwitchyOmega and reinstall, which should raise SwitchyOmega's priority. If you still see conflicts after reinstallation, please consider removing the other app causing the conflict."
+  },
+  "options_conflicts_higherPriority": {
+    "message": "If SwitchyOmega has higher priority, you can give the control back to other apps or system settings by selecting $SYSTEMPROFILE$ in the popup menu.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "SYSTEMPROFILE": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_showExternalProfile": {
+    "message": "Show popup menu item to import proxy settings from other apps."
+  },
+  "options_showExternalProfileHelp": {
+    "message": "When $SYSTEMPROFILE$ is selected, you can import the effective proxy settings from other apps by selecting $EXTERNALPROFILE$ on the popup menu. The settings will be imported as a profile using the name you provide. Please note that the imported profile is a snapshot and will not reflect any changes from the source app thereafter.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "SYSTEMPROFILE": {
+        "content": "$1"
+      },
+      "EXTERNALPROFILE": {
+        "content": "$2"
+      }
+    }
+  },
+  "options_proxy_authNotSupported": {
+    "message": "Your browser DOES NOT support $PROTOCOLDISP$ proxy authentication! Please do not report this issue to SwitchyOmega. Contact the support for your browser instead.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "PROTOCOLDISP": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_ruleNote": {
+    "message": "Note"
+  },
+  "options_proxyAuthShowPassword": {
+    "message": "Show password"
+  },
+  "options_proxyAuthHidePassword": {
+    "message": "Hide password"
+  },
+  "options_profileDownloadError_NetworkError": {
+    "message": "A network error occurred when updating."
+  },
+  "options_profileDownloadError_HttpError": {
+    "message": "An HTTP error ($STATUS$) occurred when updating.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "STATUS": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileDownloadError_HttpNotFoundError": {
+    "message": "The Profile URL was not found on the server. Please double-check."
+  },
+  "options_profileDownloadError_HttpServerError": {
+    "message": "The remote server responded with error ($STATUS$) when updating.",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "STATUS": {
+        "content": "$1"
+      }
+    }
+  },
+  "options_profileDownloadError_ContentTypeRejectedError": {
+    "message": "The downloaded data is invalid! You may open the Profile URL in your browser to inspect it."
+  },
+  "options_pac_profile_unsupported_moz": {
+    "message": "PAC Profiles WILL NOT work in Mozilla Firefox due to technical limitations!"
+  },
+  "about_title": {
+    "message": "About"
+  },
+  "about_app_description": {
+    "message": "A proxy configuration tool"
+  },
+  "about_version": {
+    "message": "Version $VERSION$",
+    "placeholders": {
+      "_unused_0": {
+        "content": "$0"
+      },
+      "VERSION": {
+        "content": "$1"
+      }
+    }
+  },
+  "about_experimental_warning_moz": {
+    "message": "Mozilla Firefox support is highly experimental! If you encounter issues, please report using the buttons below."
+  },
+  "about_disclaimer_networkService": {
+    "message": "SwitchyOmega does not provide proxies, VPNs, or other network services."
+  },
+  "about_disclaimer_privacy": {
+    "message": "SwitchyOmega does not track you or insert ads into webpages. Please see our <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/Privacy#english'>privacy policy</a>."
+  },
+  "about_help": {
+    "message": "Other questions? Need help with using SwitchyOmega? Please see our <a href='https://github.com/FelisCatus/SwitchyOmega/wiki/FAQ'>FAQ</a>."
+  },
+  "about_copyright": {
+    "message": "Copyright 2012-2017 <a href='https://github.com/FelisCatus/SwitchyOmega/blob/master/AUTHORS'>The SwitchyOmega Authors</a>. All rights reserved."
+  },
+  "about_credits": {
+    "message": "SwitchyOmega is made possible by the <a href='https://github.com/FelisCatus/SwitchyOmega'>SwitchyOmega</a> open source project and other <a href='https://github.com/FelisCatus/SwitchyOmega/blob/master/AUTHORS'>open source software</a>."
+  },
+  "about_license": {
+    "message": "SwitchyOmega is <a href='https://www.gnu.org/philosophy/free-sw.en.html'>free software</a> licensed under <a href='https://www.gnu.org/licenses/gpl.html'>GNU General Public License</a> Version 3 or later."
+  }
+}

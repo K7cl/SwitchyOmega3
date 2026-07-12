@@ -8,6 +8,10 @@
     "build-locales": "./src/build_locales.ts"
   },
   "scripts": {
+    "build-locales": "node src/build_locales.ts",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "gettext-parser": "9.1.1"
   }
 }

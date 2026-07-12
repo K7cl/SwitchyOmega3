@@ -9,7 +9,8 @@
   },
   "scripts": {
     "dev": "pnpm --filter @switchyomega/extension dev",
-    "build": "pnpm --filter @switchyomega/extension build",
+    "build:locales": "node packages/omega-i18n/src/build_locales.ts",
+    "build": "pnpm build:locales && pnpm --filter @switchyomega/extension build",
     "typecheck": "pnpm -r --if-present typecheck",
     "lint": "eslint .",
     "test": "vitest run"
