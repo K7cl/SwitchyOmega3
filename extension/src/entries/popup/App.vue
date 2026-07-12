@@ -2,6 +2,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { callBackground } from '@/ui/messaging'
 import { t, dispName } from '@/ui/i18n'
+import OmegaProfileInline from '@/ui/components/OmegaProfileInline.vue'
 
 interface AvailableProfile {
   name: string
@@ -18,8 +19,11 @@ const selected = ref(0)
 // Current-tab per-domain rule.
 const domain = ref('')
 const domainRule = ref('')
+const tempOpen = ref(false)
 
 const PINNED = ['direct', 'system']
+const isPinned = (name: string): boolean => PINNED.includes(name)
+
 const visibleProfiles = computed(() => {
   const list = profiles.value.filter((p) => !p.name.startsWith('__'))
   const rank = (name: string): number => {
@@ -29,6 +33,10 @@ const visibleProfiles = computed(() => {
   // Stable sort keeps user profiles in their existing order, built-ins on top.
   return [...list].sort((a, b) => rank(a.name) - rank(b.name))
 })
+// Faithful split: built-in profiles (Direct/System) up top, custom below.
+const builtinProfiles = computed(() => visibleProfiles.value.filter((p) => isPinned(p.name)))
+const customProfiles = computed(() => visibleProfiles.value.filter((p) => !isPinned(p.name)))
+const selectedName = computed(() => visibleProfiles.value[selected.value]?.name ?? '')
 
 // Fast path: read the last-computed state straight from storage (no SW wait).
 async function loadSnapshot(): Promise<void> {
@@ -56,8 +64,16 @@ async function apply(name: string): Promise<void> {
   setTimeout(() => window.close(), 120)
 }
 
-function openOptions(): void {
-  chrome.runtime.openOptionsPage()
+function openOptions(hash?: string): void {
+  if (hash) {
+    chrome.tabs.create({ url: chrome.runtime.getURL('src/entries/options/index.html') + hash })
+  } else {
+    chrome.runtime.openOptionsPage()
+  }
+  window.close()
+}
+
+function closePopup(): void {
   window.close()
 }
 
@@ -82,6 +98,7 @@ async function loadPage(): Promise<void> {
 async function setDomainRule(name: string): Promise<void> {
   if (!name || !domain.value) return
   domainRule.value = name
+  tempOpen.value = false
   await callBackground('addTempRule', domain.value, name)
   try {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
@@ -90,6 +107,10 @@ async function setDomainRule(name: string): Promise<void> {
     /* ignore */
   }
   setTimeout(() => window.close(), 120)
+}
+
+function profileTitle(p: AvailableProfile): string {
+  return dispName(p.name)
 }
 
 function onKey(e: KeyboardEvent): void {
@@ -131,181 +152,130 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
 </script>
 
 <template>
-  <div class="popup">
-    <div class="hd">
-      <span class="title">Proxy SwitchyOmega</span>
-    </div>
-
-    <p
-      v-if="proxyNotControllable"
-      class="warn"
-    >
-      {{ t('popup_proxyNotControllable') || 'Proxy settings are controlled by another program.' }}
+  <!-- Proxy controlled by another program (faithful message screen). -->
+  <div
+    v-if="proxyNotControllable"
+    class="proxy-not-controllable"
+  >
+    <p class="text-danger">
+      {{
+        t('popup_proxyNotControllable_' + proxyNotControllable) ||
+          t('popup_proxyNotControllable') ||
+          'The proxy settings are controlled by another program.'
+      }}
     </p>
-
-    <ul class="profiles">
-      <li
-        v-for="(p, i) in visibleProfiles"
-        :key="p.name"
-        :class="{ active: p.name === current, hi: i === selected }"
-        @click="apply(p.name)"
-        @mouseenter="selected = i"
+    <p class="help-block">
+      {{
+        t('popup_proxyNotControllableDetails_' + proxyNotControllable) ||
+          t('popup_proxyNotControllableDetails') ||
+          ''
+      }}
+    </p>
+    <p class="proxy-not-controllable-controls">
+      <button
+        class="btn btn-default"
+        @click="closePopup"
       >
-        <span
-          class="dot"
-          :style="{ background: p.color || '#888' }"
-        />
-        <span class="name">{{ dispName(p.name) }}</span>
-        <span
-          v-if="i < 9"
-          class="idx"
-        >{{ i + 1 }}</span>
-        <span
-          v-if="p.name === current"
-          class="check"
-        >✓</span>
-      </li>
-    </ul>
+        {{ t('dialog_cancel') || 'Cancel' }}
+      </button>
+      <button
+        class="btn btn-primary"
+        @click="openOptions()"
+      >
+        {{ t('popup_proxyNotControllableManage') || 'Manage' }}
+      </button>
+    </p>
+  </div>
 
-    <div
-      v-if="domain"
-      class="domain"
+  <!-- Faithful popup menu (Bootstrap 3 nav-pills nav-stacked). -->
+  <ul
+    v-else
+    class="popup-menu-nav nav nav-pills nav-stacked"
+  >
+    <!-- Built-in profiles: Direct / System. -->
+    <li
+      v-for="p in builtinProfiles"
+      :key="p.name"
+      class="profile"
+      :class="{ active: p.name === current, hi: p.name === selectedName }"
     >
-      <div class="domain-hd">
-        {{ t('popup_forThisSite') || 'For this site' }}:
-        <span class="dom">{{ domain }}</span>
-      </div>
-      <div class="domain-row">
-        <select
-          :value="domainRule"
-          @change="setDomainRule(($event.target as HTMLSelectElement).value)"
+      <a
+        role="button"
+        :title="profileTitle(p)"
+        @click="apply(p.name)"
+      >
+        <OmegaProfileInline :profile="p" />
+      </a>
+    </li>
+
+    <li class="divider" />
+
+    <!-- Custom (user) profiles. -->
+    <li
+      v-for="p in customProfiles"
+      :key="p.name"
+      class="profile custom-profile"
+      :class="{ active: p.name === current, hi: p.name === selectedName }"
+    >
+      <a
+        role="button"
+        :title="profileTitle(p)"
+        @click="apply(p.name)"
+      >
+        <OmegaProfileInline :profile="p" />
+      </a>
+    </li>
+
+    <!-- Per-domain rule for the current tab. -->
+    <template v-if="domain">
+      <li class="divider" />
+      <li
+        class="temp-rule"
+        :class="{ open: tempOpen }"
+      >
+        <a
+          class="dropdown-toggle"
+          role="button"
+          @click="tempOpen = !tempOpen"
         >
-          <option value="">
-            {{ t('popup_addRulePlaceholder') || 'Add a rule…' }}
-          </option>
-          <option
+          <span class="glyphicon glyphicon-filter" />
+          {{ ' ' }}
+          <span class="current-domain">{{ domain }}</span>
+          <span class="caret" />
+        </a>
+        <ul
+          v-show="tempOpen"
+          class="dropdown-menu"
+        >
+          <li
             v-for="p in visibleProfiles"
             :key="p.name"
-            :value="p.name"
+            :class="{ active: p.name === domainRule }"
           >
-            {{ dispName(p.name) }}
-          </option>
-        </select>
-      </div>
-    </div>
+            <a
+              role="button"
+              :title="profileTitle(p)"
+              @click="setDomainRule(p.name)"
+            >
+              <OmegaProfileInline :profile="p" />
+            </a>
+          </li>
+        </ul>
+      </li>
+    </template>
 
-    <div class="ft">
-      <button
-        class="linkbtn"
-        @click="openOptions"
+    <li class="divider" />
+
+    <!-- Open the options page. -->
+    <li>
+      <a
+        role="button"
+        @click="openOptions()"
       >
-        {{ t('popup_optionsShort') || 'Options' }} <span class="key">o</span>
-      </button>
-    </div>
-  </div>
+        <span class="glyphicon glyphicon-wrench" />
+        {{ ' ' }}
+        <span>{{ t('popup_showOptions') || 'Options' }}</span>
+      </a>
+    </li>
+  </ul>
 </template>
-
-<style scoped>
-.popup {
-  width: 280px;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  color: #1f2933;
-  background: #fff;
-}
-.hd {
-  padding: 0.6rem 0.9rem;
-  border-bottom: 1px solid #e2e7ef;
-}
-.title {
-  font-weight: 700;
-}
-.warn {
-  margin: 0;
-  padding: 0.5rem 0.9rem;
-  background: #fdecea;
-  color: #a23;
-  font-size: 0.8rem;
-}
-.profiles {
-  list-style: none;
-  margin: 0;
-  padding: 0.3rem 0;
-  max-height: 380px;
-  overflow-y: auto;
-}
-.profiles li {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.45rem 0.9rem;
-  cursor: pointer;
-}
-.profiles li.hi {
-  background: #eef3fd;
-}
-.profiles li.active {
-  font-weight: 600;
-}
-.dot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  flex: none;
-}
-.name {
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.idx {
-  color: #9aa5b5;
-  font-size: 0.72rem;
-  border: 1px solid #dbe1ea;
-  border-radius: 3px;
-  padding: 0 0.25rem;
-}
-.check {
-  color: #2f9e58;
-}
-.ft {
-  border-top: 1px solid #e2e7ef;
-  padding: 0.45rem 0.9rem;
-}
-.domain {
-  border-top: 1px solid #e2e7ef;
-  padding: 0.5rem 0.9rem;
-  background: #f7f9fc;
-}
-.domain-hd {
-  font-size: 0.8rem;
-  color: #647089;
-  margin-bottom: 0.35rem;
-}
-.dom {
-  color: #1f2933;
-  font-weight: 600;
-}
-.domain-row select {
-  width: 100%;
-  padding: 0.35rem 0.5rem;
-  border: 1px solid #c4ccd8;
-  border-radius: 6px;
-  font: inherit;
-}
-.linkbtn {
-  background: none;
-  border: none;
-  color: #2f6feb;
-  cursor: pointer;
-  font: inherit;
-  padding: 0.2rem 0;
-}
-.key {
-  color: #9aa5b5;
-  border: 1px solid #dbe1ea;
-  border-radius: 3px;
-  padding: 0 0.25rem;
-  font-size: 0.72rem;
-}
-</style>

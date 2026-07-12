@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import type { Profile } from '@switchyomega/omega-pac'
 import { dispName } from '@/ui/i18n'
 
-defineProps<{ profile: Profile }>()
+// Structural minimum so both the options-page Profile and the popup's lighter
+// available-profile shape satisfy it.
+defineProps<{ profile: { name: string; profileType?: string; color?: unknown } }>()
 </script>
 
 <template>

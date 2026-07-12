@@ -65,5 +65,22 @@ try {
     ['#/profile/proxy', '/tmp/so3-fixed.jpg'],
   ]) await shoot(hash, file)
   ws.close()
+
+  // Capture the popup in its own tab (small viewport, like the real popup).
+  try {
+    const ptab = await gj(`/json/new?${encodeURIComponent(`chrome-extension://${EXT}/src/entries/popup/index.html`)}`, 'PUT')
+    const pws = new WebSocket(ptab.webSocketDebuggerUrl)
+    await new Promise((r) => pws.addEventListener('open', r))
+    const pcall = mkcall(pws)
+    await pcall('Page.enable'); await pcall('Runtime.enable')
+    await pcall('Emulation.setDeviceMetricsOverride', { width: 320, height: 500, deviceScaleFactor: 1, mobile: false })
+    await sleep(1500)
+    try {
+      const s = await pcall('Page.captureScreenshot', { format: 'jpeg', quality: 82 }, 8000)
+      writeFileSync('/tmp/so3-popup.jpg', Buffer.from(s.data, 'base64'))
+      console.log('shot /tmp/so3-popup.jpg')
+    } catch (e) { console.log('SHOTFAIL popup', e.message) }
+    pws.close()
+  } catch (e) { console.log('popup capture error', e.message) }
 } finally { killChrome() }
 process.exit(0)
