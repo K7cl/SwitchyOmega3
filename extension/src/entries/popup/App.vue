@@ -15,7 +15,20 @@ const current = ref('')
 const proxyNotControllable = ref('')
 const selected = ref(0)
 
-const visibleProfiles = computed(() => profiles.value.filter((p) => !p.name.startsWith('__')))
+// Current-tab per-domain rule.
+const domain = ref('')
+const domainRule = ref('')
+
+const PINNED = ['direct', 'system']
+const visibleProfiles = computed(() => {
+  const list = profiles.value.filter((p) => !p.name.startsWith('__'))
+  const rank = (name: string): number => {
+    const i = PINNED.indexOf(name)
+    return i < 0 ? PINNED.length : i
+  }
+  // Stable sort keeps user profiles in their existing order, built-ins on top.
+  return [...list].sort((a, b) => rank(a.name) - rank(b.name))
+})
 
 // Fast path: read the last-computed state straight from storage (no SW wait).
 async function loadSnapshot(): Promise<void> {
@@ -48,6 +61,37 @@ function openOptions(): void {
   window.close()
 }
 
+// --- per-domain rule for the current tab ------------------------------------
+async function loadPage(): Promise<void> {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+    if (!tab?.url) return
+    const info = await callBackground<{ domain?: string; tempRuleProfileName: string | null }>(
+      'getPageInfo',
+      { url: tab.url },
+    )
+    if (info?.domain) {
+      domain.value = info.domain
+      domainRule.value = info.tempRuleProfileName ?? ''
+    }
+  } catch {
+    /* no accessible tab */
+  }
+}
+
+async function setDomainRule(name: string): Promise<void> {
+  if (!name || !domain.value) return
+  domainRule.value = name
+  await callBackground('addTempRule', domain.value, name)
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+    if (tab?.id != null) chrome.tabs.reload(tab.id)
+  } catch {
+    /* ignore */
+  }
+  setTimeout(() => window.close(), 120)
+}
+
 function onKey(e: KeyboardEvent): void {
   const list = visibleProfiles.value
   if (e.key === 'j' || e.key === 'ArrowDown') {
@@ -71,6 +115,7 @@ function onKey(e: KeyboardEvent): void {
 
 onMounted(() => {
   loadSnapshot()
+  loadPage()
   // Reconcile with the SW's authoritative state once it responds.
   callBackground<Record<string, unknown>>('getState', null)
     .then((st) => {
@@ -121,6 +166,33 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
         >✓</span>
       </li>
     </ul>
+
+    <div
+      v-if="domain"
+      class="domain"
+    >
+      <div class="domain-hd">
+        {{ t('popup_forThisSite') || 'For this site' }}:
+        <span class="dom">{{ domain }}</span>
+      </div>
+      <div class="domain-row">
+        <select
+          :value="domainRule"
+          @change="setDomainRule(($event.target as HTMLSelectElement).value)"
+        >
+          <option value="">
+            {{ t('popup_addRulePlaceholder') || 'Add a rule…' }}
+          </option>
+          <option
+            v-for="p in visibleProfiles"
+            :key="p.name"
+            :value="p.name"
+          >
+            {{ dispName(p.name) }}
+          </option>
+        </select>
+      </div>
+    </div>
 
     <div class="ft">
       <button
@@ -199,6 +271,27 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
 .ft {
   border-top: 1px solid #e2e7ef;
   padding: 0.45rem 0.9rem;
+}
+.domain {
+  border-top: 1px solid #e2e7ef;
+  padding: 0.5rem 0.9rem;
+  background: #f7f9fc;
+}
+.domain-hd {
+  font-size: 0.8rem;
+  color: #647089;
+  margin-bottom: 0.35rem;
+}
+.dom {
+  color: #1f2933;
+  font-weight: 600;
+}
+.domain-row select {
+  width: 100%;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid #c4ccd8;
+  border-radius: 6px;
+  font: inherit;
 }
 .linkbtn {
   background: none;

@@ -15,7 +15,11 @@ const props = defineProps<{ name: string }>()
 const store = useOptionsStore()
 const router = useRouter()
 
-const profile = computed(() => store.profile(props.name))
+const profile = computed(() => {
+  const p = store.profile(props.name)
+  // Hidden attached profiles (name starts with __) are not editable here.
+  return p && !p.name.startsWith('__') ? p : undefined
+})
 
 const isBuiltin = computed(() => Boolean(profile.value?.builtin))
 
