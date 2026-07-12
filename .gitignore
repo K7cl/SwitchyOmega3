@@ -4,6 +4,7 @@ bower_components
 # Build output (new MV3 toolchain)
 dist
 extension/dist
+dist-zip
 *.local
 .vite
 stats.html

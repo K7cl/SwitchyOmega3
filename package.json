@@ -13,7 +13,9 @@
     "build": "pnpm build:locales && pnpm --filter @switchyomega/extension build",
     "typecheck": "pnpm -r --if-present typecheck",
     "lint": "eslint .",
-    "test": "vitest run"
+    "test": "vitest run",
+    "check:bundle": "node scripts/check-bundle.mjs",
+    "package": "pnpm build && node scripts/check-bundle.mjs && node scripts/package.mjs"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

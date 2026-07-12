@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+    branches: [master, mv3-rewrite]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.15.9
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test
+        run: pnpm test
+
+      - name: Build locales
+        run: pnpm build:locales
+
+      - name: Ensure locales are up to date
+        run: git diff --exit-code extension/public/_locales
+
+      - name: Build extension
+        run: pnpm --filter @switchyomega/extension build
+
+      - name: Bundle security/manifest gate
+        run: pnpm check:bundle
+
+      - name: Dependency audit (high+)
+        run: pnpm audit --prod --audit-level high
+
+      - name: Package Chrome Web Store zip
+        run: node scripts/package.mjs
+
+      - name: Upload zip artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: switchyomega3-extension
+          path: dist-zip/*.zip
+          if-no-files-found: error
