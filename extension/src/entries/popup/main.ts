@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 
-// Phase 0: bare Vue mount. Phase 6 adds the quick-switch menu, keyboard
-// shortcuts, and synchronous snapshot render from storage (TTI budget).
+// Popup: mount immediately. The app renders a synchronous snapshot from
+// chrome.storage before any SW round-trip (TTI budget, plan §4.8).
 createApp(App).mount('#app')
