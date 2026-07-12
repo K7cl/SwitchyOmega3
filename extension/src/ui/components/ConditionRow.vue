@@ -5,18 +5,20 @@ const props = defineProps<{
   condition: { conditionType: string; [k: string]: unknown }
 }>()
 
-const types: Array<{ value: string; label: string }> = [
-  { value: 'HostWildcardCondition', label: t('cond_hostWildcard') || 'Host wildcard' },
-  { value: 'HostRegexCondition', label: t('cond_hostRegex') || 'Host regex' },
-  { value: 'UrlWildcardCondition', label: t('cond_urlWildcard') || 'URL wildcard' },
-  { value: 'UrlRegexCondition', label: t('cond_urlRegex') || 'URL regex' },
-  { value: 'KeywordCondition', label: t('cond_keyword') || 'Keyword' },
-  { value: 'HostLevelsCondition', label: t('cond_hostLevels') || 'Host levels' },
-  { value: 'IpCondition', label: t('cond_ip') || 'IP subnet' },
-  { value: 'WeekdayCondition', label: t('cond_weekday') || 'Weekday' },
-  { value: 'TimeCondition', label: t('cond_time') || 'Time (hour)' },
-  { value: 'FalseCondition', label: t('cond_false') || 'Disabled (never)' },
-  { value: 'TrueCondition', label: t('cond_true') || 'Always' },
+// Condition types, in the same order the original AngularJS options page
+// offered them. Labels come from the original `condition_<Type>` i18n keys.
+const types: string[] = [
+  'HostWildcardCondition',
+  'HostRegexCondition',
+  'UrlWildcardCondition',
+  'UrlRegexCondition',
+  'KeywordCondition',
+  'HostLevelsCondition',
+  'IpCondition',
+  'WeekdayCondition',
+  'TimeCondition',
+  'FalseCondition',
+  'TrueCondition',
 ]
 
 const patternTypes = new Set([
@@ -26,6 +28,10 @@ const patternTypes = new Set([
   'UrlRegexCondition',
   'KeywordCondition',
 ])
+
+function typeLabel(ty: string): string {
+  return t('condition_' + ty) || ty
+}
 
 function str(key: string): string {
   return (props.condition[key] as string) ?? ''
@@ -47,106 +53,150 @@ function setNum(key: string, e: Event): void {
 </script>
 
 <template>
-  <div class="row cond-row">
-    <select v-model="condition.conditionType">
+  <div class="form-inline cond-row">
+    <select
+      v-model="condition.conditionType"
+      class="form-control cond-type"
+    >
       <option
         v-for="ty in types"
-        :key="ty.value"
-        :value="ty.value"
+        :key="ty"
+        :value="ty"
       >
-        {{ ty.label }}
+        {{ typeLabel(ty) }}
       </option>
     </select>
 
+    <!-- Pattern-based conditions: single text pattern input -->
     <input
       v-if="patternTypes.has(condition.conditionType)"
       type="text"
-      class="grow"
+      class="form-control cond-grow"
       :value="str('pattern')"
-      :placeholder="t('cond_patternPlaceholder') || 'Pattern'"
       @input="setStr('pattern', $event)"
     >
 
+    <!-- Host levels: min ≤ host levels ≤ max -->
     <template v-else-if="condition.conditionType === 'HostLevelsCondition'">
       <input
         type="number"
+        min="1"
+        max="99"
+        class="form-control cond-num"
         :value="num('minValue')"
-        :placeholder="t('cond_min') || 'Min'"
         @input="setNum('minValue', $event)"
       >
+      <span class="cond-sep">{{ t('options_hostLevelsBetween') || '≤ host levels ≤' }}</span>
       <input
         type="number"
+        min="1"
+        max="99"
+        class="form-control cond-num"
         :value="num('maxValue')"
-        :placeholder="t('cond_max') || 'Max'"
         @input="setNum('maxValue', $event)"
       >
     </template>
 
+    <!-- IP literals: address + prefix length -->
     <template v-else-if="condition.conditionType === 'IpCondition'">
       <input
         type="text"
-        class="grow"
+        class="form-control cond-grow"
+        placeholder="127.0.0.1"
         :value="str('ip')"
-        :placeholder="t('cond_ip') || 'IP address'"
         @input="setStr('ip', $event)"
       >
+      <span class="cond-sep">/</span>
       <input
         type="number"
+        min="0"
+        max="128"
+        class="form-control cond-num"
         :value="num('prefixLength')"
-        :placeholder="t('cond_prefix') || 'Prefix'"
         @input="setNum('prefixLength', $event)"
       >
     </template>
 
+    <!-- Day of the week: start - end (0 = Sunday .. 6 = Saturday) -->
     <template v-else-if="condition.conditionType === 'WeekdayCondition'">
       <input
         type="number"
         min="0"
         max="6"
+        class="form-control cond-num"
         :value="num('startDay')"
-        :placeholder="t('cond_startDay') || 'Start day (0-6)'"
         @input="setNum('startDay', $event)"
       >
+      <span class="cond-sep">-</span>
       <input
         type="number"
         min="0"
         max="6"
+        class="form-control cond-num"
         :value="num('endDay')"
-        :placeholder="t('cond_endDay') || 'End day (0-6)'"
         @input="setNum('endDay', $event)"
       >
     </template>
 
+    <!-- Current time: start ≤ current hour ≤ end -->
     <template v-else-if="condition.conditionType === 'TimeCondition'">
       <input
         type="number"
         min="0"
         max="23"
+        class="form-control cond-num"
         :value="num('startHour')"
-        :placeholder="t('cond_startHour') || 'Start hour (0-23)'"
         @input="setNum('startHour', $event)"
       >
+      <span class="cond-sep">{{ t('options_hourBetween') || '≤ current hour ≤' }}</span>
       <input
         type="number"
         min="0"
         max="23"
+        class="form-control cond-num"
         :value="num('endHour')"
-        :placeholder="t('cond_endHour') || 'End hour (0-23)'"
         @input="setNum('endHour', $event)"
       >
     </template>
+
+    <!-- FalseCondition: ignored when matching; show any leftover pattern disabled -->
+    <template v-else-if="condition.conditionType === 'FalseCondition'">
+      <input
+        v-if="str('pattern')"
+        type="text"
+        class="form-control cond-grow"
+        disabled
+        :value="str('pattern')"
+        :title="t('condition_details_FalseCondition') || '(Condition ignored when matching)'"
+      >
+      <span
+        v-else
+        class="text-muted cond-details"
+      >{{ t('condition_details_FalseCondition') || '(Condition ignored when matching)' }}</span>
+    </template>
+
+    <!-- TrueCondition: always matches, no field -->
   </div>
 </template>
 
 <style scoped>
 .cond-row {
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  gap: 6px;
 }
-.grow {
+.cond-type {
+  width: auto;
+}
+.cond-grow {
   flex: 1;
   min-width: 8rem;
 }
-.cond-row input[type='number'] {
-  width: 6rem;
+.cond-num {
+  width: 5rem;
+}
+.cond-sep {
+  white-space: nowrap;
 }
 </style>

@@ -3,6 +3,7 @@ import { computed, ref, nextTick, type Component } from 'vue'
 import { useRouter } from 'vue-router'
 import { useOptionsStore } from '@/ui/store'
 import { t, dispName } from '@/ui/i18n'
+import { type Profile } from '@switchyomega/omega-pac'
 import FixedProfileEditor from '@/ui/editors/FixedProfileEditor.vue'
 import SwitchProfileEditor from '@/ui/editors/SwitchProfileEditor.vue'
 import PacProfileEditor from '@/ui/editors/PacProfileEditor.vue'
@@ -15,7 +16,11 @@ const props = defineProps<{ name: string }>()
 const store = useOptionsStore()
 const router = useRouter()
 
-const profile = computed(() => store.profile(props.name))
+const profile = computed(() => {
+  const p = store.profile(props.name)
+  // Hidden attached profiles (name starts with __) are not editable here.
+  return p && !p.name.startsWith('__') ? p : undefined
+})
 
 const isBuiltin = computed(() => Boolean(profile.value?.builtin))
 
@@ -28,6 +33,22 @@ const editorComponent = computed<Component>(() => {
   if (type.includes('RuleList')) return RuleListProfileEditor
   if (type === 'VirtualProfile') return VirtualProfileEditor
   return UnsupportedProfileEditor
+})
+
+const isVirtual = computed(() => profile.value?.profileType === 'VirtualProfile')
+
+/** Resolve the effective color for a virtual profile through its target chain. */
+const virtualColor = computed<string>(() => {
+  let p: Profile | undefined = profile.value
+  let color: string | undefined
+  const seen = new Set<string>()
+  while (p && !seen.has(p.name)) {
+    seen.add(p.name)
+    color = p.color as string | undefined
+    const target = p.defaultProfileName as string | undefined
+    p = target ? store.profile(target) : undefined
+  }
+  return color || '#99dd99'
 })
 
 function onColorChange(e: Event): void {
@@ -91,92 +112,132 @@ function onDelete(): void {
   store.deleteProfile(props.name)
   router.push('/about')
 }
+
+const syncOptions = computed(() => profile.value?.syncOptions as string | undefined)
+const syncError = computed(
+  () => profile.value?.syncError as { reason?: string } | undefined,
+)
 </script>
 
 <template>
   <div
     v-if="!profile"
-    class="card"
+    class="alert alert-danger width-limit"
   >
-    <p class="err">
-      {{ t('options_profileNotFound') || 'Profile not found.' }}
-    </p>
+    <span class="glyphicon glyphicon-remove" />
+    {{ ' ' }}
+    {{ t('options_profileNotFound') || 'Profile not found.' }}
   </div>
 
   <template v-else>
-    <div class="card header">
-      <div class="row title-row">
+    <div class="page-header">
+      <div class="profile-actions">
+        <template v-if="!renaming">
+          <button
+            v-if="!isBuiltin"
+            class="btn btn-default"
+            @click="startRename"
+          >
+            <span class="glyphicon glyphicon-edit" />
+            {{ ' ' }}
+            {{ t('options_renameProfile') || 'Rename' }}
+          </button>
+          {{ ' ' }}
+          <button
+            class="btn btn-default"
+            @click="onApply"
+          >
+            <span class="glyphicon glyphicon-play" />
+            {{ ' ' }}
+            {{ t('popup_applyProfile') || 'Apply' }}
+          </button>
+          {{ ' ' }}
+          <button
+            v-if="!isBuiltin"
+            class="btn btn-danger"
+            @click="onDelete"
+          >
+            <span class="glyphicon glyphicon-trash" />
+            {{ ' ' }}
+            {{ t('options_deleteProfile') || 'Delete' }}
+          </button>
+        </template>
+        <template v-else>
+          <div class="input-group">
+            <input
+              ref="renameInput"
+              v-model="renameValue"
+              type="text"
+              class="form-control"
+              @keyup.enter="confirmRename"
+              @keyup.esc="cancelRename"
+            >
+            <span class="input-group-btn">
+              <button
+                class="btn btn-primary"
+                @click="confirmRename"
+              >
+                {{ t('dialog_ok') || 'OK' }}
+              </button>
+              <button
+                class="btn btn-default"
+                @click="cancelRename"
+              >
+                {{ t('dialog_cancel') || 'Cancel' }}
+              </button>
+            </span>
+          </div>
+        </template>
+      </div>
+
+      <span class="profile-color-editor">
+        <div
+          v-if="isVirtual"
+          class="profile-color-editor-fake"
+          :style="{ 'background-color': virtualColor }"
+        />
         <input
+          v-else
           type="color"
-          class="color"
           :value="(profile.color as string) || '#000000'"
           :title="t('options_profileColor') || 'Profile color'"
           @change="onColorChange"
         >
-        <h1
-          v-if="!renaming"
-          class="pname"
-        >
-          {{ dispName(profile.name) }}
-        </h1>
-        <div
-          v-else
-          class="rename row"
-        >
-          <input
-            ref="renameInput"
-            v-model="renameValue"
-            type="text"
-            class="rename-input"
-            @keyup.enter="confirmRename"
-            @keyup.esc="cancelRename"
-          >
-          <button
-            class="btn primary"
-            @click="confirmRename"
-          >
-            {{ t('dialog_ok') || 'OK' }}
-          </button>
-          <button
-            class="btn ghost"
-            @click="cancelRename"
-          >
-            {{ t('dialog_cancel') || 'Cancel' }}
-          </button>
-        </div>
+      </span>
 
-        <span class="spacer" />
-
-        <template v-if="!renaming">
-          <button
-            v-if="!isBuiltin"
-            class="btn ghost"
-            @click="startRename"
-          >
-            {{ t('options_renameProfile') || 'Rename' }}
-          </button>
-          <button
-            class="btn"
-            @click="onApply"
-          >
-            {{ t('popup_applyProfile') || 'Apply' }}
-          </button>
-          <button
-            v-if="!isBuiltin"
-            class="btn danger"
-            @click="onDelete"
-          >
-            {{ t('options_deleteProfile') || 'Delete' }}
-          </button>
-        </template>
-      </div>
-      <p
-        v-if="renameError"
-        class="err"
-      >
-        {{ renameError }}
-      </p>
+      <h2 class="profile-name">
+        {{ t('options_profileTabPrefix') }}{{ dispName(profile.name) }}
+      </h2>
     </div>
+
+    <p
+      v-if="renameError"
+      class="alert alert-danger width-limit"
+    >
+      {{ renameError }}
+    </p>
+
+    <section
+      v-if="syncOptions === 'disabled'"
+      class="settings-group"
+    >
+      <p
+        v-if="!syncError"
+        class="alert alert-info width-limit"
+      >
+        <span class="glyphicon glyphicon-info-sign" />
+        {{ ' ' }}
+        {{ t('options_profileSyncDisabled') || 'Syncing is disabled for this profile.' }}
+      </p>
+      <p
+        v-else
+        class="alert alert-danger width-limit"
+      >
+        <span class="glyphicon glyphicon-remove" />
+        {{ ' ' }}
+        {{ t('options_profileSyncDisabled_' + (syncError.reason || '')) }}
+      </p>
+    </section>
 
     <component
       :is="editorComponent"
@@ -184,26 +245,3 @@ function onDelete(): void {
     />
   </template>
 </template>
-
-<style scoped>
-.header {
-  margin-bottom: 1rem;
-}
-.title-row {
-  align-items: center;
-}
-.color {
-  width: 2.25rem;
-  height: 2.25rem;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-}
-.pname {
-  margin: 0;
-}
-.rename-input {
-  min-width: 12rem;
-}
-</style>

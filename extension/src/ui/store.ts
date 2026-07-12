@@ -37,7 +37,13 @@ export const useOptionsStore = defineStore('options', () => {
   const profiles = computed<Profile[]>(() => {
     const list: Profile[] = []
     for (const key of Object.keys(options.value)) {
-      if (key[0] === '+') list.push(options.value[key] as Profile)
+      if (key[0] !== '+') continue
+      const p = options.value[key] as Profile
+      // Hidden profiles (name starts with __, e.g. attached rule lists like
+      // __ruleListOf_auto) are managed inside their parent profile — never
+      // listed or edited as top-level profiles.
+      if (p.name?.startsWith('__')) continue
+      list.push(p)
     }
     return list.sort((a, b) => a.name.localeCompare(b.name))
   })

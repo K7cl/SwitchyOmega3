@@ -5,7 +5,7 @@
 // icon/title is set on profile change.
 
 import { Options } from '@switchyomega/omega-core'
-import { Profiles, type Profile } from '@switchyomega/omega-pac'
+import { Profiles, getBaseDomain, type Profile } from '@switchyomega/omega-pac'
 import { drawIcon, clearIconCache } from './icon.js'
 import { fetchUrl } from './fetch_url.js'
 
@@ -194,5 +194,22 @@ export class ChromeOptions extends Options {
 
   override onFirstRun(_reason: string): void {
     chrome.tabs.create({ url: chrome.runtime.getURL(OPTIONS_PAGE) })
+  }
+
+  /** Page info for the popup's per-domain rule feature. */
+  getPageInfo({ url }: { url?: string }): {
+    url?: string
+    domain?: string
+    tempRuleProfileName: string | null
+  } {
+    if (!url || !refreshable(url)) return { tempRuleProfileName: null }
+    try {
+      const hostname = new URL(url).hostname
+      if (!hostname) return { tempRuleProfileName: null }
+      const domain = getBaseDomain(hostname)
+      return { url, domain, tempRuleProfileName: this.queryTempRule(domain) }
+    } catch {
+      return { tempRuleProfileName: null }
+    }
   }
 }
