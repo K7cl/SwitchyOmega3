@@ -31,6 +31,7 @@ if (chrome.storage.sync) {
 }
 
 const proxyImpl = new SettingsProxyImpl(Log)
+proxyImpl.initAuth() // register onAuthRequired at the top level (cold-wake safe)
 state.set({ proxyImplFeatures: proxyImpl.features })
 
 const options = new ChromeOptions(null, storage, state, Log, sync, proxyImpl)
