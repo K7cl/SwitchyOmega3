@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@switchyomega/omega-pac": "workspace:*"
+    "@switchyomega/omega-pac": "workspace:*",
+    "jsondiffpatch": "0.7.6"
   }
 }

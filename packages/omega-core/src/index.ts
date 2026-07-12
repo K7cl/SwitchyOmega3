@@ -1,9 +1,21 @@
 // @switchyomega/omega-core — browser-independent options manager.
 //
-// Phase 0: stub. Phase 2 ports the legacy `omega-target` package
-// (Options, Storage, OptionsSync, Log, errors, default_options) to TS with a
-// native-Promise layer, async-only storage, a v2→v3 upgrade chain, and the
-// abstract ProxyImpl interface. See docs/mv3-rewrite-plan.md §3.
+// Ported to TypeScript from the legacy CoffeeScript omega-target.
+// See docs/mv3-rewrite-plan.md §3.
 
-/** Placeholder marker so the package has a real export before Phase 2. */
-export const OMEGA_CORE_VERSION = '3.0.0'
+export { Log } from './log.js'
+export type { LogType } from './log.js'
+export { Storage } from './storage.js'
+export type { StorageItems, WriteOperations, MergeFn, ChangesInput, WatchCallback } from './storage.js'
+export { BrowserStorage } from './browser_storage.js'
+export type { WebStorageLike } from './browser_storage.js'
+export { Options } from './options.js'
+export { OptionsSync } from './options_sync.js'
+export { TokenBucket } from './token_bucket.js'
+export { getDefaultOptions } from './default_options.js'
+export type { ProxyImpl } from './proxy_impl.js'
+export type { OmegaOptions, Profile } from './types.js'
+export * as Errors from './errors.js'
+
+// Re-export omega-pac for convenience (legacy index exposed OmegaPac).
+export * as OmegaPac from '@switchyomega/omega-pac'

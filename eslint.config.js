@@ -44,6 +44,8 @@ export default tseslint.config(
     },
     rules: {
       'no-console': 'off',
+      // Allow `let` for variables read (in a closure) before their assignment.
+      'prefer-const': ['error', { ignoreReadBeforeAssign: true }],
       // Honor the leading-underscore convention for intentionally-unused args.
       '@typescript-eslint/no-unused-vars': [
         'error',
