@@ -5,6 +5,8 @@ bower_components
 dist
 extension/dist
 dist-zip
+# generated style assets (compiled from extension/styles/*.less)
+extension/src/styles
 *.local
 .vite
 stats.html

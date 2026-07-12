@@ -9,7 +9,6 @@ export const router = createRouter({
     { path: '/ui', component: () => import('./views/UiSettings.vue') },
     { path: '/general', component: () => import('./views/General.vue') },
     { path: '/io', component: () => import('./views/ImportExport.vue') },
-    { path: '/sync', component: () => import('./views/Sync.vue') },
     { path: '/profile/:name', component: () => import('./views/ProfileEditor.vue'), props: true },
   ],
 })

@@ -4,10 +4,12 @@ import { type Profile } from '@switchyomega/omega-pac'
 import { useOptionsStore } from '@/ui/store'
 import { callBackground } from '@/ui/messaging'
 import { t } from '@/ui/i18n'
-import ProfileSelect from '@/ui/components/ProfileSelect.vue'
+import OmegaProfileSelect from '@/ui/components/OmegaProfileSelect.vue'
 
 const props = defineProps<{ profile: Profile }>()
 const store = useOptionsStore()
+
+const ruleListFormats = ['Switchy', 'AutoProxy']
 
 function touch(): void {
   store.touchProfile(props.profile.name)
@@ -37,13 +39,24 @@ const format = computed<string>({
   },
 })
 
+// input-group-clear behaviour: toggle swaps the current value with a stashed one.
+const oldSourceUrl = ref<string>('')
+
 const sourceUrl = computed<string>({
   get: () => (props.profile.sourceUrl as string) || '',
   set: (v) => {
     props.profile.sourceUrl = v
+    if (v) oldSourceUrl.value = ''
     touch()
   },
 })
+
+function toggleClear(): void {
+  const current = sourceUrl.value
+  props.profile.sourceUrl = oldSourceUrl.value
+  oldSourceUrl.value = current
+  touch()
+}
 
 const ruleList = computed<string>({
   get: () => (props.profile.ruleList as string) || '',
@@ -53,114 +66,105 @@ const ruleList = computed<string>({
   },
 })
 
-const downloading = ref(false)
-const status = ref('')
-let statusTimer: ReturnType<typeof setTimeout> | undefined
+const updating = ref<boolean>(false)
 
-function flashStatus(msg: string): void {
-  status.value = msg
-  if (statusTimer) clearTimeout(statusTimer)
-  statusTimer = setTimeout(() => {
-    status.value = ''
-  }, 4000)
-}
-
-async function downloadNow(): Promise<void> {
-  if (!sourceUrl.value || downloading.value) return
-  downloading.value = true
-  status.value = ''
+async function updateProfile(): Promise<void> {
+  if (!sourceUrl.value || updating.value) return
+  updating.value = true
   try {
     await callBackground('updateProfile', props.profile.name)
-    flashStatus(t('options_ruleListUpdated') || 'Rule list updated.')
-  } catch (e) {
-    flashStatus((t('options_ruleListUpdateFailed') || 'Update failed: ') + String(e))
   } finally {
-    downloading.value = false
+    updating.value = false
   }
 }
 </script>
 
 <template>
-  <div class="rulelist-editor">
-    <div class="card">
-      <div class="field">
-        <label>{{ t('options_ruleListMatchProfile') || 'Match profile' }}</label>
-        <ProfileSelect
+  <div>
+    <section class="settings-group">
+      <h3>{{ t('options_group_ruleListConfig') || 'Rule List Configuration' }}</h3>
+      <div class="form-group">
+        <label>{{ t('options_ruleListMatchProfile') || 'When a request matches the rule list, apply this profile:' }}</label>
+        {{ ' ' }}
+        <OmegaProfileSelect
           v-model="matchProfileName"
-          :include-builtin="true"
+          style="display: inline-block;"
         />
       </div>
-      <div class="field">
-        <label>{{ t('options_ruleListDefaultProfile') || 'Default profile' }}</label>
-        <ProfileSelect
+      <div class="form-group">
+        <label>{{ t('options_ruleListDefaultProfile') || 'For all other requests, apply this profile:' }}</label>
+        {{ ' ' }}
+        <OmegaProfileSelect
           v-model="defaultProfileName"
-          :include-builtin="true"
+          style="display: inline-block;"
         />
       </div>
-    </div>
-
-    <div class="card">
-      <div class="field">
-        <label>{{ t('options_ruleListFormat') || 'Format' }}</label>
-        <select v-model="format">
-          <option value="Switchy">
-            {{ t('options_ruleListFormatSwitchy') || 'Switchy' }}
-          </option>
-          <option value="AutoProxy">
-            {{ t('options_ruleListFormatAutoProxy') || 'AutoProxy' }}
-          </option>
-        </select>
-      </div>
-      <div class="field">
-        <label>{{ t('options_ruleListSourceUrl') || 'Source URL' }}</label>
-        <input
-          v-model="sourceUrl"
-          type="text"
-          placeholder="https://"
+      <form class="form-group">
+        <label>{{ t('options_ruleListFormat') || 'Rule List Format' }}</label>
+        <div
+          v-for="fmt in ruleListFormats"
+          :key="fmt"
+          class="radio inline-form-control no-min-width"
         >
+          <label>
+            <input
+              v-model="format"
+              type="radio"
+              name="formatInput"
+              :value="fmt"
+            >
+            {{ t('ruleListFormat_' + fmt) || fmt }}
+          </label>
+        </div>
+      </form>
+    </section>
+    <section class="settings-group">
+      <h3>{{ t('options_group_ruleListUrl') || 'Rule List URL' }}</h3>
+      <div class="width-limit">
+        <div class="input-group">
+          <input
+            v-model="sourceUrl"
+            type="url"
+            class="form-control"
+          >
+          <span class="input-group-btn">
+            <button
+              type="button"
+              class="btn btn-default input-group-clear-btn"
+              :disabled="!sourceUrl && !oldSourceUrl"
+              :title="oldSourceUrl ? (t('inputClear_restore') || 'Restore') : (t('inputClear_clear') || 'Clear')"
+              @click="toggleClear"
+            >
+              <span
+                class="glyphicon"
+                :class="oldSourceUrl ? 'glyphicon-repeat' : 'glyphicon-remove'"
+              />
+            </button>
+          </span>
+        </div>
       </div>
-      <div class="row">
+      <p class="help-block">
+        {{ t('options_ruleListUrlHelp') || 'Set the URL of the rule list to download and use automatically.' }}
+      </p>
+    </section>
+    <section class="settings-group">
+      <h3>{{ t('options_group_ruleListText') || 'Rule List Text' }}</h3>
+      <p>
         <button
-          class="btn primary"
-          :disabled="!sourceUrl || downloading"
-          @click="downloadNow"
+          class="btn btn-default"
+          :disabled="!sourceUrl || updating"
+          @click="updateProfile"
         >
-          {{ downloading ? (t('options_downloading') || 'Downloading…') : (t('options_downloadNow') || 'Download now') }}
+          <span class="glyphicon glyphicon-download-alt" />
+          {{ ' ' }}{{ t('options_downloadProfileNow') || 'Download Now' }}
         </button>
-        <span
-          v-if="status"
-          class="status"
-        >{{ status }}</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="field">
-        <label>{{ t('options_ruleList') || 'Rule list' }}</label>
-        <textarea
-          v-model="ruleList"
-          class="rulelist-text"
-          rows="16"
-          spellcheck="false"
-        />
-      </div>
-    </div>
+      </p>
+      <textarea
+        v-model="ruleList"
+        class="monospace form-control width-limit"
+        rows="20"
+        :disabled="!!sourceUrl"
+      />
+    </section>
   </div>
 </template>
-
-<style scoped>
-.rulelist-editor {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.rulelist-text {
-  width: 100%;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  resize: vertical;
-}
-.status {
-  align-self: center;
-  opacity: 0.8;
-}
-</style>

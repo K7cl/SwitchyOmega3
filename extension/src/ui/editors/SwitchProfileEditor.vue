@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { type Profile } from '@switchyomega/omega-pac'
 import { useOptionsStore } from '@/ui/store'
 import { t } from '@/ui/i18n'
-import { type Profile } from '@switchyomega/omega-pac'
-import ProfileSelect from '@/ui/components/ProfileSelect.vue'
+import OmegaProfileSelect from '@/ui/components/OmegaProfileSelect.vue'
 import ConditionRow from '@/ui/components/ConditionRow.vue'
 
 interface Rule {
@@ -20,7 +20,7 @@ const defaultProfileName = computed<string>({
   get: () => (props.profile.defaultProfileName as string) ?? 'direct',
   set: (value: string) => {
     props.profile.defaultProfileName = value
-    store.touchProfile(props.profile.name)
+    touch()
   },
 })
 
@@ -41,7 +41,13 @@ function addRule(): void {
   touch()
 }
 
-function deleteRule(index: number): void {
+function cloneRule(index: number): void {
+  const copy = JSON.parse(JSON.stringify(rules.value[index])) as Rule
+  rules.value.splice(index + 1, 0, copy)
+  touch()
+}
+
+function removeRule(index: number): void {
   rules.value.splice(index, 1)
   touch()
 }
@@ -62,100 +68,137 @@ function moveUp(index: number): void {
 function moveDown(index: number): void {
   swap(index, index + 1)
 }
+
+function resetRules(): void {
+  for (const rule of rules.value) {
+    rule.profileName = defaultProfileName.value
+  }
+  touch()
+}
 </script>
 
 <template>
-  <div class="switch-editor">
-    <h2>{{ t('options_switchRules') || 'Switch rules' }}</h2>
+  <div>
+    <section class="settings-group">
+      <h3>{{ t('options_group_switchRules') || 'Switch rules' }}</h3>
 
-    <div class="rules card">
-      <div
-        v-if="rules.length === 0"
-        class="empty"
-      >
-        {{ t('options_noRules') || 'No rules yet. Add one below.' }}
+      <div class="table-responsive switch-rules-wrapper">
+        <table class="switch-rules table table-bordered table-condensed width-limit-xl">
+          <thead>
+            <tr>
+              <th style="white-space: nowrap">
+                {{ t('options_sort') || 'Sort' }}
+              </th>
+              <th class="condition-type-th">
+                {{ t('options_conditionType') || 'Condition Type' }}
+              </th>
+              <th>{{ t('options_conditionDetails') || 'Condition Details' }}</th>
+              <th>{{ t('options_resultProfile') || 'Result Profile' }}</th>
+              <th>{{ t('options_conditionActions') || 'Actions' }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="(rule, index) in rules"
+              :key="index"
+              class="switch-rule-row"
+            >
+              <td class="sort-bar">
+                <button
+                  class="btn btn-default btn-sm"
+                  :disabled="index === 0"
+                  :title="t('options_moveUp') || 'Move up'"
+                  @click="moveUp(index)"
+                >
+                  <span class="glyphicon glyphicon-chevron-up" />
+                </button>
+                <button
+                  class="btn btn-default btn-sm"
+                  :disabled="index === rules.length - 1"
+                  :title="t('options_moveDown') || 'Move down'"
+                  @click="moveDown(index)"
+                >
+                  <span class="glyphicon glyphicon-chevron-down" />
+                </button>
+              </td>
+              <td colspan="2">
+                <ConditionRow
+                  :condition="rule.condition"
+                  @change="touch"
+                />
+              </td>
+              <td class="switch-rule-row-target">
+                <OmegaProfileSelect
+                  v-model="rule.profileName"
+                  @update:model-value="touch"
+                />
+              </td>
+              <td>
+                <button
+                  class="btn btn-danger btn-sm"
+                  :title="t('options_deleteRule') || 'Delete rule'"
+                  @click="removeRule(index)"
+                >
+                  <span class="glyphicon glyphicon-trash" />
+                </button>
+                <button
+                  class="btn btn-default btn-sm"
+                  :title="t('options_cloneRule') || 'Clone rule'"
+                  @click="cloneRule(index)"
+                >
+                  <span class="glyphicon glyphicon-duplicate" />
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr>
+              <td style="border-right: none;" />
+              <td
+                style="border-left: none;"
+                colspan="4"
+              >
+                <button
+                  class="btn btn-default btn-sm"
+                  @click="addRule"
+                >
+                  <span class="glyphicon glyphicon-plus" />
+                  <span>{{ t('options_addCondition') || 'Add condition' }}</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr class="switch-default-row">
+              <td />
+              <td colspan="2">
+                {{ t('options_switchDefaultProfile') || 'Default profile' }}
+              </td>
+              <td>
+                <OmegaProfileSelect v-model="defaultProfileName" />
+              </td>
+              <td>
+                <button
+                  class="btn btn-info btn-sm"
+                  :title="t('options_resetRules_help') || 'Set all rules to the default profile'"
+                  @click="resetRules"
+                >
+                  <span class="glyphicon glyphicon-chevron-up" />
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-
-      <div
-        v-for="(rule, index) in rules"
-        :key="index"
-        class="rule-row row"
-      >
-        <div class="rule-condition">
-          <ConditionRow
-            :condition="rule.condition"
-            @change="touch"
-          />
-        </div>
-        <div class="rule-result">
-          <ProfileSelect
-            v-model="rule.profileName"
-            :include-builtin="true"
-            @update:model-value="touch"
-          />
-        </div>
-        <div class="rule-actions row">
-          <button
-            class="btn ghost"
-            :disabled="index === 0"
-            :title="t('options_moveUp') || 'Move up'"
-            @click="moveUp(index)"
-          >
-            &uarr;
-          </button>
-          <button
-            class="btn ghost"
-            :disabled="index === rules.length - 1"
-            :title="t('options_moveDown') || 'Move down'"
-            @click="moveDown(index)"
-          >
-            &darr;
-          </button>
-          <button
-            class="btn danger"
-            @click="deleteRule(index)"
-          >
-            {{ t('options_deleteRule') || 'Delete' }}
-          </button>
-        </div>
-      </div>
-
-      <div class="row">
-        <button
-          class="btn primary"
-          @click="addRule"
-        >
-          {{ t('options_addRule') || 'Add rule' }}
-        </button>
-      </div>
-    </div>
-
-    <div class="field">
-      <label>{{ t('options_defaultProfile') || 'Default profile' }}</label>
-      <ProfileSelect
-        v-model="defaultProfileName"
-        :include-builtin="true"
-      />
-    </div>
+    </section>
   </div>
 </template>
 
 <style scoped>
-.rule-row {
-  align-items: center;
-  flex-wrap: wrap;
+.sort-bar {
+  white-space: nowrap;
 }
-.rule-condition {
-  flex: 1 1 320px;
-  min-width: 0;
-}
-.rule-result {
-  flex: 0 0 auto;
-}
-.rule-actions {
-  flex: 0 0 auto;
-}
-.empty {
-  opacity: 0.7;
+.sort-bar .btn + .btn {
+  margin-left: 2px;
 }
 </style>
