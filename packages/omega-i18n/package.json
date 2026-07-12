@@ -1,0 +1,13 @@
+{
+  "name": "@switchyomega/omega-i18n",
+  "version": "3.0.0",
+  "description": "Build-time converter: gettext .po locales -> Chrome _locales/<lang>/messages.json.",
+  "type": "module",
+  "license": "GPL-3.0-or-later",
+  "bin": {
+    "build-locales": "./src/build_locales.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  }
+}

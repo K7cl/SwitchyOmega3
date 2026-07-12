@@ -1,0 +1,16 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["chrome", "vite/client"],
+    "jsx": "preserve",
+    "jsxImportSource": "vue",
+    "noEmit": true,
+    "paths": {
+      "@switchyomega/omega-pac": ["../packages/omega-pac/src/index.ts"],
+      "@switchyomega/omega-core": ["../packages/omega-core/src/index.ts"],
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["src", "env.d.ts", "vite.config.ts", "src/manifest.config.ts"]
+}

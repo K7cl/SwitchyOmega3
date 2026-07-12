@@ -1,0 +1,27 @@
+{
+  "name": "@switchyomega/extension",
+  "version": "3.0.0",
+  "description": "SwitchyOmega 3 — Chrome MV3 extension (Vite + @crxjs + Vue 3).",
+  "type": "module",
+  "license": "GPL-3.0-or-later",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@switchyomega/omega-core": "workspace:*",
+    "@switchyomega/omega-pac": "workspace:*",
+    "pinia": "3.0.4",
+    "vue": "3.5.39",
+    "vue-router": "4.6.4"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "2.7.1",
+    "@types/chrome": "0.2.2",
+    "@vitejs/plugin-vue": "6.0.7",
+    "vite": "8.1.4"
+  }
+}

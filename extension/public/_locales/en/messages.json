@@ -1,0 +1,11 @@
+{
+  "manifest_app_name": {
+    "message": "Proxy SwitchyOmega"
+  },
+  "manifest_app_description": {
+    "message": "Manage and switch between multiple proxies quickly & easily."
+  },
+  "manifest_icon_default_title": {
+    "message": "Proxy SwitchyOmega"
+  }
+}
