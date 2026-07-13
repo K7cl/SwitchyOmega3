@@ -40,6 +40,7 @@ async function replaceProfile(): Promise<void> {
         {{ ' ' }}
         <OmegaProfileSelect
           v-model="target"
+          :profile="profile"
           class="form-control"
           style="display: inline-block;"
         />

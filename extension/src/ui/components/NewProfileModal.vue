@@ -24,9 +24,19 @@ const profileIcons: Record<string, string> = {
 const name = ref('')
 const profileType = ref('FixedProfile')
 
-const RESERVED = ['direct', 'system']
+// Palette from the original SwitchyOmega (omega-web/src/omega/app.coffee
+// `profileColors`). A plain array literal at module scope is fine; the random
+// pick happens inside create() (a user-triggered handler), never at load time.
+const PROFILE_COLORS = ['#9ce', '#9d9', '#fa8', '#fe9', '#d497ee', '#47b', '#5b5', '#d63', '#ca0']
 
-const isReserved = computed(() => RESERVED.indexOf(name.value.trim().toLowerCase()) >= 0)
+// Built-in profile names plus any name beginning with '__' (internal
+// attached-rule-list names) are reserved and cannot be used for a new profile.
+const RESERVED = ['direct', 'system', 'auto_detect']
+
+const isReserved = computed(() => {
+  const n = name.value.trim()
+  return RESERVED.indexOf(n.toLowerCase()) >= 0 || n.startsWith('__')
+})
 const isConflict = computed(() => !!store.profile(name.value.trim()))
 function isProfileNameHidden(n: string): boolean {
   const key = '+' + n.trim()
@@ -46,10 +56,11 @@ function dismiss(): void {
 async function create(): Promise<void> {
   if (!formValid.value) return
   const finalName = name.value.trim()
+  const color = PROFILE_COLORS[Math.floor(Math.random() * PROFILE_COLORS.length)]
   store.addProfile({
     name: finalName,
     profileType: profileType.value,
-    color: '#77b1eb',
+    color,
     defaultProfileName: profileType.value === 'VirtualProfile' ? 'direct' : undefined,
   })
   emit('close')

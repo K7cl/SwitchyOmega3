@@ -1,25 +1,61 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { Conditions, type Condition } from '@switchyomega/omega-pac'
 import { t } from '@/ui/i18n'
 
 const props = defineProps<{
-  condition: { conditionType: string; [k: string]: unknown }
+  condition: Condition
 }>()
 
-// Condition types, in the same order the original AngularJS options page
-// offered them. Labels come from the original `condition_<Type>` i18n keys.
-const types: string[] = [
-  'HostWildcardCondition',
-  'HostRegexCondition',
-  'UrlWildcardCondition',
-  'UrlRegexCondition',
-  'KeywordCondition',
-  'HostLevelsCondition',
-  'IpCondition',
-  'WeekdayCondition',
-  'TimeCondition',
-  'FalseCondition',
-  'TrueCondition',
+// Emitted whenever the condition mutates so the parent can mark the profile
+// dirty (parent wires `@change="touch"`).
+const emit = defineEmits<{ (e: 'change'): void }>()
+
+// Condition types grouped exactly like the original AngularJS options page
+// (advancedConditionTypes). TrueCondition is intentionally NOT offered here.
+const conditionGroups: { key: string; types: string[] }[] = [
+  {
+    key: 'host',
+    types: [
+      'HostWildcardCondition',
+      'HostRegexCondition',
+      'HostLevelsCondition',
+      'IpCondition',
+    ],
+  },
+  {
+    key: 'url',
+    types: ['UrlWildcardCondition', 'UrlRegexCondition', 'KeywordCondition'],
+  },
+  {
+    key: 'special',
+    types: ['WeekdayCondition', 'TimeCondition', 'FalseCondition'],
+  },
 ]
+
+const groupFallback: Record<string, string> = {
+  host: 'Host',
+  url: 'URL',
+  special: 'Special',
+}
+
+const typeFallback: Record<string, string> = {
+  HostWildcardCondition: 'Host wildcard',
+  HostRegexCondition: 'Host regex',
+  HostLevelsCondition: 'Host levels',
+  IpCondition: 'IP',
+  UrlWildcardCondition: 'URL wildcard',
+  UrlRegexCondition: 'URL regex',
+  KeywordCondition: 'Keyword',
+  WeekdayCondition: 'Day of week',
+  TimeCondition: 'Time',
+  FalseCondition: 'Disabled',
+  TrueCondition: 'Always',
+}
+
+// All types offered in the dropdown, used to detect an "unknown" current type
+// (e.g. a loaded TrueCondition) that still needs to render without breaking.
+const knownTypes = new Set(conditionGroups.flatMap((g) => g.types))
 
 const patternTypes = new Set([
   'HostWildcardCondition',
@@ -29,8 +65,17 @@ const patternTypes = new Set([
   'KeywordCondition',
 ])
 
+// Only full-URL condition types get the red limitation warning icon.
+const urlTypes = new Set(['UrlWildcardCondition', 'UrlRegexCondition'])
+
+const isUrlType = computed(() => urlTypes.has(props.condition.conditionType))
+
+function groupLabel(key: string): string {
+  return t('condition_group_' + key) || groupFallback[key] || key
+}
+
 function typeLabel(ty: string): string {
-  return t('condition_' + ty) || ty
+  return t('condition_' + ty) || typeFallback[ty] || ty
 }
 
 function str(key: string): string {
@@ -39,6 +84,7 @@ function str(key: string): string {
 
 function setStr(key: string, e: Event): void {
   props.condition[key] = (e.target as HTMLInputElement).value
+  emit('change')
 }
 
 function num(key: string): number | '' {
@@ -49,6 +95,53 @@ function num(key: string): number | '' {
 function setNum(key: string, e: Event): void {
   const v = (e.target as HTMLInputElement).value
   props.condition[key] = v === '' ? 0 : Number(v)
+  emit('change')
+}
+
+// == IP literals: single "address/prefix" text field (mirrors omega-ip2str). ==
+const ipStr = computed<string>({
+  get(): string {
+    const ip = (props.condition.ip as string) ?? ''
+    if (!ip) return ''
+    const prefix = props.condition.prefixLength
+    return typeof prefix === 'number' ? ip + '/' + prefix : ip
+  },
+  set(value: string): void {
+    const slash = value.indexOf('/')
+    if (slash >= 0) {
+      props.condition.ip = value.slice(0, slash)
+      props.condition.prefixLength = Number(value.slice(slash + 1)) || 0
+    } else {
+      props.condition.ip = value
+      delete props.condition.prefixLength
+    }
+    emit('change')
+  },
+})
+
+const ipValid = computed<boolean>(
+  () => ipStr.value === '' || Conditions.parseIp(ipStr.value) != null,
+)
+
+// == Day of the week: seven named weekday checkboxes (mirrors updateDay). ==
+const weekdayFallback = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+function weekdayLabel(i: number): string {
+  return t('options_weekDayShort_' + i) || weekdayFallback[i]
+}
+
+function weekdays(): boolean[] {
+  return Conditions.getWeekdayList(props.condition)
+}
+
+function updateDay(i: number, e: Event): void {
+  const selected = (e.target as HTMLInputElement).checked
+  const days = props.condition.days || '-------'
+  const char = selected ? 'SMTWtFs'[i] : '-'
+  props.condition.days = days.slice(0, i) + char + days.slice(i + 1)
+  delete props.condition.startDay
+  delete props.condition.endDay
+  emit('change')
 }
 </script>
 
@@ -57,15 +150,40 @@ function setNum(key: string, e: Event): void {
     <select
       v-model="condition.conditionType"
       class="form-control cond-type"
+      @change="emit('change')"
     >
-      <option
-        v-for="ty in types"
-        :key="ty"
-        :value="ty"
+      <optgroup
+        v-for="group in conditionGroups"
+        :key="group.key"
+        :label="groupLabel(group.key)"
       >
-        {{ typeLabel(ty) }}
+        <option
+          v-for="ty in group.types"
+          :key="ty"
+          :value="ty"
+        >
+          {{ typeLabel(ty) }}
+        </option>
+      </optgroup>
+      <!-- Keep an unknown current type (e.g. TrueCondition) selectable so the
+           control isn't left blank, without offering it as a normal choice. -->
+      <option
+        v-if="!knownTypes.has(condition.conditionType)"
+        :value="condition.conditionType"
+      >
+        {{ typeLabel(condition.conditionType) }}
       </option>
     </select>
+
+    <!-- Full-URL limitation warning icon for URL condition types. -->
+    <span
+      v-if="isUrlType"
+      class="glyphicon glyphicon-alert text-danger cond-url-alert"
+      :title="
+        t('condition_alert_fullUrlLimitation') ||
+          'Matching the full URL requires extra permissions and may not work for all requests.'
+      "
+    />
 
     <!-- Pattern-based conditions: single text pattern input -->
     <input
@@ -97,45 +215,31 @@ function setNum(key: string, e: Event): void {
       >
     </template>
 
-    <!-- IP literals: address + prefix length -->
+    <!-- IP literals: single "address/prefix" field (e.g. 127.0.0.1/8) -->
     <template v-else-if="condition.conditionType === 'IpCondition'">
       <input
+        v-model.lazy="ipStr"
         type="text"
         class="form-control cond-grow"
-        placeholder="127.0.0.1"
-        :value="str('ip')"
-        @input="setStr('ip', $event)"
-      >
-      <span class="cond-sep">/</span>
-      <input
-        type="number"
-        min="0"
-        max="128"
-        class="form-control cond-num"
-        :value="num('prefixLength')"
-        @input="setNum('prefixLength', $event)"
+        :class="{ 'cond-invalid': !ipValid }"
+        placeholder="127.0.0.1/8"
       >
     </template>
 
-    <!-- Day of the week: start - end (0 = Sunday .. 6 = Saturday) -->
+    <!-- Day of the week: seven named weekday checkboxes -->
     <template v-else-if="condition.conditionType === 'WeekdayCondition'">
-      <input
-        type="number"
-        min="0"
-        max="6"
-        class="form-control cond-num"
-        :value="num('startDay')"
-        @input="setNum('startDay', $event)"
+      <label
+        v-for="(selected, i) in weekdays()"
+        :key="i"
+        class="checkbox-inline"
       >
-      <span class="cond-sep">-</span>
-      <input
-        type="number"
-        min="0"
-        max="6"
-        class="form-control cond-num"
-        :value="num('endDay')"
-        @input="setNum('endDay', $event)"
-      >
+        <input
+          type="checkbox"
+          :checked="selected"
+          @change="updateDay(i, $event)"
+        >
+        {{ weekdayLabel(i) }}
+      </label>
     </template>
 
     <!-- Current time: start ≤ current hour ≤ end -->
@@ -175,7 +279,7 @@ function setNum(key: string, e: Event): void {
       >{{ t('condition_details_FalseCondition') || '(Condition ignored when matching)' }}</span>
     </template>
 
-    <!-- TrueCondition: always matches, no field -->
+    <!-- TrueCondition / unknown: always matches, no detail field -->
   </div>
 </template>
 
@@ -198,5 +302,11 @@ function setNum(key: string, e: Event): void {
 }
 .cond-sep {
   white-space: nowrap;
+}
+.cond-url-alert {
+  cursor: help;
+}
+.cond-invalid {
+  border-color: #a94442;
 }
 </style>

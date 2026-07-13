@@ -287,6 +287,12 @@ export class Options {
   upgrade(options: OmegaOptions | null, changes?: StorageItems): Promise<[OmegaOptions, StorageItems]> {
     changes ??= {}
     let version = options?.['schemaVersion'] as number | undefined
+    if (!version) {
+      // No stored options yet (fresh install or cleared storage). Signal
+      // first-run cleanly instead of treating an empty store as a corrupt
+      // schema — the loader then seeds defaults via the NoOptionsError path.
+      return Promise.reject(new Options.NoOptionsError())
+    }
     if (version === 1) {
       let autoDetectUsed = false
       Profiles.each(options as unknown as PacOptions, (_key, profile) => {
