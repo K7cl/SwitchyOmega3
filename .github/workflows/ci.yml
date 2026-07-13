@@ -28,6 +28,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Build styles
+        # Compiles extension/styles/*.less -> extension/src/styles/*.css. These
+        # are generated (gitignored) but imported by the UI, so they must exist
+        # before typecheck/build on a fresh checkout.
+        run: pnpm build:styles
+
       - name: Typecheck
         run: pnpm typecheck
 
