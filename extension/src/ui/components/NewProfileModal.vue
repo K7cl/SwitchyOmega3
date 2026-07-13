@@ -69,7 +69,7 @@ async function create(): Promise<void> {
 </script>
 
 <template>
-  <div>
+  <Teleport to="body">
     <div
       class="modal-backdrop in"
       @click="dismiss"
@@ -283,5 +283,5 @@ async function create(): Promise<void> {
         </div>
       </div>
     </div>
-  </div>
+  </Teleport>
 </template>
