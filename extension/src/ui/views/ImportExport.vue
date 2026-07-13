@@ -205,6 +205,7 @@ async function resetOptionsSync(): Promise<void> {
           id="restore-local-file"
           ref="fileInput"
           type="file"
+          accept=".bak,.json,application/json"
           style="display: none"
           @change="onFileChange"
         >
