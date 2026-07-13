@@ -107,6 +107,7 @@ try {
       matchShown: val(matchSel),
       ruleListTextLen: textarea ? textarea.value.length : 0,
       sectionHeadings: qa('.settings-group h3').map(h=>h.textContent.trim()),
+      headerButtons: qa('.page-header .profile-actions button').map(b=>b.textContent.trim()),
     })
   })()`)
   console.log('auto_moto editor DOM:', dom)

@@ -3,7 +3,7 @@ import { computed, ref, nextTick, type Component } from 'vue'
 import { useRouter } from 'vue-router'
 import { useOptionsStore } from '@/ui/store'
 import { t, dispName } from '@/ui/i18n'
-import { type Profile } from '@switchyomega/omega-pac'
+import { type Profile, type Options, PacGenerator, Switchy } from '@switchyomega/omega-pac'
 import FixedProfileEditor from '@/ui/editors/FixedProfileEditor.vue'
 import SwitchProfileEditor from '@/ui/editors/SwitchProfileEditor.vue'
 import PacProfileEditor from '@/ui/editors/PacProfileEditor.vue'
@@ -96,9 +96,66 @@ async function confirmRename(): Promise<void> {
   router.replace('/profile/' + encodeURIComponent(next))
 }
 
-// --- Apply / Delete ---------------------------------------------------------
-async function onApply(): Promise<void> {
-  await store.applyProfile(props.name)
+// --- Export / Delete --------------------------------------------------------
+// A PAC can be generated for any profile except the built-in Direct/System.
+const scriptable = computed<boolean>(() => {
+  const type = profile.value?.profileType
+  return !!type && type !== 'DirectProfile' && type !== 'SystemProfile'
+})
+// Rule lists can be exported for Switch and RuleList profiles.
+const canExportRuleList = computed<boolean>(() => {
+  const type = profile.value?.profileType ?? ''
+  return type === 'SwitchProfile' || type.includes('RuleList')
+})
+
+function downloadText(filename: string, text: string): void {
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+  URL.revokeObjectURL(url)
+}
+
+function exportPac(): void {
+  const p = profile.value
+  if (!p) return
+  let missing: string | null = null
+  const ast = PacGenerator.script(store.options as unknown as Options, p.name, {
+    profileNotFound: (name: string) => {
+      missing = name
+      return 'dumb'
+    },
+  })
+  const pac = PacGenerator.ascii(ast.print_to_string())
+  downloadText(`OmegaProfile_${p.name.replace(/\W+/g, '_')}.pac`, pac)
+  if (missing) window.alert(t('options_profileNotFound', [missing]) || `Missing profile: ${missing}`)
+}
+
+function exportRuleList(): void {
+  const p = profile.value
+  if (!p) return
+  const fileName = `OmegaRules_${p.name.replace(/\W+/g, '_')}.sorl`
+  if (p.profileType === 'SwitchProfile') {
+    // Effective default: attached rule list's own default when attached.
+    const attachedName = '__ruleListOf_' + p.name
+    const attached = store.profile(attachedName)
+    const def =
+      attached && p.defaultProfileName === attachedName
+        ? (attached.defaultProfileName as string)
+        : (p.defaultProfileName as string)
+    let text = Switchy.compose(
+      { rules: (p.rules as never) || [], defaultProfileName: def || 'direct' },
+      { withResult: true },
+    )
+    text = text.replace('\n', '\n; Date: ' + new Date().toLocaleDateString() + '\n')
+    downloadText(fileName, text)
+  } else {
+    downloadText(fileName, (p.ruleList as string) || '')
+  }
 }
 
 function onDelete(): void {
@@ -134,6 +191,28 @@ const syncError = computed(
       <div class="profile-actions">
         <template v-if="!renaming">
           <button
+            v-if="canExportRuleList"
+            class="btn btn-default"
+            :title="t('options_profileExportRuleListHelp') || 'Export the rule list to a file'"
+            @click="exportRuleList"
+          >
+            <span class="glyphicon glyphicon-list" />
+            {{ ' ' }}
+            {{ t('options_profileExportRuleList') || 'Export rule list' }}
+          </button>
+          {{ ' ' }}
+          <button
+            v-if="scriptable"
+            class="btn btn-default"
+            :title="t('options_exportPacFileHelp') || 'Export the generated PAC script'"
+            @click="exportPac"
+          >
+            <span class="glyphicon glyphicon-download" />
+            {{ ' ' }}
+            {{ t('options_profileExportPac') || 'Export PAC' }}
+          </button>
+          {{ ' ' }}
+          <button
             v-if="!isBuiltin"
             class="btn btn-default"
             @click="startRename"
@@ -141,15 +220,6 @@ const syncError = computed(
             <span class="glyphicon glyphicon-edit" />
             {{ ' ' }}
             {{ t('options_renameProfile') || 'Rename' }}
-          </button>
-          {{ ' ' }}
-          <button
-            class="btn btn-default"
-            @click="onApply"
-          >
-            <span class="glyphicon glyphicon-play" />
-            {{ ' ' }}
-            {{ t('popup_applyProfile') || 'Apply' }}
           </button>
           {{ ' ' }}
           <button
