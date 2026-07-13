@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { computed, type WritableComputedRef } from 'vue'
+import { computed, ref, type WritableComputedRef } from 'vue'
 import { useOptionsStore } from '@/ui/store'
-import { t, dispName } from '@/ui/i18n'
+import { t } from '@/ui/i18n'
 import OmegaProfileInline from '@/ui/components/OmegaProfileInline.vue'
 import OmegaProfileSelect from '@/ui/components/OmegaProfileSelect.vue'
 
@@ -54,12 +54,61 @@ function isCycled(name: string): boolean {
   return quickSwitchProfiles.value.indexOf(name) >= 0
 }
 
-function toggleCycled(name: string): void {
-  const list = quickSwitchProfiles.value.slice()
-  const idx = list.indexOf(name)
-  if (idx >= 0) list.splice(idx, 1)
-  else list.push(name)
+// Profiles not in the cycle (order not persisted — derived from the rest).
+const notCycledProfiles = computed<string[]>(() =>
+  profileNames.value.filter((n) => !isCycled(n)),
+)
+
+function setCycled(list: string[]): void {
   store.setSetting('-quickSwitchProfiles', list)
+}
+
+// A profile object for OmegaProfileInline; synthesizes built-ins (direct/system)
+// which aren't stored in options, so they still show their type icon.
+function inlineProfile(name: string): { name: string; profileType?: string; color?: unknown } {
+  return (
+    store.profile(name) ?? {
+      name,
+      profileType:
+        name === 'system' ? 'SystemProfile' : name === 'direct' ? 'DirectProfile' : 'FixedProfile',
+    }
+  )
+}
+
+// --- Drag to reorder between the two lists (replaces the checkbox list) ------
+const dragName = ref<string | null>(null)
+const overIndex = ref<number | null>(null)
+function onDragStart(name: string, e: DragEvent): void {
+  dragName.value = name
+  if (e.dataTransfer) {
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.setData('text/plain', name)
+  }
+}
+function clearDrag(): void {
+  dragName.value = null
+  overIndex.value = null
+}
+// Drop into the cycled list, inserting before targetIndex (length = append).
+function dropOnCycled(targetIndex: number): void {
+  const name = dragName.value
+  if (!name) return
+  const list = quickSwitchProfiles.value.slice()
+  const from = list.indexOf(name)
+  if (from >= 0) list.splice(from, 1)
+  let ins = targetIndex
+  if (from >= 0 && from < targetIndex) ins -= 1
+  ins = Math.max(0, Math.min(ins, list.length))
+  list.splice(ins, 0, name)
+  setCycled(list)
+  clearDrag()
+}
+// Drop into the not-cycled list removes the profile from the cycle.
+function dropOnNotCycled(): void {
+  const name = dragName.value
+  if (!name) return
+  setCycled(quickSwitchProfiles.value.filter((n) => n !== name))
+  clearDrag()
 }
 
 function openShortcutConfig(): void {
@@ -186,24 +235,44 @@ function openShortcutConfig(): void {
             {{ t('options_cycledProfilesTooFew') || 'You need to select at least 2 profiles to enable this function! You can drag them from the box below.' }}
           </p>
         </div>
-        <div
-          v-for="name in profileNames"
-          :key="name"
-          class="checkbox"
+        <ul
+          class="cycle-profile-container cycle-enabled"
+          @dragover.prevent
+          @drop="dropOnCycled(quickSwitchProfiles.length)"
         >
-          <label>
-            <input
-              type="checkbox"
-              :checked="isCycled(name)"
-              @change="toggleCycled(name)"
-            >
-            <OmegaProfileInline
-              v-if="store.profile(name)"
-              :profile="store.profile(name)!"
-            />
-            <span v-else>{{ dispName(name) }}</span>
-          </label>
-        </div>
+          <li
+            v-for="(name, i) in quickSwitchProfiles"
+            :key="name"
+            draggable="true"
+            :class="{ 'drag-over': overIndex === i }"
+            @dragstart="onDragStart(name, $event)"
+            @dragend="clearDrag"
+            @dragover.prevent="overIndex = i"
+            @drop.stop="dropOnCycled(i)"
+          >
+            <OmegaProfileInline :profile="inlineProfile(name)" />
+          </li>
+        </ul>
+
+        <h4>{{ t('options_notCycledProfiles') || 'Not Cycled Profiles' }}</h4>
+        <p class="help-block">
+          {{ t('options_notCycledProfilesHelp') || 'Drag profiles between the two boxes to add or remove them, and reorder within the box above.' }}
+        </p>
+        <ul
+          class="cycle-profile-container"
+          @dragover.prevent
+          @drop="dropOnNotCycled"
+        >
+          <li
+            v-for="name in notCycledProfiles"
+            :key="name"
+            draggable="true"
+            @dragstart="onDragStart(name, $event)"
+            @dragend="clearDrag"
+          >
+            <OmegaProfileInline :profile="inlineProfile(name)" />
+          </li>
+        </ul>
       </div>
     </section>
   </div>
@@ -212,5 +281,12 @@ function openShortcutConfig(): void {
 <style scoped>
 .omega-profile-inline {
   vertical-align: middle;
+}
+.cycle-profile-container li.drag-over {
+  outline: 2px solid #337ab7;
+}
+.cycle-profile-container {
+  margin-right: 10px;
+  vertical-align: top;
 }
 </style>
