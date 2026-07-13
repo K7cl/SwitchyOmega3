@@ -228,26 +228,6 @@ async function create(): Promise<void> {
                     v-model="profileType"
                     type="radio"
                     name="profile-new-type"
-                    value="RuleListProfile"
-                  >
-                  <span class="profile-type">
-                    <span
-                      class="glyphicon"
-                      :class="profileIcons['RuleListProfile']"
-                    />
-                    <span>{{ t('options_profileTypeRuleListProfile') || 'Rule List Profile' }}</span>
-                  </span>
-                  <div class="help-block">
-                    {{ t('options_profileDescRuleListProfile') || 'A profile based on an online rule list, such as AutoProxy or Switardis.' }}
-                  </div>
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input
-                    v-model="profileType"
-                    type="radio"
-                    name="profile-new-type"
                     value="VirtualProfile"
                   >
                   <span class="profile-type">

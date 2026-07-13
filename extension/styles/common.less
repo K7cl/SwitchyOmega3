@@ -10,6 +10,15 @@
   padding: 0 !important;
 }
 
+/* Glyphicons that precede a label need a gap. The original templates inserted
+   literal spaces (`= ' '`) between the icon and text, but Vue's whitespace
+   condensing removes inter-element whitespace, leaving icon and text touching.
+   Add a small right margin whenever a glyphicon is followed by a sibling
+   (icon-only buttons keep no margin since the icon is then :last-child). */
+.glyphicon:not(:last-child) {
+  margin-right: 0.35em;
+}
+
 /* basic */
 
 a[role="button"] {
