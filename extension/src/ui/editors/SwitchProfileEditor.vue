@@ -4,6 +4,7 @@ import { type Profile, Switchy } from '@switchyomega/omega-pac'
 import { useOptionsStore } from '@/ui/store'
 import { callBackground } from '@/ui/messaging'
 import { t } from '@/ui/i18n'
+import { formatDateTime } from '@/ui/format'
 import OmegaProfileSelect from '@/ui/components/OmegaProfileSelect.vue'
 import ConditionRow from '@/ui/components/ConditionRow.vue'
 
@@ -101,10 +102,7 @@ const ruleList = computed<string>({
     }
   },
 })
-const lastUpdate = computed<string>(() => {
-  const v = attached.value?.lastUpdate as string | undefined
-  return v ? new Date(v).toLocaleString() : ''
-})
+const lastUpdate = computed<string>(() => formatDateTime(attached.value?.lastUpdate as string | undefined))
 
 function attachNew(): void {
   store.addProfile({
