@@ -398,7 +398,9 @@ onUnmounted(() => window.removeEventListener('keydown', onKey))
 </template>
 
 <style scoped>
-.popup-menu-nav > li.hi > a {
+/* Keyboard-hover highlight — but never override the active item's dark
+   background, or its white nav-pills text becomes unreadable on light blue. */
+.popup-menu-nav > li.hi:not(.active) > a {
   background-color: #eef3fd;
 }
 .effective-mark {
