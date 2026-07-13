@@ -88,6 +88,7 @@ async function updateProfile(): Promise<void> {
         {{ ' ' }}
         <OmegaProfileSelect
           v-model="matchProfileName"
+          :profile="profile"
           style="display: inline-block;"
         />
       </div>
@@ -96,6 +97,7 @@ async function updateProfile(): Promise<void> {
         {{ ' ' }}
         <OmegaProfileSelect
           v-model="defaultProfileName"
+          :profile="profile"
           style="display: inline-block;"
         />
       </div>

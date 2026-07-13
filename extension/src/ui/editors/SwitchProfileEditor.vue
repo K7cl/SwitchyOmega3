@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { type Profile } from '@switchyomega/omega-pac'
+import { type Profile, Switchy } from '@switchyomega/omega-pac'
 import { useOptionsStore } from '@/ui/store'
 import { callBackground } from '@/ui/messaging'
 import { t } from '@/ui/i18n'
@@ -10,6 +10,7 @@ import ConditionRow from '@/ui/components/ConditionRow.vue'
 interface Rule {
   condition: { conditionType: string; [k: string]: unknown }
   profileName: string
+  note?: string
 }
 
 const props = defineProps<{ profile: Profile }>()
@@ -18,11 +19,6 @@ const store = useOptionsStore()
 const rules = computed<Rule[]>(() => props.profile.rules as Rule[])
 
 // == Attached rule list ================================================
-// A switch profile can have a rule list attached; SwitchyOmega stores it as a
-// hidden profile named `__ruleListOf_<switchName>` and points the switch
-// profile's defaultProfileName at it. When attached, matched rule-list entries
-// resolve to `matchProfileName` and everything else to the attached profile's
-// own defaultProfileName.
 const attachedName = computed<string>(() => '__ruleListOf_' + props.profile.name)
 const attached = computed<Profile | undefined>(() => store.profile(attachedName.value))
 const attachedEnabled = computed<boolean>(() => props.profile.defaultProfileName === attachedName.value)
@@ -35,9 +31,8 @@ function touchAttached(): void {
   store.touchProfile(attachedName.value)
 }
 
-// The *effective* default profile — the attached profile's own default when a
-// rule list is attached, otherwise the switch profile's default. This is what
-// the "Default" row shows (never the internal `__ruleListOf_` name).
+// Effective default — the attached profile's own default when a rule list is
+// attached, otherwise the switch profile's default (never the `__ruleListOf_`).
 const defaultProfileName = computed<string>({
   get: () => {
     if (attachedEnabled.value && attached.value) {
@@ -66,7 +61,6 @@ const matchProfileName = computed<string>({
   },
 })
 
-// Checkbox: whether the attached rule list actually decides results.
 const attachedInUse = computed<boolean>({
   get: () => attachedEnabled.value,
   set: (enabled: boolean) => {
@@ -167,39 +161,136 @@ function cloneRule(index: number): void {
 }
 
 function removeRule(index: number): void {
+  if (store.setting<boolean>('-confirmDeletion')) {
+    const msg = t('options_deleteRuleConfirm') || 'Delete this rule?'
+    if (!window.confirm(msg)) return
+  }
   rules.value.splice(index, 1)
   touch()
 }
 
-function swap(a: number, b: number): void {
-  const list = rules.value
-  if (a < 0 || b < 0 || a >= list.length || b >= list.length) return
-  const tmp = list[a]
-  list[a] = list[b]
-  list[b] = tmp
-  touch()
-}
-function moveUp(index: number): void {
-  swap(index, index - 1)
-}
-function moveDown(index: number): void {
-  swap(index, index + 1)
-}
-
 function resetRules(): void {
+  const msg =
+    t('options_resetRules_confirm') ||
+    'Set the result of ALL rules to the default profile?'
+  if (!window.confirm(msg)) return
   for (const rule of rules.value) {
     rule.profileName = defaultProfileName.value
   }
   touch()
+}
+
+// Per-rule notes (revealed by the note button, like the original).
+const showNotes = ref<boolean>(rules.value.some((r) => !!r.note))
+function addNote(): void {
+  showNotes.value = true
+}
+
+// == Drag to reorder (replaces up/down buttons; handle = .sort-bar) ====
+const dragIndex = ref<number | null>(null)
+const overIndex = ref<number | null>(null)
+function onDragStart(i: number, e: DragEvent): void {
+  dragIndex.value = i
+  if (e.dataTransfer) {
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.setData('text/plain', String(i))
+  }
+}
+function onDragOver(i: number): void {
+  if (dragIndex.value !== null && dragIndex.value !== i) overIndex.value = i
+}
+function onDrop(i: number): void {
+  const from = dragIndex.value
+  if (from !== null && from !== i) {
+    const list = rules.value
+    const [moved] = list.splice(from, 1)
+    list.splice(i, 0, moved)
+    touch()
+  }
+  clearDrag()
+}
+function clearDrag(): void {
+  dragIndex.value = null
+  overIndex.value = null
+}
+
+// == Edit source code ==================================================
+const editSource = ref(false)
+const source = ref('')
+const sourceError = ref('')
+function toggleSource(): void {
+  if (!editSource.value) {
+    source.value = Switchy.compose(
+      { rules: rules.value, defaultProfileName: defaultProfileName.value },
+      { withResult: true },
+    )
+    sourceError.value = ''
+    editSource.value = true
+  } else if (parseSource()) {
+    editSource.value = false
+  }
+}
+function parseSource(): boolean {
+  try {
+    const parsed = Switchy.parseOmega(source.value.trim(), '', '', {
+      strict: true,
+      source: false,
+    }) as Rule[]
+    const def = parsed.pop() // trailing `* +default`
+    if (def) defaultProfileName.value = def.profileName
+    rules.value.splice(0, rules.value.length, ...parsed)
+    sourceError.value = ''
+    touch()
+    return true
+  } catch (e) {
+    sourceError.value = (e as Error).message || String(e)
+    return false
+  }
 }
 </script>
 
 <template>
   <div>
     <section class="settings-group">
-      <h3>{{ t('options_group_switchRules') || 'Switch rules' }}</h3>
+      <h3>
+        {{ t('options_group_switchRules') || 'Switch rules' }}
+        {{ ' ' }}
+        <button
+          class="btn"
+          :class="editSource ? 'btn-primary active' : 'btn-default'"
+          :title="t('options_profileEditSource') || 'Edit source code'"
+          @click="toggleSource"
+        >
+          <span class="glyphicon glyphicon-edit" />
+          {{ ' ' }}{{ t('options_profileEditSource') || 'Edit source code' }}
+        </button>
+      </h3>
 
-      <div class="table-responsive switch-rules-wrapper">
+      <div
+        v-if="sourceError"
+        class="alert alert-danger width-limit"
+      >
+        <span class="glyphicon glyphicon-remove" />
+        {{ ' ' }}{{ sourceError }}
+      </div>
+
+      <!-- Source-code editing mode. -->
+      <div
+        v-if="editSource"
+        class="rules-source"
+      >
+        <textarea
+          v-model="source"
+          class="monospace form-control width-limit"
+          rows="20"
+        />
+      </div>
+
+      <!-- Rules table. -->
+      <div
+        v-else
+        class="table-responsive switch-rules-wrapper"
+      >
         <table class="switch-rules table table-bordered table-condensed width-limit-xl">
           <thead>
             <tr>
@@ -212,6 +303,9 @@ function resetRules(): void {
               <th>{{ t('options_conditionDetails') || 'Condition Details' }}</th>
               <th>{{ t('options_resultProfile') || 'Result Profile' }}</th>
               <th>{{ t('options_conditionActions') || 'Actions' }}</th>
+              <th v-if="showNotes">
+                {{ t('options_ruleNote') || 'Note' }}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -219,24 +313,18 @@ function resetRules(): void {
               v-for="(rule, index) in rules"
               :key="index"
               class="switch-rule-row"
+              :class="{ 'drag-over': overIndex === index, dragging: dragIndex === index }"
+              @dragover.prevent="onDragOver(index)"
+              @drop="onDrop(index)"
+              @dragend="clearDrag"
             >
-              <td class="sort-bar">
-                <button
-                  class="btn btn-default btn-sm"
-                  :disabled="index === 0"
-                  :title="t('options_moveUp') || 'Move up'"
-                  @click="moveUp(index)"
-                >
-                  <span class="glyphicon glyphicon-chevron-up" />
-                </button>
-                <button
-                  class="btn btn-default btn-sm"
-                  :disabled="index === rules.length - 1"
-                  :title="t('options_moveDown') || 'Move down'"
-                  @click="moveDown(index)"
-                >
-                  <span class="glyphicon glyphicon-chevron-down" />
-                </button>
+              <td
+                class="sort-bar"
+                draggable="true"
+                :title="t('options_dragToReorder') || 'Drag to reorder'"
+                @dragstart="onDragStart(index, $event)"
+              >
+                <span class="glyphicon glyphicon-sort" />
               </td>
               <td colspan="2">
                 <ConditionRow
@@ -247,6 +335,7 @@ function resetRules(): void {
               <td class="switch-rule-row-target">
                 <OmegaProfileSelect
                   v-model="rule.profileName"
+                  :profile="profile"
                   @update:model-value="touch"
                 />
               </td>
@@ -258,6 +347,7 @@ function resetRules(): void {
                 >
                   <span class="glyphicon glyphicon-trash" />
                 </button>
+                {{ ' ' }}
                 <button
                   class="btn btn-default btn-sm"
                   :title="t('options_cloneRule') || 'Clone rule'"
@@ -265,6 +355,21 @@ function resetRules(): void {
                 >
                   <span class="glyphicon glyphicon-duplicate" />
                 </button>
+                <button
+                  v-if="!showNotes"
+                  class="btn btn-default btn-sm"
+                  :title="t('options_ruleNote') || 'Note'"
+                  @click="addNote"
+                >
+                  <span class="glyphicon glyphicon-comment" />
+                </button>
+              </td>
+              <td v-if="showNotes">
+                <input
+                  v-model="rule.note"
+                  class="form-control"
+                  @input="touch"
+                >
               </td>
             </tr>
           </tbody>
@@ -273,7 +378,7 @@ function resetRules(): void {
               <td style="border-right: none;" />
               <td
                 style="border-left: none;"
-                colspan="4"
+                :colspan="showNotes ? 5 : 4"
               >
                 <button
                   class="btn btn-default btn-sm"
@@ -316,6 +421,7 @@ function resetRules(): void {
               <td>
                 <OmegaProfileSelect
                   v-model="matchProfileName"
+                  :profile="profile"
                   :disabled="!attachedInUse"
                 />
               </td>
@@ -328,6 +434,7 @@ function resetRules(): void {
                   <span class="glyphicon glyphicon-trash" />
                 </button>
               </td>
+              <td v-if="showNotes" />
             </tr>
           </tbody>
 
@@ -338,7 +445,10 @@ function resetRules(): void {
                 {{ t('options_switchDefaultProfile') || 'Default profile' }}
               </td>
               <td>
-                <OmegaProfileSelect v-model="defaultProfileName" />
+                <OmegaProfileSelect
+                  v-model="defaultProfileName"
+                  :profile="profile"
+                />
               </td>
               <td>
                 <button
@@ -349,6 +459,7 @@ function resetRules(): void {
                   <span class="glyphicon glyphicon-chevron-up" />
                 </button>
               </td>
+              <td v-if="showNotes" />
             </tr>
           </tbody>
         </table>
@@ -458,8 +569,17 @@ function resetRules(): void {
 <style scoped>
 .sort-bar {
   white-space: nowrap;
+  cursor: grab;
+  text-align: center;
+  color: #999;
 }
-.sort-bar .btn + .btn {
-  margin-left: 2px;
+.sort-bar:active {
+  cursor: grabbing;
+}
+.switch-rule-row.dragging {
+  opacity: 0.4;
+}
+.switch-rule-row.drag-over td {
+  border-top: 2px solid #337ab7;
 }
 </style>

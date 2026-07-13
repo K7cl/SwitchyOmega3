@@ -56,6 +56,61 @@ async function updateProfile(): Promise<void> {
     downloading.value = false
   }
 }
+
+// ---- Proxy authentication (mirror FixedProfileEditor, single scheme keyed 'all') ----
+
+interface AuthEntry {
+  username: string
+  password: string
+}
+
+// Credentials for a PAC-provided proxy are stored under profile.auth.all.
+const authActive = computed<boolean>(() => {
+  const auth = props.profile.auth as Record<string, unknown> | undefined
+  return auth?.all != null
+})
+
+interface AuthModalState {
+  username: string
+  password: string
+  showPassword: boolean
+}
+
+const authModal = ref<AuthModalState | null>(null)
+
+function editProxyAuth(): void {
+  const existing = (props.profile.auth as Record<string, AuthEntry> | undefined)?.all
+  authModal.value = {
+    username: existing?.username ?? '',
+    password: existing?.password ?? '',
+    showPassword: false,
+  }
+}
+
+function closeAuth(): void {
+  authModal.value = null
+}
+
+function saveAuth(): void {
+  const m = authModal.value
+  if (!m) return
+  const profile = props.profile as Record<string, unknown>
+  if (!m.username) {
+    const auth = profile.auth as Record<string, unknown> | undefined
+    if (auth) {
+      delete auth.all
+      if (Object.keys(auth).length === 0) profile.auth = undefined
+    }
+  } else {
+    if (profile.auth == null) profile.auth = {}
+    ;(profile.auth as Record<string, AuthEntry>).all = {
+      username: m.username,
+      password: m.password,
+    }
+  }
+  touch()
+  authModal.value = null
+}
 </script>
 
 <template>
@@ -86,7 +141,25 @@ async function updateProfile(): Promise<void> {
     </section>
 
     <section class="settings-group">
-      <h3>{{ t('options_group_pacScript') || 'PAC Script' }}</h3>
+      <h3>
+        {{ t('options_group_pacScript') || 'PAC Script' }}{{ ' ' }}
+        <button
+          class="btn btn-xs proxy-auth-toggle"
+          :class="authActive ? 'btn-success' : 'btn-default'"
+          type="button"
+          role="button"
+          :title="t('options_proxy_auth') || 'Proxy authentication'"
+          @click="editProxyAuth"
+        >
+          <span class="glyphicon glyphicon-lock" />
+        </button>
+      </h3>
+      <div
+        v-if="authActive"
+        class="alert alert-warning width-limit"
+      >
+        {{ t('options_proxy_authAllWarningPac') || t('options_proxy_authAllWarning') || 'Credentials are sent to the PAC-provided proxy for all requests.' }}
+      </div>
       <p
         v-if="pacUrl && lastUpdate"
         class="alert alert-success width-limit"
@@ -113,5 +186,112 @@ async function updateProfile(): Promise<void> {
         :disabled="!!pacUrl"
       />
     </section>
+
+    <!-- Proxy authentication modal (mirror fixed_auth_edit.jade, single 'all' scheme) -->
+    <div
+      v-if="authModal"
+      class="omega-modal-backdrop"
+    >
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <form
+            name="authForm"
+            @submit.prevent="saveAuth"
+          >
+            <div class="modal-header">
+              <button
+                class="close"
+                type="button"
+                @click="closeAuth"
+              >
+                <span aria-hidden="true">×</span>
+                <span class="sr-only">Close</span>
+              </button>
+              <h4 class="modal-title">
+                {{ t('options_modalHeader_proxyAuth') || 'Proxy Authentication' }}
+              </h4>
+            </div>
+            <div
+              class="modal-body"
+              style="padding-bottom: 0;"
+            >
+              <div class="form-group">
+                <label class="sr-only">{{ t('options_proxyAuthUsername') || 'Username' }}</label>
+                <input
+                  v-model="authModal.username"
+                  class="form-control"
+                  type="text"
+                  autofocus
+                  :placeholder="t('options_proxyAuthUsername') || 'Username'"
+                >
+              </div>
+              <div class="form-group">
+                <label class="sr-only">{{ t('options_proxyAuthPassword') || 'Password' }}</label>
+                <div class="input-group">
+                  <input
+                    v-show="!!authModal.username"
+                    v-model="authModal.password"
+                    class="form-control"
+                    :type="authModal.showPassword ? 'text' : 'password'"
+                    :placeholder="t('options_proxyAuthPassword') || 'Password'"
+                  >
+                  <input
+                    v-show="!authModal.username"
+                    class="form-control"
+                    type="text"
+                    value=""
+                    :placeholder="t('options_proxyAuthNone') || 'None'"
+                    disabled
+                  >
+                  <span class="input-group-btn">
+                    <button
+                      class="btn btn-default"
+                      type="button"
+                      :title="(authModal.showPassword ? t('options_proxyAuthHidePassword') : t('options_proxyAuthShowPassword')) || ''"
+                      :disabled="!authModal.username"
+                      @click="authModal.showPassword = !authModal.showPassword"
+                    >
+                      <span
+                        class="glyphicon"
+                        :class="authModal.showPassword ? 'glyphicon-eye-open' : 'glyphicon-eye-close'"
+                      />
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                class="btn btn-default"
+                type="button"
+                @click="closeAuth"
+              >
+                {{ t('dialog_cancel') || 'Cancel' }}
+              </button>
+              <button
+                class="btn btn-primary"
+                type="submit"
+              >
+                {{ t('dialog_save') || 'Save' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
+<style scoped>
+.omega-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 40px;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.5);
+}
+</style>

@@ -3,6 +3,7 @@ import { computed, type WritableComputedRef } from 'vue'
 import { useOptionsStore } from '@/ui/store'
 import { t, dispName } from '@/ui/i18n'
 import OmegaProfileInline from '@/ui/components/OmegaProfileInline.vue'
+import OmegaProfileSelect from '@/ui/components/OmegaProfileSelect.vue'
 
 const store = useOptionsStore()
 
@@ -140,22 +141,11 @@ function openShortcutConfig(): void {
       <div class="form-group">
         <label>{{ t('options_startupProfile') || 'Startup Profile' }}</label>
         {{ ' ' }}
-        <select
+        <OmegaProfileSelect
           v-model="startupProfileName"
-          class="form-control"
-          style="display: inline-block; width: auto;"
-        >
-          <option value="">
-            {{ t('options_startupProfile_none') || '(Current profile)' }}
-          </option>
-          <option
-            v-for="name in profileNames"
-            :key="name"
-            :value="name"
-          >
-            {{ dispName(name) }}
-          </option>
-        </select>
+          :default-text="t('options_startupProfile_none') || '(Current profile)'"
+          style="display: inline-block;"
+        />
       </div>
       <div class="checkbox">
         <label>

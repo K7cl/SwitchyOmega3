@@ -114,9 +114,46 @@ try {
   const shot = await page.call('Page.captureScreenshot', { format: 'jpeg', quality: 80 }, 10000).catch(() => null)
   if (shot) { writeFileSync('/tmp/so3-import-switch.jpg', Buffer.from(shot.data, 'base64')); console.log('shot /tmp/so3-import-switch.jpg') }
 
-  // Also screenshot a rules=0 attached profile (auto_v2ray) and the sidebar icons.
+  // Open a result-profile dropdown to verify per-type icons render in the menu.
+  await page.ev(`(() => { const b=document.querySelector('.switch-rule-row .omega-profile-select .dropdown-toggle'); if(b) b.click(); })()`)
+  await sleep(500)
+  const dd = await page.ev(`(() => {
+    const menu = document.querySelector('.switch-rule-row .omega-profile-select.open .dropdown-menu')
+    if(!menu) return JSON.stringify({open:false})
+    const icons = Array.from(menu.querySelectorAll('a .glyphicon')).map(g=>g.className.replace('glyphicon ',''))
+    return JSON.stringify({open:true, iconCount:icons.length, sampleIcons:icons.slice(0,6)})
+  })()`)
+  console.log('result dropdown:', dd)
+  const shotDd = await page.call('Page.captureScreenshot', { format: 'jpeg', quality: 80 }, 10000).catch(() => null)
+  if (shotDd) { writeFileSync('/tmp/so3-import-dropdown.jpg', Buffer.from(shotDd.data, 'base64')); console.log('shot /tmp/so3-import-dropdown.jpg') }
+
+  // Edit-source mode: click the "Edit source code" toggle, capture the textarea.
+  await page.ev(`(() => { const btns=Array.from(document.querySelectorAll('.settings-group h3 button')); const b=btns.find(x=>/source/i.test(x.textContent)); if(b) b.click(); })()`)
+  await sleep(600)
+  const src = await page.ev(`(() => { const ta=document.querySelector('.rules-source textarea'); return JSON.stringify({hasTextarea:!!ta, len: ta?ta.value.length:0, head: ta?ta.value.slice(0,60):''}) })()`)
+  console.log('edit-source:', src)
+  const shotSrc = await page.call('Page.captureScreenshot', { format: 'jpeg', quality: 80 }, 10000).catch(() => null)
+  if (shotSrc) { writeFileSync('/tmp/so3-import-editsource.jpg', Buffer.from(shotSrc.data, 'base64')); console.log('shot /tmp/so3-import-editsource.jpg') }
+
+  // PAC profile with proxy-auth lock button (motopac).
+  await page.call('Page.navigate', { url: URLOPT + '#/profile/motopac' })
+  await sleep(1000)
+  const pac = await page.ev(`(() => { const lock=document.querySelector('.proxy-auth-toggle, h3 .glyphicon-lock'); return JSON.stringify({hasLock: !!lock}) })()`)
+  console.log('pac editor:', pac)
+  const shotPac = await page.call('Page.captureScreenshot', { format: 'jpeg', quality: 80 }, 10000).catch(() => null)
+  if (shotPac) { writeFileSync('/tmp/so3-import-pac.jpg', Buffer.from(shotPac.data, 'base64')); console.log('shot /tmp/so3-import-pac.jpg') }
+
+  // Sidebar ordering + icons (already visible on any screen; capture v2ray view).
   await page.call('Page.navigate', { url: URLOPT + '#/profile/' + encodeURIComponent('auto_v2ray') })
   await sleep(1200)
+  const sidebar = await page.ev(`(() => {
+    const items = Array.from(document.querySelectorAll('.nav-profile')).map(li=>({
+      name: (li.querySelector('.profile-name')||{}).textContent,
+      icon: (li.querySelector('.profile-type-icon')||{}).className,
+    }))
+    return JSON.stringify(items.slice(0,14))
+  })()`)
+  console.log('sidebar items:', sidebar)
   const shot2 = await page.call('Page.captureScreenshot', { format: 'jpeg', quality: 80 }, 10000).catch(() => null)
   if (shot2) { writeFileSync('/tmp/so3-import-v2ray.jpg', Buffer.from(shot2.data, 'base64')); console.log('shot /tmp/so3-import-v2ray.jpg') }
 
