@@ -188,97 +188,99 @@ function saveAuth(): void {
     </section>
 
     <!-- Proxy authentication modal (mirror fixed_auth_edit.jade, single 'all' scheme) -->
-    <div
-      v-if="authModal"
-      class="omega-modal-backdrop"
-    >
-      <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-          <form
-            name="authForm"
-            @submit.prevent="saveAuth"
-          >
-            <div class="modal-header">
-              <button
-                class="close"
-                type="button"
-                @click="closeAuth"
-              >
-                <span aria-hidden="true">×</span>
-                <span class="sr-only">Close</span>
-              </button>
-              <h4 class="modal-title">
-                {{ t('options_modalHeader_proxyAuth') || 'Proxy Authentication' }}
-              </h4>
-            </div>
-            <div
-              class="modal-body"
-              style="padding-bottom: 0;"
+    <Teleport to="body">
+      <div
+        v-if="authModal"
+        class="omega-modal-backdrop"
+      >
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            <form
+              name="authForm"
+              @submit.prevent="saveAuth"
             >
-              <div class="form-group">
-                <label class="sr-only">{{ t('options_proxyAuthUsername') || 'Username' }}</label>
-                <input
-                  v-model="authModal.username"
-                  class="form-control"
-                  type="text"
-                  autofocus
-                  :placeholder="t('options_proxyAuthUsername') || 'Username'"
+              <div class="modal-header">
+                <button
+                  class="close"
+                  type="button"
+                  @click="closeAuth"
                 >
+                  <span aria-hidden="true">×</span>
+                  <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title">
+                  {{ t('options_modalHeader_proxyAuth') || 'Proxy Authentication' }}
+                </h4>
               </div>
-              <div class="form-group">
-                <label class="sr-only">{{ t('options_proxyAuthPassword') || 'Password' }}</label>
-                <div class="input-group">
+              <div
+                class="modal-body"
+                style="padding-bottom: 0;"
+              >
+                <div class="form-group">
+                  <label class="sr-only">{{ t('options_proxyAuthUsername') || 'Username' }}</label>
                   <input
-                    v-show="!!authModal.username"
-                    v-model="authModal.password"
-                    class="form-control"
-                    :type="authModal.showPassword ? 'text' : 'password'"
-                    :placeholder="t('options_proxyAuthPassword') || 'Password'"
-                  >
-                  <input
-                    v-show="!authModal.username"
+                    v-model="authModal.username"
                     class="form-control"
                     type="text"
-                    value=""
-                    :placeholder="t('options_proxyAuthNone') || 'None'"
-                    disabled
+                    autofocus
+                    :placeholder="t('options_proxyAuthUsername') || 'Username'"
                   >
-                  <span class="input-group-btn">
-                    <button
-                      class="btn btn-default"
-                      type="button"
-                      :title="(authModal.showPassword ? t('options_proxyAuthHidePassword') : t('options_proxyAuthShowPassword')) || ''"
-                      :disabled="!authModal.username"
-                      @click="authModal.showPassword = !authModal.showPassword"
+                </div>
+                <div class="form-group">
+                  <label class="sr-only">{{ t('options_proxyAuthPassword') || 'Password' }}</label>
+                  <div class="input-group">
+                    <input
+                      v-show="!!authModal.username"
+                      v-model="authModal.password"
+                      class="form-control"
+                      :type="authModal.showPassword ? 'text' : 'password'"
+                      :placeholder="t('options_proxyAuthPassword') || 'Password'"
                     >
-                      <span
-                        class="glyphicon"
-                        :class="authModal.showPassword ? 'glyphicon-eye-open' : 'glyphicon-eye-close'"
-                      />
-                    </button>
-                  </span>
+                    <input
+                      v-show="!authModal.username"
+                      class="form-control"
+                      type="text"
+                      value=""
+                      :placeholder="t('options_proxyAuthNone') || 'None'"
+                      disabled
+                    >
+                    <span class="input-group-btn">
+                      <button
+                        class="btn btn-default"
+                        type="button"
+                        :title="(authModal.showPassword ? t('options_proxyAuthHidePassword') : t('options_proxyAuthShowPassword')) || ''"
+                        :disabled="!authModal.username"
+                        @click="authModal.showPassword = !authModal.showPassword"
+                      >
+                        <span
+                          class="glyphicon"
+                          :class="authModal.showPassword ? 'glyphicon-eye-open' : 'glyphicon-eye-close'"
+                        />
+                      </button>
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button
-                class="btn btn-default"
-                type="button"
-                @click="closeAuth"
-              >
-                {{ t('dialog_cancel') || 'Cancel' }}
-              </button>
-              <button
-                class="btn btn-primary"
-                type="submit"
-              >
-                {{ t('dialog_save') || 'Save' }}
-              </button>
-            </div>
-          </form>
+              <div class="modal-footer">
+                <button
+                  class="btn btn-default"
+                  type="button"
+                  @click="closeAuth"
+                >
+                  {{ t('dialog_cancel') || 'Cancel' }}
+                </button>
+                <button
+                  class="btn btn-primary"
+                  type="submit"
+                >
+                  {{ t('dialog_save') || 'Save' }}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </Teleport>
   </div>
 </template>
 
