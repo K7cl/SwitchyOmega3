@@ -6,7 +6,7 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { create } from 'jsondiffpatch'
-import { Profiles, type Profile } from '@switchyomega/omega-pac'
+import { Profiles, type Profile, type Options } from '@switchyomega/omega-pac'
 import { callBackground, getState } from './messaging.js'
 
 export type OmegaOptions = Record<string, unknown>
@@ -86,8 +86,33 @@ export const useOptionsStore = defineStore('options', () => {
     return created
   }
 
+  /**
+   * Display names of OTHER user profiles that reference `name` as a result
+   * profile (transitively, via omega-pac's reference graph). Excludes `name`
+   * itself and its own attached rule list (`__ruleListOf_<name>`) — that list is
+   * owned by `name` and is cleaned up alongside it, so it is not an external
+   * reference. Returns [] when nothing external references `name`.
+   */
+  function profilesReferencing(name: string): string[] {
+    const ownKey = '+' + name
+    const attachedKey = '+__ruleListOf_' + name
+    // options.value is our loosely-typed working copy; referencedBySet expects the
+    // omega-pac Options shape (profile entries keyed by '+name'). The cast is safe
+    // because those entries hold Profile objects.
+    const refs = Profiles.referencedBySet(name, options.value as unknown as Options)
+    const names: string[] = []
+    for (const key of Object.keys(refs)) {
+      if (key === ownKey || key === attachedKey) continue
+      names.push(refs[key])
+    }
+    return names
+  }
+
   function deleteProfile(name: string): void {
     delete options.value['+' + name]
+    // Also drop the owned attached rule list (e.g. a switch profile's GFWList) so
+    // deleting the profile doesn't orphan it.
+    delete options.value['+__ruleListOf_' + name]
     const qs = options.value['-quickSwitchProfiles'] as string[] | undefined
     if (qs) options.value['-quickSwitchProfiles'] = qs.filter((n) => n !== name)
     if (options.value['-startupProfileName'] === name) options.value['-startupProfileName'] = ''
@@ -127,6 +152,7 @@ export const useOptionsStore = defineStore('options', () => {
     applyProfile,
     addProfile,
     deleteProfile,
+    profilesReferencing,
     renameProfile,
     touchProfile,
     resetToOptions,
