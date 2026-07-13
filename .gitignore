@@ -14,3 +14,6 @@ stats.html
 # Editor / OS
 .DS_Store
 *.log
+
+# user backups (private proxy configs)
+*.bak
