@@ -22,21 +22,34 @@ function dispName(name: string): string {
 const PROFILE_PREFIX = 'omega.profile.'
 
 export function installContextMenus(options: ChromeOptions, state: Storage): void {
+  // Serialize rebuilds. rebuild() can fire concurrently (from options.ready and
+  // from state.watch during initial load); without serialization two rebuilds
+  // both removeAll() then both create() the same ids → "duplicate id" errors.
+  let queue: Promise<void> = Promise.resolve()
   const rebuild = (): void => {
-    chrome.contextMenus.removeAll(() => {
-      state.get({ availableProfiles: {} }).then(({ availableProfiles }) => {
-        const profiles = (availableProfiles ?? {}) as Record<string, AvailableProfile>
-        for (const key of Object.keys(profiles)) {
-          const p = profiles[key]
-          if (!p?.name || p.name.startsWith('__')) continue
-          chrome.contextMenus.create({
-            id: PROFILE_PREFIX + p.name,
-            title: dispName(p.name),
-            contexts: ['action'],
+    queue = queue.then(
+      () =>
+        new Promise<void>((resolve) => {
+          chrome.contextMenus.removeAll(() => {
+            state
+              .get({ availableProfiles: {} })
+              .then(({ availableProfiles }) => {
+                const profiles = (availableProfiles ?? {}) as Record<string, AvailableProfile>
+                for (const key of Object.keys(profiles)) {
+                  const p = profiles[key]
+                  if (!p?.name || p.name.startsWith('__')) continue
+                  chrome.contextMenus.create({
+                    id: PROFILE_PREFIX + p.name,
+                    title: dispName(p.name),
+                    contexts: ['action'],
+                  })
+                }
+              })
+              .catch(() => undefined)
+              .finally(() => resolve())
           })
-        }
-      })
-    })
+        }),
+    )
   }
 
   chrome.contextMenus.onClicked.addListener((info) => {

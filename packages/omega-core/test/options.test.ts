@@ -101,6 +101,14 @@ describe('Options', () => {
     await expect(o.upgrade({ schemaVersion: 99 })).rejects.toThrow(/Invalid schemaVerion/)
   })
 
+  it('signals first-run (NoOptionsError) when options lack a schemaVersion', async () => {
+    const { o } = makeOptions(getDefaultOptions())
+    await o.ready
+    // Empty / schemaVersion-less stores are a fresh install, not corruption.
+    await expect(o.upgrade({})).rejects.toBeInstanceOf(Options.NoOptionsError)
+    await expect(o.upgrade(null)).rejects.toBeInstanceOf(Options.NoOptionsError)
+  })
+
   it('adds a profile and rejects duplicates', async () => {
     const { o } = makeOptions(getDefaultOptions())
     await o.ready
