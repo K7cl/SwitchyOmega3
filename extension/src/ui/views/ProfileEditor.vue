@@ -160,6 +160,18 @@ function exportRuleList(): void {
 
 function onDelete(): void {
   if (isBuiltin.value) return
+  // Referential integrity: block deletion while other profiles still target this
+  // one as a result profile, listing them so the user can fix those references.
+  const refs = store.profilesReferencing(props.name)
+  if (refs.length) {
+    window.alert(
+      (t('options_cannotDeleteProfile') ||
+        'This profile cannot be deleted because it is referenced by other profiles:') +
+        '\n' +
+        refs.join(', '),
+    )
+    return
+  }
   if (store.setting<boolean>('-confirmDeletion')) {
     const msg =
       t('options_confirmDeletion', dispName(props.name)) ||
