@@ -12,6 +12,7 @@
 import { Log, OptionsSync } from '@switchyomega/omega-core'
 import { ChromeStorage } from './adapter/chrome_storage.js'
 import { ChromeOptions } from './adapter/chrome_options.js'
+import { ChromeTabs } from './adapter/chrome_tabs.js'
 import { SettingsProxyImpl } from './adapter/proxy/proxy_impl_settings.js'
 import { installMessageRouter } from './adapter/messaging.js'
 import { installContextMenus } from './adapter/context_menu.js'
@@ -35,6 +36,13 @@ proxyImpl.initAuth() // register onAuthRequired at the top level (cold-wake safe
 state.set({ proxyImplFeatures: proxyImpl.features })
 
 const options = new ChromeOptions(null, storage, state, Log, sync, proxyImpl)
+// Wire per-tab dynamic action icons. Must be assigned synchronously here, before
+// init()'s async currentProfileChanged microtask fires, so the first icon update
+// already routes through the tab controller. watch() registers tab listeners at
+// the top level (cold-wake safe).
+const tabs = new ChromeTabs((url) => options.actionForUrl(url))
+options.setTabs(tabs)
+tabs.watch()
 options.setProxyNotControllable(null)
 
 // --- external proxy-change detection (with own-change guard) ---

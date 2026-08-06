@@ -3,6 +3,7 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useOptionsStore } from '@/ui/store'
 import { t } from '@/ui/i18n'
+import { showAlert } from '@/ui/alert'
 import type { Profile } from '@switchyomega/omega-pac'
 import OmegaProfileInline from '@/ui/components/OmegaProfileInline.vue'
 import NewProfileModal from '@/ui/components/NewProfileModal.vue'
@@ -69,6 +70,18 @@ function isActive(path: string): boolean {
 }
 function isProfileActive(name: string): boolean {
   return route.path === '/profile/' + encodeURIComponent(name)
+}
+
+// Apply pending edits and confirm with a toast (the original showAlert success).
+// Only announces when there were changes to save.
+async function onApply(): Promise<void> {
+  if (!store.isDirty) return
+  try {
+    await store.apply()
+    showAlert('success', t('options_saveSuccess') || 'Options saved.')
+  } catch (e) {
+    showAlert('error', (e as Error)?.message || t('options_saveFailed') || 'Failed to save options.')
+  }
 }
 </script>
 
@@ -138,7 +151,7 @@ function isProfileActive(name: string): boolean {
           role="button"
           class="btn-default btn align-initial"
           :class="{ 'btn-success': store.isDirty }"
-          @click="store.apply()"
+          @click="onApply"
         >
           <span class="glyphicon glyphicon-ok-circle" /> {{ t('options_apply') || 'Apply changes' }}
         </a>

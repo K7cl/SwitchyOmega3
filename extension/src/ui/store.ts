@@ -12,7 +12,14 @@ import { callBackground, getState } from './messaging.js'
 export type OmegaOptions = Record<string, unknown>
 
 const differ = create({ objectHash: (obj: object) => JSON.stringify(obj) })
-const clone = <T>(v: T): T => structuredClone(v)
+// Deep-clone that also detaches from Vue reactivity. `options`/`snapshot` are
+// deep-reactive refs, so their values (and every nested object) are Proxies —
+// and structuredClone throws "could not be cloned" on a reactive Proxy. The
+// options tree is pure JSON (profiles, rules, settings: only strings, numbers,
+// booleans, arrays and plain objects — no Date/Map/Set/undefined), which is also
+// exactly how it is persisted and imported/exported, so a JSON round-trip is a
+// lossless plain-object copy that unwraps proxies at every depth.
+const clone = <T>(v: T): T => JSON.parse(JSON.stringify(v)) as T
 
 export const useOptionsStore = defineStore('options', () => {
   const options = ref<OmegaOptions>({})

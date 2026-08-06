@@ -3,6 +3,7 @@ import { onMounted } from 'vue'
 import { useOptionsStore } from '@/ui/store'
 import { t } from '@/ui/i18n'
 import Sidebar from '@/ui/components/Sidebar.vue'
+import OmegaAlert from '@/ui/components/OmegaAlert.vue'
 
 const store = useOptionsStore()
 
@@ -19,6 +20,7 @@ onMounted(() => {
 
 <template>
   <div class="container-fluid">
+    <OmegaAlert />
     <Sidebar />
     <main class="col-lg-10 col-sm-9 col-lg-offset-2 col-sm-offset-3 om-main">
       <div
