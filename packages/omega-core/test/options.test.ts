@@ -131,4 +131,57 @@ describe('Options', () => {
     expect(rules.some((r) => r.profileName === 'renamed')).toBe(true)
     expect(rules.some((r) => r.profileName === 'proxy')).toBe(false)
   })
+
+  it('restores a temp rule across a service-worker restart via session storage', async () => {
+    // Shared backing stores model the same profile/state/session areas that
+    // survive an MV3 service-worker termination.
+    const storage = new Storage()
+    const state = new Storage()
+    const session = new Storage()
+
+    // Instance A: warm service worker — the user adds a per-domain temp rule.
+    const proxyA = new StubProxy()
+    const a = new Options(getDefaultOptions(), storage, state, silentLog, undefined, proxyA, session)
+    await a.ready
+    await a.applyProfile('auto switch')
+    await a.addTempRule('example.org', 'proxy')
+    expect(a.queryTempRule('example.org')).toBe('proxy')
+
+    // The temp profile was persisted to session storage (not just held in memory).
+    const persisted = (await session.get({ tempProfile: null }))['tempProfile'] as Profile | null
+    expect(persisted).toBeTruthy()
+    const persistedRules = persisted!.rules as Array<{ profileName: string }>
+    expect(persistedRules.some((r) => r.profileName === 'proxy')).toBe(true)
+
+    // Instance B: cold wake — same backing stores, fresh instance (options == null
+    // so it loads from storage rather than reseeding).
+    const proxyB = new StubProxy()
+    const b = new Options(null, storage, state, silentLog, undefined, proxyB, session)
+    await b.ready
+    expect(b.queryTempRule('example.org')).toBe('proxy')
+
+    // The cold-wake apply routed the proxy through the restored temp profile,
+    // still switching under 'auto switch' — the rule was not silently dropped.
+    const applied = proxyB.last!
+    expect(applied.meta.name).toBe('auto switch')
+    const appliedRules = applied.profile.rules as Array<{ condition: { pattern: string }; profileName: string }>
+    expect(appliedRules.some((r) => r.condition.pattern === '*.example.org' && r.profileName === 'proxy')).toBe(true)
+  })
+
+  it('loses the temp rule across a restart when no session store is provided', async () => {
+    // Guards the opt-in nature: callers that pass no session store keep the
+    // original memory-only behavior (no persistence side effects).
+    const storage = new Storage()
+    const state = new Storage()
+
+    const a = new Options(getDefaultOptions(), storage, state, silentLog, undefined, new StubProxy())
+    await a.ready
+    await a.applyProfile('auto switch')
+    await a.addTempRule('example.org', 'proxy')
+    expect(a.queryTempRule('example.org')).toBe('proxy')
+
+    const b = new Options(null, storage, state, silentLog, undefined, new StubProxy())
+    await b.ready
+    expect(b.queryTempRule('example.org')).toBeNull()
+  })
 })

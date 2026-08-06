@@ -22,6 +22,12 @@ const STATE_PREFIX = 'omega.state.'
 
 const storage = new ChromeStorage('local', { excludePrefix: STATE_PREFIX })
 const state = new ChromeStorage('local', { prefix: STATE_PREFIX })
+// Temp rules persist in session storage: they survive service-worker restarts
+// (so a per-domain temp rule isn't lost after the SW idles out) but clear on
+// browser restart, matching the original's temporary-rule lifetime.
+const session = chrome.storage.session
+  ? new ChromeStorage('session', { prefix: STATE_PREFIX })
+  : undefined
 
 let sync: OptionsSync | undefined
 if (chrome.storage.sync) {
@@ -35,7 +41,7 @@ const proxyImpl = new SettingsProxyImpl(Log)
 proxyImpl.initAuth() // register onAuthRequired at the top level (cold-wake safe)
 state.set({ proxyImplFeatures: proxyImpl.features })
 
-const options = new ChromeOptions(null, storage, state, Log, sync, proxyImpl)
+const options = new ChromeOptions(null, storage, state, Log, sync, proxyImpl, session)
 // Wire per-tab dynamic action icons. Must be assigned synchronously here, before
 // init()'s async currentProfileChanged microtask fires, so the first icon update
 // already routes through the tab controller. watch() registers tab listeners at

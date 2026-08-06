@@ -101,6 +101,9 @@ export class Options {
   _options: OmegaOptions = {}
   protected _storage: Storage
   protected _state: Storage
+  // Ephemeral, browser-session-scoped storage for temp rules. When absent (e.g.
+  // in unit tests) temp rules stay in-memory only, as before.
+  protected _session?: Storage
   log: LogType
   sync?: OptionsSync
   proxyImpl?: ProxyImpl
@@ -129,9 +132,11 @@ export class Options {
     log?: LogType,
     sync?: OptionsSync,
     proxyImpl?: ProxyImpl,
+    session?: Storage,
   ) {
     this._storage = storage ?? new Storage()
     this._state = state ?? new Storage()
+    this._session = session
     this.log = log ?? Log
     this.sync = sync
     this.proxyImpl = proxyImpl
@@ -247,6 +252,7 @@ export class Options {
 
   init(): Promise<OmegaOptions> {
     this.ready = this.loadOptions()
+      .then(() => this._restoreTempRules())
       .then(() => {
         if (this._options['-startupProfileName']) {
           return this.applyProfile(this._options['-startupProfileName'] as string)
@@ -640,6 +646,9 @@ export class Options {
         profileNotFound: this._profileNotFound.bind(this),
       })
 
+      // Persist the temp profile so it survives an MV3 service-worker restart.
+      this._saveTempRules()
+
       applyProxy = this.proxyImpl!.applyProfile(this._tempProfile, profile, this._options)
     } else {
       applyProxy = this.proxyImpl!.applyProfile(profile, profile, this._options)
@@ -850,6 +859,63 @@ export class Options {
       delete this._tempProfileRules[domain]
     }
     return null
+  }
+
+  /**
+   * Persist the temp profile to session storage. Temp rules live only in
+   * memory, so under MV3 they would be lost every time the service worker is
+   * terminated (~30 s idle); session storage survives SW restarts and clears on
+   * browser restart, matching the original persistent-background lifetime.
+   * No-op when no session store was provided.
+   */
+  protected _saveTempRules(): void {
+    if (!this._session) return
+    const rules = (this._tempProfile?.rules as TempRule[] | undefined) ?? []
+    if (this._tempProfile && rules.length > 0) {
+      this._session.set({ tempProfile: this._tempProfile }).catch(() => undefined)
+    } else {
+      this._session.remove(['tempProfile']).catch(() => undefined)
+    }
+  }
+
+  /**
+   * Rebuild the domain→rule and profile→rules lookup maps from the temp
+   * profile's rules. Used after restoring the temp profile from session storage,
+   * since only the profile itself (with its rules) is persisted.
+   */
+  protected _rebuildTempRuleIndexes(): void {
+    this._tempProfileRules = {}
+    this._tempProfileRulesByProfile = {}
+    const rules = (this._tempProfile?.rules as TempRule[] | undefined) ?? []
+    for (const rule of rules) {
+      const pattern = rule.condition?.pattern
+      // addTempRule stores conditions as HostWildcardCondition '*.' + domain.
+      const domain = pattern?.startsWith('*.') ? pattern.slice(2) : pattern
+      if (domain) this._tempProfileRules[domain] = rule
+      if (rule.profileName) {
+        const key = Profiles.nameAsKey(rule.profileName)
+        ;(this._tempProfileRulesByProfile[key] ??= []).push(rule)
+      }
+    }
+  }
+
+  /**
+   * Rehydrate the in-memory temp profile from session storage. Called during
+   * init() before the current profile is applied, so a temp rule added before
+   * an MV3 service-worker termination is re-applied on the next wake.
+   */
+  protected _restoreTempRules(): Promise<void> {
+    if (!this._session) return Promise.resolve()
+    return this._session
+      .get({ tempProfile: null })
+      .then((st) => {
+        const tp = st['tempProfile'] as Profile | null
+        if (tp && Array.isArray((tp as { rules?: unknown[] }).rules) && (tp.rules as unknown[]).length > 0) {
+          this._tempProfile = tp
+          this._rebuildTempRuleIndexes()
+        }
+      })
+      .catch(() => undefined)
   }
 
   addCondition(condition: unknown, profileName: string): Promise<unknown> | void {
